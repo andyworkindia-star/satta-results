@@ -10,9 +10,15 @@
         .download-btn { background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; margin-top: 10px; }
         .container { max-width: 600px; margin: auto; background: white; padding: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         .live-header { background-color: #2ecc71; color: white; padding: 10px; text-align: center; font-weight: bold; font-size: 18px; margin-top: 10px; }
-        .game-row { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #ddd; align-items: center; }
-        .game-name { font-weight: bold; font-size: 16px; text-transform: uppercase; }
-        .game-result { font-size: 20px; font-weight: bold; color: #d9534f; }
+        
+        /* Chart Section Styling */
+        .chart-section { margin-top: 20px; }
+        .chart-title { background-color: #f39c12; color: white; padding: 10px; text-align: center; font-weight: bold; font-size: 16px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 5px; text-align: center; }
+        th, td { border: 1px solid #ddd; padding: 10px; font-size: 16px; }
+        th { background-color: #f1c40f; color: #000; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .game-result { font-weight: bold; color: #d9534f; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -24,11 +30,21 @@
     </header>
 
     <div class="container">
-        <!-- LIVE RESULTS -->
-        <div class="live-header">🟢 Live Results Today (14 October)</div>
+        <!-- LIVE RESULTS / TODAY'S CHART -->
+        <div class="live-header">🟢 Live Results - 14 October</div>
         
-        <div id="results-container">
-            <p style="text-align:center; color:#666;">Loading results...</p>
+        <div class="chart-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>GAME NAME</th>
+                        <th>RESULT</th>
+                    </tr>
+                </thead>
+                <tbody id="chart-body">
+                    <tr><td colspan="2" style="text-align:center;">Loading results...</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -50,28 +66,29 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // MonthlyCharts ke andar 14 node ko target karna
-        const todayRef = ref(db, 'MonthlyCharts/14');
-        onValue(todayRef, (snapshot) => {
+        // MonthlyCharts ke andar '14' node se data fetch karna
+        const dayRef = ref(db, 'MonthlyCharts/14');
+        onValue(dayRef, (snapshot) => {
             const data = snapshot.val();
-            const container = document.getElementById('results-container');
+            const tableBody = document.getElementById('chart-body');
             
             if (data) {
-                container.innerHTML = ""; 
+                tableBody.innerHTML = ""; // Purana loading text hatao
                 
+                // Har ek game aur uska result table row mein dikhana
                 for (let gameName in data) {
                     let resultValue = data[gameName] ? data[gameName] : "--";
 
                     let rowHTML = `
-                        <div class="game-row">
-                            <div class="game-name">${gameName}</div>
-                            <div class="game-result">${resultValue}</div>
-                        </div>
+                        <tr>
+                            <td style="font-weight: bold; text-align: left; padding-left: 15px;">${gameName}</td>
+                            <td class="game-result">${resultValue}</td>
+                        </tr>
                     `;
-                    container.innerHTML += rowHTML;
+                    tableBody.innerHTML += rowHTML;
                 }
             } else {
-                container.innerHTML = "<p style='text-align:center;'>Data not found under MonthlyCharts/14.</p>";
+                tableBody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:#666;">No results found for today.</td></tr>`;
             }
         });
     </script>
