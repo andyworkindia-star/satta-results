@@ -13,7 +13,6 @@
         
         /* Chart Section Styling */
         .chart-section { margin-top: 20px; }
-        .chart-title { background-color: #f39c12; color: white; padding: 10px; text-align: center; font-weight: bold; font-size: 16px; }
         table { width: 100%; border-collapse: collapse; margin-top: 5px; text-align: center; }
         th, td { border: 1px solid #ddd; padding: 10px; font-size: 16px; }
         th { background-color: #f1c40f; color: #000; }
@@ -30,7 +29,7 @@
     </header>
 
     <div class="container">
-        <!-- LIVE RESULTS / TODAY'S CHART -->
+        <!-- LIVE RESULTS -->
         <div class="live-header">🟢 Live Results - 14 October</div>
         
         <div class="chart-section">
@@ -42,7 +41,7 @@
                     </tr>
                 </thead>
                 <tbody id="chart-body">
-                    <tr><td colspan="2" style="text-align:center;">Loading results...</td></tr>
+                    <tr><td colspan="2" style="text-align:center;">Loading markets...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -66,30 +65,43 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // MonthlyCharts ke andar '14' node se data fetch karna
+        // Aapki di gayi fix market list
+        const markets = [
+            "Bulandshahr City",
+            "Delhi Bazar",
+            "Shree Ganesh",
+            "Faridabad",
+            "Ghaziabad",
+            "Gali",
+            "Disawar",
+            "Noida NCR"
+        ];
+
         const dayRef = ref(db, 'MonthlyCharts/14');
         onValue(dayRef, (snapshot) => {
-            const data = snapshot.val();
+            const dbData = snapshot.val() || {};
             const tableBody = document.getElementById('chart-body');
+            tableBody.innerHTML = ""; 
             
-            if (data) {
-                tableBody.innerHTML = ""; // Purana loading text hatao
+            markets.forEach(market => {
+                let resultValue = "--";
                 
-                // Har ek game aur uska result table row mein dikhana
-                for (let gameName in data) {
-                    let resultValue = data[gameName] ? data[gameName] : "--";
-
-                    let rowHTML = `
-                        <tr>
-                            <td style="font-weight: bold; text-align: left; padding-left: 15px;">${gameName}</td>
-                            <td class="game-result">${resultValue}</td>
-                        </tr>
-                    `;
-                    tableBody.innerHTML += rowHTML;
+                // Database se match karne ki koshish (case-insensitive)
+                for (let key in dbData) {
+                    if (key.trim().toLowerCase() === market.trim().toLowerCase()) {
+                        resultValue = dbData[key];
+                        break;
+                    }
                 }
-            } else {
-                tableBody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:#666;">No results found for today.</td></tr>`;
-            }
+
+                let rowHTML = `
+                    <tr>
+                        <td style="font-weight: bold; text-align: left; padding-left: 15px;">${market}</td>
+                        <td class="game-result">${resultValue}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += rowHTML;
+            });
         });
     </script>
 </body>
