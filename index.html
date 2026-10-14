@@ -11,19 +11,12 @@
         .container { max-width: 600px; margin: auto; background: white; padding: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         .live-header { background-color: #2ecc71; color: white; padding: 10px; text-align: center; font-weight: bold; font-size: 18px; margin-top: 10px; }
         .game-row { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #ddd; align-items: center; }
-        .game-name { font-weight: bold; font-size: 16px; }
-        .game-time { font-size: 12px; color: #666; }
+        .game-name { font-weight: bold; font-size: 16px; text-transform: uppercase; }
         .game-result { font-size: 20px; font-weight: bold; color: #d9534f; }
         
         /* Chart Section Styling */
         .chart-section { margin-top: 20px; }
         .chart-title { background-color: #f39c12; color: white; padding: 10px; text-align: center; font-weight: bold; font-size: 16px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 5px; text-align: center; }
-        th, td { border: 1px solid #ddd; padding: 8px; font-size: 14px; }
-        th { background-color: #f1c40f; color: #000; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        .nav-buttons { display: flex; justify-content: space-between; margin: 15px 0; }
-        .nav-buttons a { background: #007bff; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -38,38 +31,9 @@
         <!-- LIVE RESULTS -->
         <div class="live-header">🟢 Live Results Today</div>
         
-        <div class="game-row">
-            <div>
-                <div class="game-name">FARIDABAD</div>
-                <div class="game-time">at 06:00 PM</div>
-            </div>
-            <div class="game-result" id="frbd-result">--</div>
-        </div>
-
-        <div class="game-row">
-            <div>
-                <div class="game-name">GHAZIABAD</div>
-                <div class="game-time">at 08:00 PM</div>
-            </div>
-            <div class="game-result" id="gzbd-result">--</div>
-        </div>
-
-        <!-- MONTHLY CHART SECTION -->
-        <div class="chart-section">
-            <div class="chart-title">Monthly Result Chart - October 2026</div>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>DATE</th>
-                        <th>FRBD</th>
-                        <th>GZBD</th>
-                    </tr>
-                </thead>
-                <tbody id="chart-body">
-                    <!-- Firebase se data yahan automatically aayega -->
-                </tbody>
-            </table>
+        <div id="results-container">
+            <!-- Firebase se saare games yahan automatically load honge -->
+            <p style="text-align:center; color:#666;">Loading results...</p>
         </div>
     </div>
 
@@ -91,13 +55,30 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Live Results Realtime Fetching
-        const resultsRef = ref(db, 'results/today');
+        // Fetching all results dynamically from Results node
+        const resultsRef = ref(db, 'Results');
         onValue(resultsRef, (snapshot) => {
             const data = snapshot.val();
+            const container = document.getElementById('results-container');
+            
             if (data) {
-                if(data.frbd) document.getElementById('frbd-result').innerText = data.frbd;
-                if(data.gzbd) document.getElementById('gzbd-result').innerText = data.gzbd;
+                container.innerHTML = ""; // Clear loading text
+                
+                // Loop through each game inside Results
+                for (let gameName in data) {
+                    let gameData = data[gameName];
+                    let resultValue = (gameData && gameData.result) ? gameData.result : "--";
+
+                    let rowHTML = `
+                        <div class="game-row">
+                            <div class="game-name">${gameName}</div>
+                            <div class="game-result">${resultValue}</div>
+                        </div>
+                    `;
+                    container.innerHTML += rowHTML;
+                }
+            } else {
+                container.innerHTML = "<p style='text-align:center;'>No results found.</p>";
             }
         });
     </script>
