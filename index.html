@@ -50,8 +50,8 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Seedha database ke '14' node ko target karna
-        const todayRef = ref(db, '14');
+        // MonthlyCharts ke andar 14 node ko target karna
+        const todayRef = ref(db, 'MonthlyCharts/14');
         onValue(todayRef, (snapshot) => {
             const data = snapshot.val();
             const container = document.getElementById('results-container');
@@ -71,7 +71,7 @@
                     container.innerHTML += rowHTML;
                 }
             } else {
-                container.innerHTML = "<p style='text-align:center;'>Data not found under node 14.</p>";
+                container.innerHTML = "<p style='text-align:center;'>Data not found under MonthlyCharts/14.</p>";
             }
         });
     </script>
