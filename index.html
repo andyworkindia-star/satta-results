@@ -43,6 +43,7 @@
         </table>
     </div>
 
+    <!-- Firebase Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
@@ -71,8 +72,9 @@
             "NOIDA NCR"
         ];
 
-        const monthlyRef = ref(db, 'MonthlyCharts');
-        onValue(monthlyRef, (snapshot) => {
+        // Oct 2026 folder se data fetch karna
+        const octRef = ref(db, 'Oct 2026');
+        onValue(octRef, (snapshot) => {
             const allData = snapshot.val() || {};
             const data13 = allData['13'] || {};
             const data14 = allData['14'] || {};
