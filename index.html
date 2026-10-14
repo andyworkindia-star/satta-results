@@ -13,10 +13,6 @@
         .game-row { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #ddd; align-items: center; }
         .game-name { font-weight: bold; font-size: 16px; text-transform: uppercase; }
         .game-result { font-size: 20px; font-weight: bold; color: #d9534f; }
-        
-        /* Chart Section Styling */
-        .chart-section { margin-top: 20px; }
-        .chart-title { background-color: #f39c12; color: white; padding: 10px; text-align: center; font-weight: bold; font-size: 16px; }
     </style>
 </head>
 <body>
@@ -54,16 +50,15 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Aaj ki date (14) ke node se data fetch karna
+        // Seedha database ke '14' node ko target karna
         const todayRef = ref(db, '14');
         onValue(todayRef, (snapshot) => {
             const data = snapshot.val();
             const container = document.getElementById('results-container');
             
             if (data) {
-                container.innerHTML = ""; // Clear loading text
+                container.innerHTML = ""; 
                 
-                // Loop through each game inside today's date node
                 for (let gameName in data) {
                     let resultValue = data[gameName] ? data[gameName] : "--";
 
@@ -76,7 +71,7 @@
                     container.innerHTML += rowHTML;
                 }
             } else {
-                container.innerHTML = "<p style='text-align:center;'>No results found for today.</p>";
+                container.innerHTML = "<p style='text-align:center;'>Data not found under node 14.</p>";
             }
         });
     </script>
