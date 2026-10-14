@@ -43,7 +43,7 @@
                 <div class="game-name">FARIDABAD</div>
                 <div class="game-time">at 06:00 PM</div>
             </div>
-            <div class="game-result">87</div>
+            <div class="game-result" id="frbd-result">--</div>
         </div>
 
         <div class="game-row">
@@ -51,61 +51,55 @@
                 <div class="game-name">GHAZIABAD</div>
                 <div class="game-time">at 08:00 PM</div>
             </div>
-            <div class="game-result">--</div>
+            <div class="game-result" id="gzbd-result">--</div>
         </div>
 
         <!-- MONTHLY CHART SECTION -->
         <div class="chart-section">
             <div class="chart-title">Monthly Result Chart - October 2026</div>
             
-            <div class="nav-buttons">
-                <a href="#">⬅ Sep 2026</a>
-                <a href="#">Nov 2026 ➡</a>
-            </div>
-
             <table>
                 <thead>
                     <tr>
                         <th>DATE</th>
-                        <th>DSWR</th>
                         <th>FRBD</th>
                         <th>GZBD</th>
-                        <th>GALI</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><b>01</b></td>
-                        <td>52</td>
-                        <td>05</td>
-                        <td>81</td>
-                        <td>01</td>
-                    </tr>
-                    <tr>
-                        <td><b>02</b></td>
-                        <td>18</td>
-                        <td>58</td>
-                        <td>95</td>
-                        <td>68</td>
-                    </tr>
-                    <tr>
-                        <td><b>03</b></td>
-                        <td>15</td>
-                        <td>36</td>
-                        <td>98</td>
-                        <td>80</td>
-                    </tr>
-                    <tr>
-                        <td><b>04</b></td>
-                        <td>70</td>
-                        <td>26</td>
-                        <td>78</td>
-                        <td>24</td>
-                    </tr>
+                <tbody id="chart-body">
+                    <!-- Firebase se data yahan automatically aayega -->
                 </tbody>
             </table>
         </div>
     </div>
 
+    <!-- Firebase Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAOYsup23b0lc3kgH6ays_XnisNP1HztcU",
+            authDomain: "galidisawarkingg.firebaseapp.com",
+            databaseURL: "https://galidisawarkingg-default-rtdb.firebaseio.com",
+            projectId: "galidisawarkingg",
+            storageBucket: "galidisawarkingg.appspot.com",
+            messagingSenderId: "143107893995",
+            appId: "1:143107893995:web:fb8aadce0ab8732cc22cae"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Live Results Realtime Fetching
+        const resultsRef = ref(db, 'results/today');
+        onValue(resultsRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                if(data.frbd) document.getElementById('frbd-result').innerText = data.frbd;
+                if(data.gzbd) document.getElementById('gzbd-result').innerText = data.gzbd;
+            }
+        });
+    </script>
 </body>
 </html>
