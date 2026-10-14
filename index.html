@@ -13,7 +13,7 @@
         table { width: 100%; border-collapse: collapse; text-align: center; background: white; }
         th, td { border: 1px solid #ddd; padding: 10px; font-size: 15px; }
         .header-row th { background-color: #333; color: white; font-size: 14px; }
-        .game-name-col { text-align: left; font-weight: bold; width: 50%; }
+        .game-name-col { text-align: left; font-weight: bold; width: 50%; text-transform: uppercase; }
         .date-col { width: 25%; font-weight: bold; font-size: 17px; color: #d9534f; }
         tr:nth-child(even) { background-color: #f9f9f9; }
     </style>
@@ -43,7 +43,6 @@
         </table>
     </div>
 
-    <!-- Firebase Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
@@ -62,14 +61,14 @@
         const db = getDatabase(app);
 
         const markets = [
-            "Bulandshahr City",
-            "Delhi Bazar",
-            "Shree Ganesh",
-            "Faridabad",
-            "Ghaziabad",
-            "Gali",
-            "Disawar",
-            "Noida NCR"
+            "BULANDSHAHR CITY",
+            "DELHI BAZAR",
+            "SHREE GANESH",
+            "FARIDABAD",
+            "GHAZIABAD",
+            "GALI",
+            "DISAWAR",
+            "NOIDA NCR"
         ];
 
         const monthlyRef = ref(db, 'MonthlyCharts');
@@ -85,19 +84,22 @@
                 let res13 = "--";
                 let res14 = "--";
                 
-                let target = market.trim().toLowerCase();
+                let target = market.replace(/\s+/g, '').toLowerCase();
 
                 // Check 13th data
                 for (let key in data13) {
-                    if (key.trim().toLowerCase() === target) {
-                        res13 = data13[key];
+                    let cleanKey = key.replace(/\s+/g, '').toLowerCase();
+                    if (cleanKey === target) {
+                        let val = data13[key];
+                        res13 = (typeof val === 'object' && val !== null) ? (val.result || val[Object.keys(val)[0]] || "--") : val;
                         break;
                     }
                 }
 
-                // Check 14th data (agar nested object ya direct value ho)
+                // Check 14th data
                 for (let key in data14) {
-                    if (key.trim().toLowerCase() === target) {
+                    let cleanKey = key.replace(/\s+/g, '').toLowerCase();
+                    if (cleanKey === target) {
                         let val = data14[key];
                         res14 = (typeof val === 'object' && val !== null) ? (val.result || val[Object.keys(val)[0]] || "--") : val;
                         break;
