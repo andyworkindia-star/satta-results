@@ -29,10 +29,9 @@
 
     <div class="container">
         <!-- LIVE RESULTS -->
-        <div class="live-header">🟢 Live Results Today</div>
+        <div class="live-header">🟢 Live Results Today (14 October)</div>
         
         <div id="results-container">
-            <!-- Firebase se saare games yahan automatically load honge -->
             <p style="text-align:center; color:#666;">Loading results...</p>
         </div>
     </div>
@@ -55,19 +54,18 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Fetching all results dynamically from Results node
-        const resultsRef = ref(db, 'Results');
-        onValue(resultsRef, (snapshot) => {
+        // Aaj ki date (14) ke node se data fetch karna
+        const todayRef = ref(db, '14');
+        onValue(todayRef, (snapshot) => {
             const data = snapshot.val();
             const container = document.getElementById('results-container');
             
             if (data) {
                 container.innerHTML = ""; // Clear loading text
                 
-                // Loop through each game inside Results
+                // Loop through each game inside today's date node
                 for (let gameName in data) {
-                    let gameData = data[gameName];
-                    let resultValue = (gameData && gameData.result) ? gameData.result : "--";
+                    let resultValue = data[gameName] ? data[gameName] : "--";
 
                     let rowHTML = `
                         <div class="game-row">
@@ -78,7 +76,7 @@
                     container.innerHTML += rowHTML;
                 }
             } else {
-                container.innerHTML = "<p style='text-align:center;'>No results found.</p>";
+                container.innerHTML = "<p style='text-align:center;'>No results found for today.</p>";
             }
         });
     </script>
