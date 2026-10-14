@@ -13,7 +13,7 @@
         table { width: 100%; border-collapse: collapse; text-align: center; background: white; }
         th, td { border: 1px solid #ddd; padding: 10px; font-size: 15px; }
         .header-row th { background-color: #333; color: white; font-size: 14px; }
-        .game-name-col { text-align: left; font-weight: bold; width: 50%; text-transform: uppercase; }
+        .game-name-col { text-align: left; font-weight: bold; width: 50%; }
         .date-col { width: 25%; font-weight: bold; font-size: 17px; color: #d9534f; }
         tr:nth-child(even) { background-color: #f9f9f9; }
     </style>
@@ -72,12 +72,11 @@
             "NOIDA NCR"
         ];
 
-        // Oct 2026 folder se data fetch karna
-        const octRef = ref(db, 'Oct 2026');
-        onValue(octRef, (snapshot) => {
-            const allData = snapshot.val() || {};
-            const data13 = allData['13'] || {};
-            const data14 = allData['14'] || {};
+        const dbRef = ref(db, 'Oct 2026');
+        onValue(dbRef, (snapshot) => {
+            const octData = snapshot.val() || {};
+            const d13 = octData['13'] || {};
+            const d14 = octData['14'] || {};
             
             const tableBody = document.getElementById('chart-body');
             tableBody.innerHTML = ""; 
@@ -86,24 +85,18 @@
                 let res13 = "--";
                 let res14 = "--";
                 
-                let target = market.replace(/\s+/g, '').toLowerCase();
-
-                // Check 13th data
-                for (let key in data13) {
-                    let cleanKey = key.replace(/\s+/g, '').toLowerCase();
-                    if (cleanKey === target) {
-                        let val = data13[key];
-                        res13 = (typeof val === 'object' && val !== null) ? (val.result || val[Object.keys(val)[0]] || "--") : val;
+                // Direct key match for 13th
+                for (let k in d13) {
+                    if (k.toUpperCase().trim() === market.toUpperCase().trim()) {
+                        res13 = d13[k];
                         break;
                     }
                 }
 
-                // Check 14th data
-                for (let key in data14) {
-                    let cleanKey = key.replace(/\s+/g, '').toLowerCase();
-                    if (cleanKey === target) {
-                        let val = data14[key];
-                        res14 = (typeof val === 'object' && val !== null) ? (val.result || val[Object.keys(val)[0]] || "--") : val;
+                // Direct key match for 14th
+                for (let k in d14) {
+                    if (k.toUpperCase().trim() === market.toUpperCase().trim()) {
+                        res14 = d14[k];
                         break;
                     }
                 }
