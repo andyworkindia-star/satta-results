@@ -29,7 +29,6 @@
             .container { border-radius: 12px; min-height: auto; margin-bottom: 30px; border: 1px solid #475569; }
         }
         
-        /* App Download Header Styles */
         .app-header { background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 25px 20px; text-align: center; border-top-left-radius: inherit; border-top-right-radius: inherit; }
         .app-header h2 { font-size: 26px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
         .download-btn { background-color: #28a745; color: white; padding: 12px 28px; text-decoration: none; font-weight: bold; border-radius: 6px; display: inline-block; margin-top: 12px; font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.2s; }
@@ -93,7 +92,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Tables Wrapper with Smooth Horizontal Scroll for Mobile */
         .tables-wrapper {
             display: flex;
             flex-direction: column;
@@ -121,7 +119,6 @@
         .month-btn { flex: 1; background-color: #2563eb; color: white; border: none; padding: 11px; border-radius: 6px; font-size: 13px; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; transition: background 0.2s; }
         .month-btn:hover { background-color: #1d4ed8; }
 
-        /* Embedded Admin Panel Styles */
         .admin-section { background: #1e293b; margin: 25px 15px 30px 15px; padding: 22px; border-radius: 12px; color: #fff; box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
         .admin-section h3 { text-align: center; color: #38bdf8; font-size: 18px; margin-bottom: 16px; font-weight: 700; }
         .form-group { margin-bottom: 14px; display: flex; flex-direction: column; }
@@ -136,24 +133,20 @@
 <body>
 
 <div class="container">
-    <!-- App Download Header -->
     <header class="app-header">
         <h2>Gali Disawar Kingg Results</h2>
         <p style="font-size: 14px; margin-top: 6px;">Hamari Official Android App download karein!</p>
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
     </header>
 
-    <!-- Top Alert Bar -->
     <div class="update-bar">
         ⚠️ Disclaimer: Independent informational portal. <a href="#">Read More</a>
     </div>
 
-    <!-- Date & Main Title Header -->
     <div class="date-header">
         ⚡ Fast Results of October 15, 2026 & October 14, 2026
     </div>
 
-    <!-- Live Section with Days aligned inline -->
     <div class="section-title">
         <span>Live Results</span>
         <div class="section-days">
@@ -169,8 +162,8 @@
             <div class="game-time">at 09:20 AM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="live-14-BULANDSHAHR_CITY">--</div>
-            <div class="score-box" id="live-15-BULANDSHAHR_CITY">--</div>
+            <div class="score-box" id="live-14-BULANDSHAHR_CITY"><div class="spinner"></div></div>
+            <div class="score-box" id="live-15-BULANDSHAHR_CITY"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -181,8 +174,8 @@
             <div class="game-time">at 12:30 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="live-14-ALIGARH_CITY">--</div>
-            <div class="score-box" id="live-15-ALIGARH_CITY">--</div>
+            <div class="score-box" id="live-14-ALIGARH_CITY"><div class="spinner"></div></div>
+            <div class="score-box" id="live-15-ALIGARH_CITY"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -193,8 +186,8 @@
             <div class="game-time">at 02:27 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="live-14-NOIDA_NCR">--</div>
-            <div class="score-box" id="live-15-NOIDA_NCR">--</div>
+            <div class="score-box" id="live-14-NOIDA_NCR"><div class="spinner"></div></div>
+            <div class="score-box" id="live-15-NOIDA_NCR"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -205,8 +198,8 @@
             <div class="game-time">at 03:00 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="live-14-DELHI_BAZAR">--</div>
-            <div class="score-box" id="live-15-DELHI_BAZAR">--</div>
+            <div class="score-box" id="live-14-DELHI_BAZAR"><div class="spinner"></div></div>
+            <div class="score-box" id="live-15-DELHI_BAZAR"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -217,20 +210,20 @@
             <div class="game-time">at 03:52 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="live-14-SHREE_GANESH">--</div>
-            <div class="score-box" id="live-15-SHREE_GANESH">--</div>
+            <div class="score-box" id="live-14-SHREE_GANESH"><div class="spinner"></div></div>
+            <div class="score-box" id="live-15-SHREE_GANESH"><div class="spinner"></div></div>
         </div>
     </div>
 
-    <!-- FARIDABAD (Highlighted) -->
+    <!-- FARIDABAD -->
     <div class="result-card highlight">
         <div>
             <div class="game-name">FARIDABAD</div>
             <div class="game-time">at 06:00 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="live-14-FARIDABAD">--</div>
-            <div class="score-box" id="live-15-FARIDABAD">--</div>
+            <div class="score-box" id="live-14-FARIDABAD"><div class="spinner"></div></div>
+            <div class="score-box" id="live-15-FARIDABAD"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -241,8 +234,8 @@
             <div class="game-time">at 08:40 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="live-14-MATHURA_KING">--</div>
-            <div class="score-box" id="live-15-MATHURA_KING">--</div>
+            <div class="score-box" id="live-14-MATHURA_KING"><div class="spinner"></div></div>
+            <div class="score-box" id="live-15-MATHURA_KING"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -253,7 +246,7 @@
             <div class="game-time">at 09:55 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="live-14-GHAZIABAD">--</div>
+            <div class="score-box" id="live-14-GHAZIABAD"><div class="spinner"></div></div>
             <div id="live-15-GHAZIABAD"><div class="wait-box"><div class="spinner"></div> Wait...</div></div>
         </div>
     </div>
@@ -265,7 +258,7 @@
             <div class="game-time">at 11:25 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="live-14-GALI">--</div>
+            <div class="score-box" id="live-14-GALI"><div class="spinner"></div></div>
             <div id="live-15-GALI"><div class="wait-box"><div class="spinner"></div> Wait...</div></div>
         </div>
     </div>
@@ -277,14 +270,12 @@
             <div class="game-time">at 05:00 AM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="live-14-DISAWAR">--</div>
-            <div class="score-box" id="live-15-DISAWAR">--</div>
+            <div class="score-box" id="live-14-DISAWAR"><div class="spinner"></div></div>
+            <div class="score-box" id="live-15-DISAWAR"><div class="spinner"></div></div>
         </div>
     </div>
 
-    <!-- TABLES SECTION WITH MOVING / SCROLLABLE TABLE VIEW -->
     <div class="tables-wrapper">
-        <!-- TABLE 1: Main Markets -->
         <div class="chart-container">
             <div class="chart-heading" id="chartHeading1">Main Result Chart - Oct 2026</div>
             <div class="table-scroll-container">
@@ -312,7 +303,6 @@
             </div>
         </div>
 
-        <!-- TABLE 2: Other Markets -->
         <div class="chart-container">
             <div class="chart-heading" id="chartHeading2">Other Markets Chart - Oct 2026</div>
             <div class="table-scroll-container">
@@ -339,18 +329,14 @@
         </div>
     </div>
 
-    <!-- EMBEDDED SECRET ADMIN PANEL -->
     <div class="admin-section">
         <h3>🔒 Admin Control Panel</h3>
-        
-        <!-- Login Box -->
         <div id="loginBox" class="form-group">
             <label>Admin Password Daalein</label>
             <input type="password" id="adminPass" placeholder="Password daalein">
             <button class="admin-btn" onclick="checkLogin()">Login</button>
         </div>
 
-        <!-- Update Panel (Hidden by default) -->
         <div id="panelBox" style="display: none;">
             <div class="form-group">
                 <label>Game Select Karein (Live Result)</label>
@@ -375,7 +361,6 @@
 
             <button class="admin-btn" onclick="updateResult()">Update Live Result</button>
 
-            <!-- Excel Uploader Box inside Admin Panel -->
             <div class="excel-box">
                 <label style="color: #38bdf8; font-weight: bold; margin-bottom: 6px; display: block;">📂 Poore Saal ka Excel Data Upload Karein</label>
                 <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" style="margin-bottom: 8px; font-size: 13px;">
@@ -386,7 +371,6 @@
 
 </div>
 
-<!-- Firebase Script -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
@@ -434,7 +418,6 @@
         'DISAWAR': 'DISAWAR'
     };
 
-    // Load Chart Data & Live Results directly from Oct 2026 Database
     window.loadChartData = function() {
         const currentMonthName = months[currentMonthIndex];
         document.getElementById('chartHeading1').innerText = `Main Result Chart - ${currentMonthName} 2026`;
@@ -485,15 +468,13 @@
                     `;
                 });
 
-                // Populate Live Results for Oct 14 (date '14') and Oct 15 (date '15') from database
                 if (currentMonthName === 'Oct') {
-                    const day14 = chartData['14'] || chartData['14'];
-                    const day15 = chartData['15'] || chartData['15'];
+                    const day14 = chartData['14'];
+                    const day15 = chartData['15'];
 
                     for (const gameKey in marketKeyMap) {
                         const mName = marketKeyMap[gameKey];
                         
-                        // 14th Oct result
                         const box14 = document.getElementById(`live-14-${gameKey}`);
                         if (box14) {
                             let val14 = day14 ? day14[mName] : '--';
@@ -505,13 +486,17 @@
                             }
                         }
 
-                        // 15th Oct result (Live)
                         const box15 = document.getElementById(`live-15-${gameKey}`);
                         if (box15) {
                             let val15 = day15 ? day15[mName] : '--';
                             if (!val15 || val15 === '--' || val15 === 'Wait...') {
-                                box15.innerHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
-                                box15.className = "";
+                                if(gameKey === 'GHAZIABAD' || gameKey === 'GALI') {
+                                    box15.innerHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
+                                    box15.className = "";
+                                } else {
+                                    box15.innerText = '--';
+                                    box15.className = "score-box";
+                                }
                             } else {
                                 let str15 = String(val15).trim();
                                 if (str15.length === 1) str15 = '0' + str15;
@@ -526,7 +511,7 @@
                 tbody1.innerHTML = `<tr><td colspan="7">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
                 tbody2.innerHTML = `<tr><td colspan="5">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
             }
-        }, { onlyOnce: true });
+        });
     }
 
     window.changeMonth = function(direction) {
@@ -536,9 +521,8 @@
         window.loadChartData();
     }
 
-    setTimeout(() => { window.loadChartData(); }, 1000);
+    window.loadChartData();
 
-    // Admin Login Function (Password: 12345)
     window.checkLogin = function() {
         const pass = document.getElementById('adminPass').value;
         if(pass === "12345") {
