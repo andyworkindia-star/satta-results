@@ -32,19 +32,20 @@
         .game-time { font-size: 11px; color: #64748b; margin-top: 2px; }
         .chart-link { font-size: 11px; color: #2563eb; text-decoration: none; font-weight: 500; }
         
-        .game-scores { display: flex; gap: 12px; }
-        .score-box { background: #f1f5f9; padding: 6px 12px; border-radius: 6px; font-size: 16px; font-weight: 700; color: #0f172a; min-width: 40px; text-align: center; border: 1px solid #cbd5e1; }
+        .game-scores { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+        .score-box { background: #f1f5f9; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 700; color: #0f172a; min-width: 35px; text-align: center; border: 1px solid #cbd5e1; }
         .result-card.highlight .score-box { background: #ffffff; color: #b45309; border-color: #ca8a04; }
 
         /* Monthly Chart Table Styles */
-        .chart-container { background: #ffffff; margin: 15px 12px; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; }
+        .chart-container { background: #ffffff; margin: 15px 12px; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; overflow-x: auto; }
         .chart-heading { background: #0284c7; color: white; text-align: center; padding: 10px; font-size: 13px; font-weight: 700; border-radius: 6px; margin-bottom: 10px; }
-        .monthly-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 13px; }
-        .monthly-table th { background-color: #f59e0b; color: #fff; padding: 8px 4px; border: 1px solid #d97706; font-weight: 700; }
-        .monthly-table td { padding: 7px 4px; border: 1px solid #cbd5e1; font-weight: 600; color: #1e293b; }
+        .monthly-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 11px; }
+        .monthly-table th { background-color: #f59e0b; color: #fff; padding: 6px 3px; border: 1px solid #d97706; font-weight: 700; }
+        .monthly-table td { padding: 5px 3px; border: 1px solid #cbd5e1; font-weight: 600; color: #1e293b; }
         .monthly-table tr:nth-child(even) { background-color: #f8fafc; }
-        .month-buttons { display: flex; gap: 10px; margin-top: 12px; }
-        .month-btn { flex: 1; background-color: #2563eb; color: white; border: none; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 600; text-align: center; text-decoration: none; }
+        
+        .month-selector { margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .month-selector select { padding: 6px; font-size: 12px; background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 4px; }
 
         /* Embedded Admin Panel Styles */
         .admin-section { background: #1e293b; margin: 20px 12px; padding: 15px; border-radius: 10px; color: #fff; }
@@ -87,10 +88,9 @@
     <div class="result-card">
         <div>
             <div class="game-name">BULANDSHAHR CITY</div>
-            <div class="game-time">at 09:20 AM • <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 09:20 AM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">12</div>
             <div class="score-box" id="score-BULANDSHAHR_CITY">--</div>
         </div>
     </div>
@@ -99,10 +99,9 @@
     <div class="result-card">
         <div>
             <div class="game-name">ALIGARH CITY</div>
-            <div class="game-time">at 12:30 PM • <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 12:30 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">15</div>
             <div class="score-box" id="score-ALIGARH_CITY">--</div>
         </div>
     </div>
@@ -111,10 +110,9 @@
     <div class="result-card">
         <div>
             <div class="game-name">NOIDA NCR</div>
-            <div class="game-time">at 02:27 PM • <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 02:27 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">25</div>
             <div class="score-box" id="score-NOIDA_NCR">--</div>
         </div>
     </div>
@@ -123,10 +121,9 @@
     <div class="result-card">
         <div>
             <div class="game-name">DELHI BAZAR</div>
-            <div class="game-time">at 03:00 PM • <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 03:00 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">15</div>
             <div class="score-box" id="score-DELHI_BAZAR">--</div>
         </div>
     </div>
@@ -135,10 +132,9 @@
     <div class="result-card">
         <div>
             <div class="game-name">SHREE GANESH</div>
-            <div class="game-time">at 03:52 PM • <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 03:52 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">25</div>
             <div class="score-box" id="score-SHREE_GANESH">--</div>
         </div>
     </div>
@@ -147,10 +143,9 @@
     <div class="result-card highlight">
         <div>
             <div class="game-name">FARIDABAD</div>
-            <div class="game-time">at 06:00 PM • <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 06:00 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">25</div>
             <div class="score-box" id="score-FARIDABAD">--</div>
         </div>
     </div>
@@ -159,10 +154,9 @@
     <div class="result-card">
         <div>
             <div class="game-name">MATHURA KING</div>
-            <div class="game-time">at 08:40 PM • <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 08:40 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">45</div>
             <div class="score-box" id="score-MATHURA_KING">--</div>
         </div>
     </div>
@@ -171,10 +165,9 @@
     <div class="result-card">
         <div>
             <div class="game-name">GHAZIABAD</div>
-            <div class="game-time">at 09:55 PM • <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 09:55 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">57</div>
             <div class="score-box" id="score-GHAZIABAD">--</div>
         </div>
     </div>
@@ -183,10 +176,9 @@
     <div class="result-card">
         <div>
             <div class="game-name">GALI</div>
-            <div class="game-time">at 11:25 PM • <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 11:25 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">27</div>
             <div class="score-box" id="score-GALI">--</div>
         </div>
     </div>
@@ -195,35 +187,53 @@
     <div class="result-card">
         <div>
             <div class="game-name">DISAWAR</div>
-            <div class="game-time">at 05:00 AM • <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 05:00 AM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">15</div>
             <div class="score-box" id="score-DISAWAR">--</div>
         </div>
     </div>
 
     <!-- Monthly Chart Table Section -->
     <div class="chart-container">
-        <div class="chart-heading">Monthly Satta King Result Chart of October 2026</div>
+        <div class="month-selector">
+            <span style="font-size: 12px; font-weight: bold; color: #0284c7;">Mahina Chunein:</span>
+            <select id="selectedMonth" onchange="loadChartData()">
+                <option value="Jan">Jan</option>
+                <option value="Feb">Feb</option>
+                <option value="Mar">Mar</option>
+                <option value="Apr">Apr</option>
+                <option value="May">May</option>
+                <option value="Jun">Jun</option>
+                <option value="Jul">Jul</option>
+                <option value="Aug">Aug</option>
+                <option value="Sep">Sep</option>
+                <option value="Oct" selected>Oct</option>
+                <option value="Nov">Nov</option>
+                <option value="Dec">Dec</option>
+            </select>
+        </div>
+        <div class="chart-heading" id="chartHeading">Monthly Result Chart - 2026</div>
         <table class="monthly-table">
             <thead>
                 <tr>
                     <th>DATE</th>
-                    <th>DSWR</th>
+                    <th>BULAND</th>
+                    <th>ALIGARH</th>
+                    <th>NOIDA</th>
+                    <th>DELHI</th>
+                    <th>SHREE</th>
                     <th>FRBD</th>
+                    <th>MATHURA</th>
                     <th>GZBD</th>
                     <th>GALI</th>
+                    <th>DSWR</th>
                 </tr>
             </thead>
             <tbody id="monthlyChartBody">
-                <tr><td colspan="5">Loading chart...</td></tr>
+                <tr><td colspan="11">Loading chart...</td></tr>
             </tbody>
         </table>
-        <div class="month-buttons">
-            <a href="#" class="month-btn">Sep 2026</a>
-            <a href="#" class="month-btn">Nov 2026</a>
-        </div>
     </div>
 
     <!-- EMBEDDED SECRET ADMIN PANEL -->
@@ -264,9 +274,9 @@
 
             <!-- Excel Uploader Box inside Admin Panel -->
             <div class="excel-box">
-                <label style="color: #38bdf8; font-weight: bold; margin-bottom: 6px; display: block;">📂 Excel Chart Data Upload Karein</label>
+                <label style="color: #38bdf8; font-weight: bold; margin-bottom: 6px; display: block;">📂 Poore Saal ka Excel Data Upload Karein</label>
                 <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" style="margin-bottom: 8px; font-size: 12px;">
-                <button class="admin-btn" style="background: #2563eb;" onclick="uploadExcelData()">Upload & Save Chart</button>
+                <button class="admin-btn" style="background: #2563eb;" onclick="uploadExcelData()">Upload & Save All Data</button>
             </div>
         </div>
     </div>
@@ -305,30 +315,44 @@
         }
     });
 
-    // Monthly Chart Data sync
-    const chartRef = ref(db, 'monthly_chart/october_2026');
-    onValue(chartRef, (snapshot) => {
-        const chartData = snapshot.val();
-        const tbody = document.getElementById('monthlyChartBody');
-        if (chartData) {
-            tbody.innerHTML = '';
-            const sortedDates = Object.keys(chartData).sort((a, b) => parseInt(a) - parseInt(b));
-            sortedDates.forEach(date => {
-                const row = chartData[date];
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${date}</td>
-                        <td>${row.dswr || '--'}</td>
-                        <td>${row.frbd || '--'}</td>
-                        <td>${row.gzbd || '--'}</td>
-                        <td>${row.gali || '--'}</td>
-                    </tr>
-                `;
-            });
-        } else {
-            tbody.innerHTML = `<tr><td colspan="5">Koi data uplabdh nahi hai. Admin se upload karein.</td></tr>`;
-        }
-    });
+    // Load Chart Data when month changes
+    window.loadChartData = function() {
+        const selectedMonth = document.getElementById('selectedMonth').value;
+        document.getElementById('chartHeading').innerText = `Monthly Result Chart - ${selectedMonth} 2026`;
+        
+        const chartRef = ref(db, `yearly_charts_2026/${selectedMonth}`);
+        onValue(chartRef, (snapshot) => {
+            const chartData = snapshot.val();
+            const tbody = document.getElementById('monthlyChartBody');
+            if (chartData) {
+                tbody.innerHTML = '';
+                const sortedDates = Object.keys(chartData).sort((a, b) => parseInt(a) - parseInt(b));
+                sortedDates.forEach(date => {
+                    const r = chartData[date];
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${date}</td>
+                            <td>${r['BULANDSHAHR CITY'] || '--'}</td>
+                            <td>${r['ALIGARH CITY'] || '--'}</td>
+                            <td>${r['NOIDA NCR'] || '--'}</td>
+                            <td>${r['DELHI BAZAR'] || '--'}</td>
+                            <td>${r['SHREE GANESH'] || '--'}</td>
+                            <td>${r['FARIDABAD'] || '--'}</td>
+                            <td>${r['MATHURA KING'] || '--'}</td>
+                            <td>${r['GHAZIABAD'] || '--'}</td>
+                            <td>${r['GALI'] || '--'}</td>
+                            <td>${r['DISAWAR'] || '--'}</td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = `<tr><td colspan="11">Is mahine ka data uplabdh nahi hai.</td></tr>`;
+            }
+        }, { onlyOnce: true });
+    }
+
+    // Initial load
+    setTimeout(() => { window.loadChartData(); }, 1000);
 
     // Admin Login Function (Password: 12345)
     window.checkLogin = function() {
@@ -365,7 +389,7 @@
         }
     }
 
-    // Excel File Upload & Parse Function
+    // Excel File Upload & Parse Function for Full Year Data
     window.uploadExcelData = function() {
         const fileInput = document.getElementById('excelFile');
         const file = fileInput.files[0];
@@ -383,22 +407,44 @@
                 const worksheet = workbook.Sheets[firstSheetName];
                 const jsonRows = XLSX.utils.sheet_to_json(worksheet);
 
-                let chartObj = {};
+                // Group data by month (e.g., 'Jan', 'Feb', etc.)
+                let groupedData = {};
+
                 jsonRows.forEach(row => {
+                    let m = row.month || row.MONTH || row.Month;
                     let d = row.date || row.DATE || row.Date;
-                    if(d) {
-                        chartObj[String(d).padStart(2, '0')] = {
-                            dswr: row.dswr || row.DSWR || '--',
-                            frbd: row.frbd || row.FRBD || '--',
-                            gzbd: row.gzbd || row.GZBD || '--',
-                            gali: row.gali || row.GALI || '--'
+
+                    if(m && d) {
+                        let monthKey = String(m).trim();
+                        let dateKey = String(d).padStart(2, '0');
+
+                        if(!groupedData[monthKey]) {
+                            groupedData[monthKey] = {};
+                        }
+
+                        groupedData[monthKey][dateKey] = {
+                            'BULANDSHAHR CITY': row['BULANDSHAHR CITY'] || row['Bulandshahr City'] || '--',
+                            'ALIGARH CITY': row['ALIGARH CITY'] || row['Aligarh City'] || '--',
+                            'NOIDA NCR': row['NOIDA NCR'] || row['Noida Ncr'] || '--',
+                            'DELHI BAZAR': row['DELHI BAZAR'] || row['Delhi Bazar'] || '--',
+                            'SHREE GANESH': row['SHREE GANESH'] || row['Shree Ganesh'] || '--',
+                            'FARIDABAD': row['FARIDABAD'] || row['Faridabad'] || '--',
+                            'MATHURA KING': row['MATHURA KING'] || row['Mathura King'] || '--',
+                            'GHAZIABAD': row['GHAZIABAD'] || row['Ghaziabad'] || '--',
+                            'GALI': row['GALI'] || row['Gali'] || '--',
+                            'DISAWAR': row['DISAWAR'] || row['Disawar'] || '--'
                         };
                     }
                 });
 
-                await set(ref(db, 'monthly_chart/october_2026'), chartObj);
-                alert("Excel ka saara data successfully database me save ho gaya!");
+                // Save each month into Firebase under yearly_charts_2026
+                for(let month in groupedData) {
+                    await set(ref(db, `yearly_charts_2026/${month}`), groupedData[month]);
+                }
+
+                alert("Aapka poore saal ka Excel data successfully upload aur save ho gaya!");
                 fileInput.value = '';
+                window.loadChartData();
             } catch (err) {
                 console.error(err);
                 alert("File padhne me error aayi. Kripya check karein ki format sahi hai.");
