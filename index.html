@@ -3,82 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fast Results & Charts</title>
+    <title>Live Results & Charts Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            color: #000;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #0f172a;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
         }
         .container {
+            width: 100%;
             max-width: 480px;
-            margin: 0 auto;
-            background: #fff;
-            padding-bottom: 20px;
+            background: #f8fafc;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+        /* Top Alert Bar */
         .update-bar {
-            background-color: #ffcccc;
-            color: #cc0000;
-            padding: 8px;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            padding: 10px 15px;
             text-align: center;
-            font-size: 13px;
-            font-weight: bold;
+            font-size: 12px;
+            font-weight: 500;
         }
+        .update-bar a {
+            color: #fff;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        /* Main Header */
         .date-header {
-            background-color: #2ecc71;
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             text-align: center;
-            padding: 10px;
-            font-size: 16px;
-            font-weight: bold;
+            padding: 15px;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
         .sub-header {
-            background-color: #333;
-            color: white;
+            background-color: #1e293b;
+            color: #f1f5f9;
             display: flex;
             justify-content: space-between;
-            padding: 8px 15px;
-            font-size: 14px;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
+        /* Section Title */
         .section-title {
-            background-color: #fce4ec;
-            color: #d81b60;
-            padding: 8px 15px;
-            font-weight: bold;
-            font-size: 15px;
-            border-left: 5px solid #d81b60;
+            background-color: #fce7f3;
+            color: #be185d;
+            padding: 8px 18px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-left: 4px solid #be185d;
+            margin-top: 10px;
         }
-        .result-row {
+        /* Result Rows */
+        .result-card {
+            background: #ffffff;
+            margin: 8px 12px;
+            padding: 12px 15px;
+            border-radius: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
-            border-bottom: 1px solid #ddd;
-            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
         }
-        .result-row.highlight {
-            background-color: #f1c40f;
+        .result-card:hover {
+            transform: translateY(-2px);
+        }
+        .result-card.highlight {
+            background: linear-gradient(135deg, #fef08a, #fde047);
+            border-color: #facc15;
         }
         .game-name {
-            font-weight: bold;
-            font-size: 15px;
+            font-weight: 700;
+            font-size: 14px;
+            color: #1e293b;
         }
         .game-time {
-            font-size: 12px;
-            color: #555;
-        }
-        .game-scores {
-            display: flex;
-            gap: 20px;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 2px;
         }
         .chart-link {
             font-size: 11px;
-            color: #2980b9;
+            color: #2563eb;
             text-decoration: none;
+            font-weight: 500;
+        }
+        .chart-link:hover {
+            text-decoration: underline;
+        }
+        .game-scores {
+            display: flex;
+            gap: 12px;
+        }
+        .score-box {
+            background: #f1f5f9;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+            min-width: 40px;
+            text-align: center;
+            border: 1px solid #cbd5e1;
+        }
+        .result-card.highlight .score-box {
+            background: #ffffff;
+            color: #b45309;
+            border-color: #ca8a04;
         }
     </style>
 </head>
@@ -87,12 +140,12 @@
 <div class="container">
     <!-- Top Alert Bar -->
     <div class="update-bar">
-        Disclaimer: Yeh ek independent informational portal hai. Read More...
+        ⚠️ Disclaimer: Independent informational portal. <a href="#">Read More</a>
     </div>
 
     <!-- Date & Main Title Header -->
     <div class="date-header">
-        Fast Results of October 15, 2026 & October 14, 2026
+        ⚡ Fast Results of October 15, 2026 & October 14, 2026
     </div>
 
     <div class="sub-header">
@@ -101,41 +154,41 @@
     </div>
 
     <!-- Live Section -->
-    <div class="section-title">LIVE</div>
+    <div class="section-title">Live Results</div>
 
     <!-- Result Item 1 -->
-    <div class="result-row">
+    <div class="result-card">
         <div>
             <div class="game-name">KINGS</div>
-            <div class="game-time">at 06:30 PM <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 06:30 PM • <a href="#" class="chart-link">Record Chart</a></div>
         </div>
         <div class="game-scores">
-            <span>85</span>
-            <span>16</span>
+            <div class="score-box">85</div>
+            <div class="score-box">16</div>
         </div>
     </div>
 
     <!-- Result Item 2 (Highlighted) -->
-    <div class="result-row highlight">
+    <div class="result-card highlight">
         <div>
             <div class="game-name">FARIDABAD</div>
-            <div class="game-time">at 06:00 PM <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 06:00 PM • <a href="#" class="chart-link">Record Chart</a></div>
         </div>
         <div class="game-scores">
-            <span>11</span>
-            <span>87</span>
+            <div class="score-box">11</div>
+            <div class="score-box">87</div>
         </div>
     </div>
 
     <!-- Result Item 3 -->
-    <div class="result-row">
+    <div class="result-card">
         <div>
             <div class="game-name">OLD FARIDABAD</div>
-            <div class="game-time">at 06:00 PM <a href="#" class="chart-link">Record Chart</a></div>
+            <div class="game-time">at 06:00 PM • <a href="#" class="chart-link">Record Chart</a></div>
         </div>
         <div class="game-scores">
-            <span>78</span>
-            <span>40</span>
+            <div class="score-box">78</div>
+            <div class="score-box">40</div>
         </div>
     </div>
 
