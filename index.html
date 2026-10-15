@@ -3,127 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gali Disawar Kingg Results - Fast Satta Results Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- SheetJS Library for reading Excel files -->
+    <title>Gali Disawar Kingg - Ultimate Gaming Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         
-        body { background: #0b1120; color: #1e293b; display: flex; justify-content: center; min-height: 100vh; padding: 0; }
+        body { 
+            background: #030712; 
+            color: #f3f4f6; 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh; 
+            padding: 0; 
+        }
         
         .container { 
             width: 100%; 
             max-width: 900px; 
-            background: #f8fafc; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6); 
+            background: #0b0f19; 
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.15); 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
-            border-left: 2px solid #334155;
-            border-right: 2px solid #334155;
+            border-left: 1px solid #1e293b;
+            border-right: 1px solid #1e293b;
         }
 
         @media (min-width: 768px) {
-            body { padding: 30px 10px; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); }
-            .container { border-radius: 12px; min-height: auto; margin-bottom: 30px; border: 1px solid #475569; }
+            body { padding: 20px 10px; background: radial-gradient(circle at top, #111827 0%, #030712 100%); }
+            .container { border-radius: 16px; min-height: auto; margin-bottom: 30px; border: 1px solid #374151; }
         }
         
-        .app-header { background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 25px 20px; text-align: center; border-top-left-radius: inherit; border-top-right-radius: inherit; }
-        .app-header h2 { font-size: 26px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
-        .download-btn { background-color: #28a745; color: white; padding: 12px 28px; text-decoration: none; font-weight: bold; border-radius: 6px; display: inline-block; margin-top: 12px; font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.2s; }
-        .download-btn:hover { background-color: #218838; }
+        /* Unique Cyber-Neon Header */
+        .app-header { 
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); 
+            color: white; 
+            padding: 30px 20px; 
+            text-align: center; 
+            border-top-left-radius: inherit; 
+            border-top-right-radius: inherit;
+            position: relative;
+            border-bottom: 2px solid #3b82f6;
+        }
+        .app-header h2 { 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px; 
+            font-weight: 900; 
+            letter-spacing: 1.5px; 
+            color: #60a5fa;
+            text-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
+            text-transform: uppercase; 
+        }
+        .admin-trigger-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #475569;
+            color: #93c5fd;
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .admin-trigger-btn:hover { background: #2563eb; color: #fff; border-color: #2563eb; }
 
-        .update-bar { background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; padding: 12px 20px; text-align: center; font-size: 12px; font-weight: 500; line-height: 1.5; }
-        .update-bar a { color: #fff; text-decoration: underline; font-weight: 700; cursor: pointer; }
+        .download-btn { 
+            background: linear-gradient(135deg, #10b981, #059669); 
+            color: white; 
+            padding: 10px 24px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            border-radius: 8px; 
+            display: inline-block; 
+            margin-top: 14px; 
+            font-size: 14px; 
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); 
+            transition: transform 0.2s; 
+        }
+        .download-btn:hover { transform: translateY(-2px); }
+
+        .update-bar { 
+            background: #1e1b4b; 
+            color: #c7d2fe; 
+            padding: 12px 18px; 
+            text-align: center; 
+            font-size: 12px; 
+            font-weight: 500; 
+            border-bottom: 1px solid #312e81;
+        }
+        .update-bar a { color: #f43f5e; text-decoration: underline; font-weight: 700; cursor: pointer; }
         
-        .date-header { background: linear-gradient(135deg, #10b981, #059669); color: white; text-align: center; padding: 16px; font-size: 15px; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); letter-spacing: 0.5px; }
+        .date-header { 
+            background: linear-gradient(90deg, #047857, #059669, #047857); 
+            color: white; 
+            text-align: center; 
+            padding: 14px; 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px; 
+            font-weight: 700; 
+            letter-spacing: 0.5px; 
+        }
         
-        .section-title { background-color: #fce7f3; color: #be185d; padding: 12px 20px; font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-left: 5px solid #be185d; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .section-days { display: flex; gap: 28px; font-size: 11px; font-weight: 700; color: #831843; text-transform: none; }
+        .section-title { 
+            background-color: #172554; 
+            color: #60a5fa; 
+            padding: 12px 20px; 
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700; 
+            font-size: 12px; 
+            letter-spacing: 1.5px; 
+            text-transform: uppercase; 
+            border-left: 4px solid #3b82f6; 
+            margin-top: 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .section-days { display: flex; gap: 28px; font-size: 11px; font-weight: 700; color: #93c5fd; }
         
-        .result-card { background: #ffffff; margin: 10px 15px; padding: 14px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 3px 6px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
-        .result-card.highlight { background: linear-gradient(135deg, #fef08a, #fde047); border-color: #facc15; }
-        .game-name { font-weight: 700; font-size: 15px; color: #1e293b; }
-        .game-time { font-size: 12px; color: #64748b; margin-top: 3px; }
+        .result-card { 
+            background: #111827; 
+            margin: 8px 12px; 
+            padding: 12px 18px; 
+            border-radius: 10px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2); 
+            border: 1px solid #1f2937; 
+            transition: border-color 0.2s;
+        }
+        .result-card:hover { border-color: #4b5563; }
+        .result-card.highlight { background: linear-gradient(135deg, #451a03, #1e1b4b); border-color: #d97706; }
         
-        .game-scores { display: flex; gap: 12px; align-items: center; }
+        .game-info { display: flex; flex-direction: column; }
+        .game-name { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 14px; color: #f9fafb; letter-spacing: 0.5px; }
+        .game-time { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+        
+        .game-scores { display: flex; gap: 10px; align-items: center; }
         
         .score-box { 
-            background: #f1f5f9; 
-            padding: 8px 0; 
+            background: #1f2937; 
+            padding: 6px 0; 
             border-radius: 6px; 
-            font-size: 16px; 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px; 
             font-weight: 700; 
-            color: #0f172a; 
-            width: 58px; 
-            height: 38px;
+            color: #38bdf8; 
+            width: 56px; 
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #cbd5e1; 
+            border: 1px solid #374151; 
         }
-        .result-card.highlight .score-box { background: #ffffff; color: #b45309; border-color: #ca8a04; }
+        .result-card.highlight .score-box { background: #78350f; color: #fde047; border-color: #b45309; }
 
         .wait-box { 
             font-size: 10px; 
             font-weight: 600; 
-            color: #d97706; 
+            color: #fbbf24; 
             display: flex; 
             align-items: center; 
             justify-content: center;
             gap: 4px; 
-            background: #fef3c7; 
-            width: 58px; 
-            height: 38px;
+            background: #451a03; 
+            width: 56px; 
+            height: 36px;
             border-radius: 6px; 
-            border: 1px solid #fcd34d; 
+            border: 1px solid #b45309; 
         }
         .spinner {
-            width: 10px;
-            height: 10px;
-            border: 2px solid #d97706;
+            width: 9px;
+            height: 9px;
+            border: 2px solid #fbbf24;
             border-top: 2px solid transparent;
             border-radius: 50%;
-            animation: spin 1.6s linear infinite;
+            animation: spin 1.5s linear infinite;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        .tables-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 5px 10px;
-        }
+        .tables-wrapper { display: flex; flex-direction: column; gap: 15px; padding: 5px 10px; margin-top: 15px; }
 
-        .chart-container { background: #ffffff; margin: 10px 5px; padding: 18px; border-radius: 10px; border: 1px solid #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-        .chart-heading { background: #0284c7; color: white; text-align: center; padding: 12px; font-size: 15px; font-weight: 700; border-radius: 6px; margin-bottom: 14px; letter-spacing: 0.5px; }
+        .chart-container { background: #111827; margin: 5px; padding: 16px; border-radius: 12px; border: 1px solid #1f2937; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .chart-heading { background: linear-gradient(135deg, #0369a1, #0284c7); color: white; text-align: center; padding: 10px; font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 700; border-radius: 8px; margin-bottom: 12px; letter-spacing: 0.5px; }
         
-        .table-scroll-container {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
+        .table-scroll-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
         .monthly-table { width: 100%; min-width: 550px; border-collapse: collapse; text-align: center; font-size: 12px; }
-        .monthly-table th, .monthly-table td { padding: 9px 6px; border: 1px solid #cbd5e1; font-weight: 600; color: #1e293b; white-space: nowrap; }
-        .monthly-table th { background-color: #f59e0b; color: #fff; border: 1px solid #d97706; font-weight: 700; font-size: 11px; letter-spacing: 0.3px; }
-        .monthly-table tr:nth-child(even) { background-color: #f8fafc; }
+        .monthly-table th, .monthly-table td { padding: 9px 6px; border: 1px solid #1f2937; font-weight: 600; color: #e5e7eb; white-space: nowrap; }
+        .monthly-table th { background-color: #1e293b; color: #38bdf8; border: 1px solid #334155; font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 0.5px; }
+        .monthly-table tr:nth-child(even) { background-color: #0f172a; }
         
-        .highlight-digit { background-color: #fef08a !important; color: #b45309 !important; font-weight: bold; display: inline-block; padding: 2px 6px; border-radius: 3px; }
+        .highlight-digit { background-color: #78350f !important; color: #fde047 !important; font-weight: bold; display: inline-block; padding: 2px 6px; border-radius: 4px; }
 
-        .month-buttons { display: flex; gap: 12px; margin-top: 15px; }
-        .month-btn { flex: 1; background-color: #2563eb; color: white; border: none; padding: 11px; border-radius: 6px; font-size: 13px; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; transition: background 0.2s; }
-        .month-btn:hover { background-color: #1d4ed8; }
+        .month-buttons { display: flex; gap: 10px; margin-top: 14px; }
+        .month-btn { flex: 1; background-color: #1e293b; color: #93c5fd; border: 1px solid #334155; padding: 10px; border-radius: 8px; font-size: 12px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .month-btn:hover { background-color: #2563eb; color: #fff; border-color: #2563eb; }
 
-        /* Terms Modal Styles */
+        /* Modal Popups Overlay */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(5px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -131,49 +221,47 @@
             padding: 15px;
         }
         .modal-content {
-            background: #ffffff;
-            color: #1e293b;
+            background: #111827;
+            color: #f3f4f6;
             width: 100%;
             max-width: 650px;
             max-height: 85vh;
-            border-radius: 12px;
-            padding: 25px;
+            border-radius: 14px;
+            padding: 24px;
             overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+            border: 1px solid #374151;
             position: relative;
         }
-        .modal-header { font-size: 20px; font-weight: 700; color: #0284c7; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .close-btn { background: #ef4444; color: white; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .close-btn:hover { background: #dc2626; }
-        .modal-body { font-size: 13px; line-height: 1.6; color: #334155; }
-        .modal-body h3 { font-size: 14px; font-weight: 700; color: #0f172a; margin-top: 12px; margin-bottom: 4px; }
+        .modal-header { font-family: 'Orbitron', sans-serif; font-size: 18px; font-weight: 700; color: #60a5fa; margin-bottom: 15px; border-bottom: 1px solid #1f2937; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .close-btn { background: #ef4444; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .modal-body { font-size: 12px; line-height: 1.6; color: #9ca3af; }
+        .modal-body h3 { font-size: 13px; font-weight: 700; color: #e5e7eb; margin-top: 12px; margin-bottom: 4px; font-family: 'Orbitron', sans-serif; }
 
-        .admin-section { background: #1e293b; margin: 25px 15px 30px 15px; padding: 22px; border-radius: 12px; color: #fff; box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
-        .admin-section h3 { text-align: center; color: #38bdf8; font-size: 18px; margin-bottom: 16px; font-weight: 700; }
+        /* Admin Panel Styles inside Modal */
         .form-group { margin-bottom: 14px; display: flex; flex-direction: column; }
-        label { font-size: 13px; margin-bottom: 6px; color: #cbd5e1; font-weight: 500; }
-        input, select { padding: 12px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 15px; outline: none; }
-        input:focus, select:focus { border-color: #38bdf8; }
-        .admin-btn { background: #10b981; color: white; border: none; padding: 12px; border-radius: 6px; font-size: 15px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 5px; transition: background 0.2s; }
-        .admin-btn:hover { background: #059669; }
-        .excel-box { margin-top: 18px; border-top: 1px dashed #475569; padding-top: 18px; }
+        label { font-size: 12px; margin-bottom: 5px; color: #93c5fd; font-weight: 600; }
+        input, select { padding: 10px; border-radius: 6px; border: 1px solid #374151; background: #030712; color: #fff; font-size: 14px; outline: none; }
+        input:focus, select:focus { border-color: #3b82f6; }
+        .admin-btn { background: #059669; color: white; border: none; padding: 11px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 5px; transition: background 0.2s; }
+        .admin-btn:hover { background: #10b981; }
+        .excel-box { margin-top: 16px; border-top: 1px dashed #374151; padding-top: 16px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header class="app-header">
-        <h2>Gali Disawar Kingg Results</h2>
-        <p style="font-size: 14px; margin-top: 6px;">Hamari Official Android App download karein!</p>
+        <button class="admin-trigger-btn" onclick="openAdminModal()">🔐 Admin Login</button>
+        <h2>Gali Disawar Kingg</h2>
+        <p style="font-size: 13px; margin-top: 6px; color: #93c5fd;">Hamari Official Android App download karein!</p>
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
     </header>
 
-    <!-- Top Alert Bar with Clickable Read More link -->
     <div class="update-bar">
-        GaliDisawarKing is an independent information platform. All content is provided for general informational purposes only. Users are responsible for verifying information and complying with applicable laws. We are not affiliated with third parties unless expressly stated. <a onclick="openModal()">Read More...</a>
+        GaliDisawarKing is an independent information platform. All content is provided for general informational purposes only. Users are responsible for verifying information and complying with applicable laws. We are not affiliated with third parties unless expressly stated. <a onclick="openTermsModal()">Read More...</a>
     </div>
 
-    <!-- Corrected Date Header Order: Oct 14 & Oct 15 -->
     <div class="date-header">
         ⚡ Fast Results of October 14, 2026 & October 15, 2026
     </div>
@@ -186,124 +274,9 @@
         </div>
     </div>
 
-    <!-- BULANDSHAHR CITY -->
-    <div class="result-card">
-        <div>
-            <div class="game-name">BULANDSHAHR CITY</div>
-            <div class="game-time">at 09:20 AM</div>
-        </div>
-        <div class="game-scores">
-            <div class="score-box" id="live-14-BULANDSHAHR_CITY"><div class="spinner"></div></div>
-            <div class="score-box" id="live-15-BULANDSHAHR_CITY"><div class="spinner"></div></div>
-        </div>
-    </div>
-
-    <!-- ALIGARH CITY -->
-    <div class="result-card">
-        <div>
-            <div class="game-name">ALIGARH CITY</div>
-            <div class="game-time">at 12:30 PM</div>
-        </div>
-        <div class="game-scores">
-            <div class="score-box" id="live-14-ALIGARH_CITY"><div class="spinner"></div></div>
-            <div class="score-box" id="live-15-ALIGARH_CITY"><div class="spinner"></div></div>
-        </div>
-    </div>
-
-    <!-- NOIDA NCR -->
-    <div class="result-card">
-        <div>
-            <div class="game-name">NOIDA NCR</div>
-            <div class="game-time">at 02:27 PM</div>
-        </div>
-        <div class="game-scores">
-            <div class="score-box" id="live-14-NOIDA_NCR"><div class="spinner"></div></div>
-            <div class="score-box" id="live-15-NOIDA_NCR"><div class="spinner"></div></div>
-        </div>
-    </div>
-
-    <!-- DELHI BAZAR -->
-    <div class="result-card">
-        <div>
-            <div class="game-name">DELHI BAZAR</div>
-            <div class="game-time">at 03:00 PM</div>
-        </div>
-        <div class="game-scores">
-            <div class="score-box" id="live-14-DELHI_BAZAR"><div class="spinner"></div></div>
-            <div class="score-box" id="live-15-DELHI_BAZAR"><div class="spinner"></div></div>
-        </div>
-    </div>
-
-    <!-- SHREE GANESH -->
-    <div class="result-card">
-        <div>
-            <div class="game-name">SHREE GANESH</div>
-            <div class="game-time">at 03:52 PM</div>
-        </div>
-        <div class="game-scores">
-            <div class="score-box" id="live-14-SHREE_GANESH"><div class="spinner"></div></div>
-            <div class="score-box" id="live-15-SHREE_GANESH"><div class="spinner"></div></div>
-        </div>
-    </div>
-
-    <!-- FARIDABAD -->
-    <div class="result-card highlight">
-        <div>
-            <div class="game-name">FARIDABAD</div>
-            <div class="game-time">at 06:00 PM</div>
-        </div>
-        <div class="game-scores">
-            <div class="score-box" id="live-14-FARIDABAD"><div class="spinner"></div></div>
-            <div class="score-box" id="live-15-FARIDABAD"><div class="spinner"></div></div>
-        </div>
-    </div>
-
-    <!-- MATHURA KING -->
-    <div class="result-card">
-        <div>
-            <div class="game-name">MATHURA KING</div>
-            <div class="game-time">at 08:40 PM</div>
-        </div>
-        <div class="game-scores">
-            <div class="score-box" id="live-14-MATHURA_KING"><div class="spinner"></div></div>
-            <div class="score-box" id="live-15-MATHURA_KING"><div class="spinner"></div></div>
-        </div>
-    </div>
-
-    <!-- GHAZIABAD -->
-    <div class="result-card">
-        <div>
-            <div class="game-name">GHAZIABAD</div>
-            <div class="game-time">at 09:55 PM</div>
-        </div>
-        <div class="game-scores">
-            <div class="score-box" id="live-14-GHAZIABAD"><div class="spinner"></div></div>
-            <div id="live-15-GHAZIABAD"><div class="wait-box"><div class="spinner"></div> Wait...</div></div>
-        </div>
-    </div>
-
-    <!-- GALI -->
-    <div class="result-card">
-        <div>
-            <div class="game-name">GALI</div>
-            <div class="game-time">at 11:25 PM</div>
-        </div>
-        <div class="game-scores">
-            <div class="score-box" id="live-14-GALI"><div class="spinner"></div></div>
-            <div id="live-15-GALI"><div class="wait-box"><div class="spinner"></div> Wait...</div></div>
-        </div>
-    </div>
-
-    <!-- DISAWAR -->
-    <div class="result-card">
-        <div>
-            <div class="game-name">DISAWAR</div>
-            <div class="game-time">at 05:00 AM</div>
-        </div>
-        <div class="game-scores">
-            <div class="score-box" id="live-14-DISAWAR"><div class="spinner"></div></div>
-            <div class="score-box" id="live-15-DISAWAR"><div class="spinner"></div></div>
-        </div>
+    <!-- MARKETS LIST WITH DYNAMIC TIMES -->
+    <div id="marketsListContainer">
+        <!-- Dynamically rendered via JS to reflect updated times & scores -->
     </div>
 
     <div class="tables-wrapper">
@@ -359,101 +332,82 @@
             </div>
         </div>
     </div>
-
-    <div class="admin-section">
-        <h3>🔒 Admin Control Panel</h3>
-        <div id="loginBox" class="form-group">
-            <label>Admin Password Daalein</label>
-            <input type="password" id="adminPass" placeholder="Password daalein">
-            <button class="admin-btn" onclick="checkLogin()">Login</button>
-        </div>
-
-        <div id="panelBox" style="display: none;">
-            <div class="form-group">
-                <label>Game Select Karein (Live Result)</label>
-                <select id="gameName">
-                    <option value="BULANDSHAHR_CITY">BULANDSHAHR CITY</option>
-                    <option value="ALIGARH_CITY">ALIGARH CITY</option>
-                    <option value="NOIDA_NCR">NOIDA NCR</option>
-                    <option value="DELHI_BAZAR">DELHI BAZAR</option>
-                    <option value="SHREE_GANESH">SHREE GANESH</option>
-                    <option value="FARIDABAD">FARIDABAD</option>
-                    <option value="MATHURA_KING">MATHURA KING</option>
-                    <option value="GHAZIABAD">GHAZIABAD</option>
-                    <option value="GALI">GALI</option>
-                    <option value="DISAWAR">DISAWAR</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Result Number (Score)</label>
-                <input type="text" id="resultScore" placeholder="Jaise: 45">
-            </div>
-
-            <button class="admin-btn" onclick="updateResult()">Update Live Result</button>
-
-            <div class="excel-box">
-                <label style="color: #38bdf8; font-weight: bold; margin-bottom: 6px; display: block;">📂 Poore Saal ka Excel Data Upload Karein</label>
-                <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" style="margin-bottom: 8px; font-size: 13px;">
-                <button class="admin-btn" style="background: #2563eb;" onclick="uploadExcelData()">Upload & Save All Data</button>
-            </div>
-        </div>
-    </div>
-
 </div>
 
-<!-- Terms of Service Modal Popup -->
+<!-- TERMS OF SERVICE MODAL -->
 <div id="termsModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
             <span>Terms of Service</span>
-            <button class="close-btn" onclick="closeModal()">✕</button>
+            <button class="close-btn" onclick="closeTermsModal()">✕</button>
         </div>
         <div class="modal-body">
             <p><strong>Effective Date:</strong> October 15, 2026</p>
-            
             <h3>1. ACCEPTANCE OF TERMS</h3>
-            <p>Welcome to GaliDisawarKing. These Terms of Service govern your access to and use of our website, its content, features, and related services. By visiting or using this website, you acknowledge that you have read and understood these Terms. If you do not agree with any part of these Terms, please discontinue using the website.</p>
-
+            <p>Welcome to GaliDisawarKing. These Terms of Service govern your access to and use of our website...</p>
             <h3>2. ABOUT OUR WEBSITE</h3>
-            <p>GaliDisawarKing is an independently operated online platform that may publish gaming-related updates, results, general information, and other relevant content.<br>Our website is intended to provide information for general reference purposes. Unless expressly stated otherwise, we are not officially associated with any third-party company, organization, or service mentioned on the website.<br>We do not guarantee that all published information will always be accurate, complete, current, or available without interruption.</p>
-
+            <p>GaliDisawarKing is an independently operated online platform that may publish gaming-related updates...</p>
             <h3>3. INFORMATIONAL PURPOSES</h3>
-            <p>All content available on GaliDisawarKing is provided for general informational purposes only. Nothing published on this website should be interpreted as financial, legal, or professional advice.<br>Users should independently verify information before relying on it. We are not responsible for decisions made solely on the basis of content published on this platform.</p>
+            <p>All content available on GaliDisawarKing is provided for general informational purposes only...</p>
+            <h3>4. USER ELIGIBILITY</h3>
+            <p>Users are responsible for ensuring that their access to and use of this website complies with applicable laws...</p>
+        </div>
+    </div>
+</div>
 
-            <h3>4. USER ELIGIBILITY AND LEGAL COMPLIANCE</h3>
-            <p>Users are responsible for ensuring that their access to and use of this website complies with the laws applicable in their location.<br>Where access to particular content or activities is restricted by law, users must refrain from accessing or participating in those activities. Nothing on this website is intended to encourage unlawful conduct or to override any applicable legal restriction.</p>
+<!-- SECURE ADMIN MODAL -->
+<div id="adminModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span>🔐 Admin Control Panel</span>
+            <button class="close-btn" onclick="closeAdminModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <!-- Login Box -->
+            <div id="loginBox">
+                <div class="form-group">
+                    <label>Admin Password</label>
+                    <input type="password" id="adminPass" placeholder="Password daalein (12345)">
+                </div>
+                <button class="admin-btn" onclick="checkLogin()">Login</button>
+            </div>
 
-            <h3>5. THIRD-PARTY WEBSITES AND SERVICES</h3>
-            <p>Our website may contain references or links to third-party websites, platforms, or services. Such external resources are operated independently and are not under our direct control.<br>We do not guarantee the accuracy, security, availability, or policies of third-party websites. Visiting an external website is at your own discretion, and you should review its terms and privacy policy before using it.</p>
+            <!-- Panel Box (Hidden until login) -->
+            <div id="panelBox" style="display: none;">
+                <div class="form-group">
+                    <label>Market Select Karein</label>
+                    <select id="gameName">
+                        <option value="BULANDSHAHR_CITY">BULANDSHAHR CITY</option>
+                        <option value="ALIGARH_CITY">ALIGARH CITY</option>
+                        <option value="NOIDA_NCR">NOIDA NCR</option>
+                        <option value="DELHI_BAZAR">DELHI BAZAR</option>
+                        <option value="SHREE_GANESH">SHREE GANESH</option>
+                        <option value="FARIDABAD">FARIDABAD</option>
+                        <option value="MATHURA_KING">MATHURA KING</option>
+                        <option value="GHAZIABAD">GHAZIABAD</option>
+                        <option value="GALI">GALI</option>
+                        <option value="DISAWAR">DISAWAR</option>
+                    </select>
+                </div>
 
-            <h3>6. INTELLECTUAL PROPERTY</h3>
-            <p>Unless otherwise indicated, the original text, design elements, branding, and other materials created for GaliDisawarKing are protected by applicable intellectual property laws.<br>You may not reproduce, republish, distribute, or commercially exploit our original content without prior authorization, except where permitted by applicable law.<br>Third-party names, trademarks, and logos remain the property of their respective owners.</p>
+                <div class="form-group">
+                    <label>New Result Number (Correction / Update)</label>
+                    <input type="text" id="resultScore" placeholder="Jaise: 45 ya --">
+                </div>
 
-            <h3>7. ACCEPTABLE USE</h3>
-            <p>By using this website, you agree not to:</p>
-            <ul>
-                <li>Use the website for any unlawful purpose.</li>
-                <li>Attempt to disrupt, damage, or interfere with the website's operation or security.</li>
-                <li>Copy or collect website content through automated methods in a manner that violates these Terms or applicable law.</li>
-                <li>Misrepresent your identity or misuse the website to harm other users or third parties.</li>
-            </ul>
-            <p>We reserve the right to take reasonable action against activities that violate these Terms or threaten the proper operation of the website.</p>
+                <div class="form-group">
+                    <label>Market Time (Change Schedule)</label>
+                    <input type="text" id="gameTimeInput" placeholder="Jaise: at 06:00 PM">
+                </div>
 
-            <h3>8. DISCLAIMER OF WARRANTIES</h3>
-            <p>The website and its content are provided on an “as available” basis, to the extent permitted by applicable law. We make no guarantee that the website will be uninterrupted, error-free, or free from technical issues.<br>To the extent permitted by law, we disclaim warranties that cannot otherwise be excluded under applicable legislation.</p>
+                <button class="admin-btn" onclick="updateMarketData()">Save Changes / Result</button>
 
-            <h3>9. LIMITATION OF LIABILITY</h3>
-            <p>To the extent permitted by applicable law, GaliDisawarKing and its operators shall not be liable for indirect or consequential losses arising from the use of, or inability to use, the website or from reliance on its published information.<br>Nothing in these Terms excludes or limits liability where such exclusion or limitation is prohibited by applicable law.</p>
-
-            <h3>10. PRIVACY</h3>
-            <p>Your use of this website may also be governed by our Privacy Policy, which explains how information is collected, used, stored, and protected. Please review the Privacy Policy for further details.</p>
-
-            <h3>11. CHANGES TO THESE TERMS</h3>
-            <p>We may update or revise these Terms of Service from time to time to reflect changes in our website, services, or applicable requirements. Updated terms will be published on this page along with the revised effective date.<br>Continued use of the website after changes are published constitutes acceptance of the revised Terms, to the extent permitted by law.</p>
-
-            <h3>12. CONTACT INFORMATION</h3>
-            <p>If you have any questions about these Terms of Service, please contact us through the Contact Us page available on GaliDisawarKing.<br>Thank you for visiting GaliDisawarKing.</p>
+                <div class="excel-box">
+                    <label style="color: #60a5fa; font-weight: bold; margin-bottom: 6px; display: block;">📂 Poore Saal ka Excel Data Upload Karein</label>
+                    <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" style="margin-bottom: 8px; font-size: 12px;">
+                    <button class="admin-btn" style="background: #2563eb;" onclick="uploadExcelData()">Upload & Save All Data</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -478,6 +432,19 @@
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let currentMonthIndex = 9; // October
 
+    const defaultMarkets = [
+        { id: 'BULANDSHAHR_CITY', name: 'BULANDSHAHR CITY', time: 'at 09:20 AM', highlight: false },
+        { id: 'ALIGARH_CITY', name: 'ALIGARH CITY', time: 'at 12:30 PM', highlight: false },
+        { id: 'NOIDA_NCR', name: 'NOIDA NCR', time: 'at 02:27 PM', highlight: false },
+        { id: 'DELHI_BAZAR', name: 'DELHI BAZAR', time: 'at 03:00 PM', highlight: false },
+        { id: 'SHREE_GANESH', name: 'SHREE GANESH', time: 'at 03:52 PM', highlight: false },
+        { id: 'FARIDABAD', name: 'FARIDABAD', time: 'at 06:00 PM', highlight: true },
+        { id: 'MATHURA_KING', name: 'MATHURA KING', time: 'at 08:40 PM', highlight: false },
+        { id: 'GHAZIABAD', name: 'GHAZIABAD', time: 'at 09:55 PM', highlight: false },
+        { id: 'GALI', name: 'GALI', time: 'at 11:25 PM', highlight: false },
+        { id: 'DISAWAR', name: 'DISAWAR', time: 'at 05:00 AM', highlight: false }
+    ];
+
     const commonDigits = ["11", "16", "61", "66", "22", "27", "72", "77", "33", "83", "88", "38", "44", "99", "49", "94", "05", "50", "55", "00"];
 
     function formatScore(val) {
@@ -492,19 +459,57 @@
         return str;
     }
 
-    const marketKeyMap = {
-        'BULANDSHAHR_CITY': 'BULANDSHAHR CITY',
-        'ALIGARH_CITY': 'ALIGARH CITY',
-        'NOIDA_NCR': 'NOIDA NCR',
-        'DELHI_BAZAR': 'DELHI BAZAR',
-        'SHREE_GANESH': 'SHREE GANESH',
-        'FARIDABAD': 'FARIDABAD',
-        'MATHURA_KING': 'MATHURA KING',
-        'GHAZIABAD': 'GHAZIABAD',
-        'GALI': 'GALI',
-        'DISAWAR': 'DISAWAR'
-    };
+    // Render Markets List with Time
+    function renderMarketsUI(customTimes = {}, liveData14 = {}, liveData15 = {}) {
+        const container = document.getElementById('marketsListContainer');
+        container.innerHTML = '';
 
+        defaultMarkets.forEach(market => {
+            const mTime = customTimes[market.id] || market.time;
+            const val14 = liveData14[market.name] || '--';
+            const val15 = liveData15[market.name] || '--';
+
+            let score15HTML = '';
+            if (!val15 || val15 === '--' || val15 === 'Wait...') {
+                if(market.id === 'GHAZIABAD' || market.id === 'GALI') {
+                    score15HTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
+                } else {
+                    score15HTML = `<div class="score-box">--</div>`;
+                }
+            } else {
+                let str15 = String(val15).trim();
+                if (str15.length === 1) str15 = '0' + str15;
+                score15HTML = `<div class="score-box">${str15}</div>`;
+            }
+
+            let str14 = (!val14 || val14 === '--') ? '--' : String(val14).trim();
+            if (str14.length === 1) str14 = '0' + str14;
+
+            container.innerHTML += `
+                <div class="result-card ${market.highlight ? 'highlight' : ''}">
+                    <div class="game-info">
+                        <div class="game-name">${market.name}</div>
+                        <div class="game-time">${mTime}</div>
+                    </div>
+                    <div class="game-scores">
+                        <div class="score-box">${str14}</div>
+                        <div id="score-${market.id}">${score15HTML}</div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // Sync Market Times and Live Data from Firebase
+    onValue(ref(db, 'market_times'), (snapshot) => {
+        const timesData = snapshot.val() || {};
+        onValue(ref(db, 'yearly_charts_2026/Oct'), (chartSnap) => {
+            const octData = chartSnap.val() || {};
+            renderMarketsUI(timesData, octData['14'] || {}, octData['15'] || {});
+        });
+    });
+
+    // Load Charts Data
     window.loadChartData = function() {
         const currentMonthName = months[currentMonthIndex];
         document.getElementById('chartHeading1').innerText = `Main Result Chart - ${currentMonthName} 2026`;
@@ -517,8 +522,7 @@
         document.getElementById('prevBtn2').innerText = `⬅️ ${months[prevIndex]} 2026`;
         document.getElementById('nextBtn2').innerText = `${months[nextIndex]} 2026 ➡️`;
         
-        const chartRef = ref(db, `yearly_charts_2026/${currentMonthName}`);
-        onValue(chartRef, (snapshot) => {
+        onValue(ref(db, `yearly_charts_2026/${currentMonthName}`), (snapshot) => {
             const chartData = snapshot.val();
             const tbody1 = document.getElementById('monthlyChartBody1');
             const tbody2 = document.getElementById('monthlyChartBody2');
@@ -554,46 +558,6 @@
                         </tr>
                     `;
                 });
-
-                if (currentMonthName === 'Oct') {
-                    const day14 = chartData['14'];
-                    const day15 = chartData['15'];
-
-                    for (const gameKey in marketKeyMap) {
-                        const mName = marketKeyMap[gameKey];
-                        
-                        const box14 = document.getElementById(`live-14-${gameKey}`);
-                        if (box14) {
-                            let val14 = day14 ? day14[mName] : '--';
-                            if (!val14 || val14 === '--') box14.innerHTML = '--';
-                            else {
-                                let str14 = String(val14).trim();
-                                if (str14.length === 1) str14 = '0' + str14;
-                                box14.innerHTML = str14;
-                            }
-                        }
-
-                        const box15 = document.getElementById(`live-15-${gameKey}`);
-                        if (box15) {
-                            let val15 = day15 ? day15[mName] : '--';
-                            if (!val15 || val15 === '--' || val15 === 'Wait...') {
-                                if(gameKey === 'GHAZIABAD' || gameKey === 'GALI') {
-                                    box15.innerHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
-                                    box15.className = "";
-                                } else {
-                                    box15.innerHTML = '--';
-                                    box15.className = "score-box";
-                                }
-                            } else {
-                                let str15 = String(val15).trim();
-                                if (str15.length === 1) str15 = '0' + str15;
-                                box15.innerHTML = str15;
-                                box15.className = "score-box";
-                            }
-                        }
-                    }
-                }
-
             } else {
                 tbody1.innerHTML = `<tr><td colspan="7">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
                 tbody2.innerHTML = `<tr><td colspan="5">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
@@ -610,13 +574,12 @@
 
     window.loadChartData();
 
-    // Modal Control Functions
-    window.openModal = function() {
-        document.getElementById('termsModal').style.display = 'flex';
-    }
-    window.closeModal = function() {
-        document.getElementById('termsModal').style.display = 'none';
-    }
+    // Modal Controls
+    window.openTermsModal = () => document.getElementById('termsModal').style.display = 'flex';
+    window.closeTermsModal = () => document.getElementById('termsModal').style.display = 'none';
+
+    window.openAdminModal = () => document.getElementById('adminModal').style.display = 'flex';
+    window.closeAdminModal = () => document.getElementById('adminModal').style.display = 'none';
 
     window.checkLogin = function() {
         const pass = document.getElementById('adminPass').value;
@@ -629,70 +592,64 @@
         }
     }
 
-    window.updateResult = async function() {
-        const game = document.getElementById('gameName').value;
-        const score = document.getElementById('resultScore').value.trim();
-
-        if(!score) {
-            alert("Kripya result number daalein!");
-            return;
-        }
+    // Admin Update Result & Time
+    window.updateMarketData = async function() {
+        const gameKey = document.getElementById('gameName').value;
+        const newScore = document.getElementById('resultScore').value.trim();
+        const newTime = document.getElementById('gameTimeInput').value.trim();
 
         try {
-            await set(ref(db, 'results/' + game), {
-                score: score,
-                updatedAt: new Date().toLocaleTimeString()
-            });
-            alert("Result successfully update ho gaya!");
+            const marketObj = defaultMarkets.find(m => m.id === gameKey);
+            const mName = marketObj ? marketObj.name : gameKey;
+
+            if(newScore) {
+                await set(ref(db, `yearly_charts_2026/Oct/15/${mName}`), newScore);
+            }
+            if(newTime) {
+                await set(ref(db, `market_times/${gameKey}`), newTime);
+            }
+            alert("Successfully update ho gaya!");
             document.getElementById('resultScore').value = '';
-        } catch (e) {
-            console.error("Error: ", e);
-            alert("Update karne me error aayi!");
+            document.getElementById('gameTimeInput').value = '';
+            closeAdminModal();
+        } catch(e) {
+            console.error(e);
+            alert("Error aayi update karne me!");
         }
     }
 
     window.uploadExcelData = function() {
         const fileInput = document.getElementById('excelFile');
         const file = fileInput.files[0];
-        if(!file) {
-            alert("Kripya pehle Excel file select karein!");
-            return;
-        }
+        if(!file) { alert("Kripya Excel file select karein!"); return; }
 
         const reader = new FileReader();
         reader.onload = async function(e) {
             try {
                 const data = new Uint8Array(e.target.result);
                 const workbook = XLSX.read(data, {type: 'array'});
-                const firstSheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[firstSheetName];
+                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
                 const jsonRows = XLSX.utils.sheet_to_json(worksheet);
 
                 let groupedData = {};
-
                 jsonRows.forEach(row => {
                     let m = row.month || row.MONTH || row.Month;
                     let d = row.date || row.DATE || row.Date;
-
                     if(m && d) {
                         let monthKey = String(m).trim();
                         let dateKey = String(d).padStart(2, '0');
-
-                        if(!groupedData[monthKey]) {
-                            groupedData[monthKey] = {};
-                        }
-
+                        if(!groupedData[monthKey]) groupedData[monthKey] = {};
                         groupedData[monthKey][dateKey] = {
-                            'BULANDSHAHR CITY': row['BULANDSHAHR CITY'] || row['Bulandshahr City'] || '--',
-                            'ALIGARH CITY': row['ALIGARH CITY'] || row['Aligarh City'] || '--',
-                            'NOIDA NCR': row['NOIDA NCR'] || row['Noida Ncr'] || '--',
-                            'DELHI BAZAR': row['DELHI BAZAR'] || row['Delhi Bazar'] || '--',
-                            'SHREE GANESH': row['SHREE GANESH'] || row['Shree Ganesh'] || '--',
-                            'FARIDABAD': row['FARIDABAD'] || row['Faridabad'] || '--',
-                            'MATHURA KING': row['MATHURA KING'] || row['Mathura King'] || '--',
-                            'GHAZIABAD': row['GHAZIABAD'] || row['Ghaziabad'] || '--',
-                            'GALI': row['GALI'] || row['Gali'] || '--',
-                            'DISAWAR': row['DISAWAR'] || row['Disawar'] || '--'
+                            'BULANDSHAHR CITY': row['BULANDSHAHR CITY'] || '--',
+                            'ALIGARH CITY': row['ALIGARH CITY'] || '--',
+                            'NOIDA NCR': row['NOIDA NCR'] || '--',
+                            'DELHI BAZAR': row['DELHI BAZAR'] || '--',
+                            'SHREE GANESH': row['SHREE GANESH'] || '--',
+                            'FARIDABAD': row['FARIDABAD'] || '--',
+                            'MATHURA KING': row['MATHURA KING'] || '--',
+                            'GHAZIABAD': row['GHAZIABAD'] || '--',
+                            'GALI': row['GALI'] || '--',
+                            'DISAWAR': row['DISAWAR'] || '--'
                         };
                     }
                 });
@@ -700,13 +657,13 @@
                 for(let month in groupedData) {
                     await set(ref(db, `yearly_charts_2026/${month}`), groupedData[month]);
                 }
-
-                alert("Aapka poore saal ka Excel data successfully upload aur save ho gaya!");
+                alert("Poora saal ka data successfully upload ho gaya!");
                 fileInput.value = '';
                 window.loadChartData();
+                closeAdminModal();
             } catch (err) {
                 console.error(err);
-                alert("File padhne me error aayi. Kripya check karein ki format sahi hai.");
+                alert("File read karne me error aayi.");
             }
         };
         reader.readAsArrayBuffer(file);
