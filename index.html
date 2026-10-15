@@ -83,35 +83,38 @@
         }
         .download-btn:hover { background: #059669; }
 
-        /* Custom Khaiwal / Game Play Panel (As requested) */
-        .khaiwal-panel {
+        /* FLOATING / STICKY MOVING BANNER (Stays on screen as user scrolls) */
+        .floating-banner {
+            position: sticky;
+            top: 10px;
+            z-index: 999;
             background: #fffdf5;
             color: #2b2b2b;
-            margin: 12px;
-            padding: 16px;
+            margin: 10px 12px;
+            padding: 14px;
             border-radius: 12px;
             border: 2px solid #f59e0b;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
         }
         .khaiwal-header {
             text-align: center;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #78350f;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .khaiwal-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             background: #ffffff;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid #e5e7eb;
         }
         .khaiwal-table th, .khaiwal-table td {
-            padding: 8px 12px;
-            font-size: 13px;
+            padding: 6px 10px;
+            font-size: 12px;
             font-weight: 600;
             border-bottom: 1px solid #f3f4f6;
             color: #1f2937;
@@ -123,39 +126,38 @@
         }
         .rate-box-row {
             display: flex;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 10px;
         }
         .rate-card {
             flex: 1;
             background: #ffffff;
             border: 1px solid #e5e7eb;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 8px;
+            border-radius: 6px;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: #78350f;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .khaiwal-footer-text {
             text-align: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #b45309;
-            margin-bottom: 10px;
-            line-height: 1.5;
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
         .khaiwal-action-btn {
             background: #10b981;
             color: white;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 10px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 700;
             display: block;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
             box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
             transition: background 0.2s;
         }
@@ -341,9 +343,9 @@
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
     </header>
 
-    <!-- CUSTOM GAME PLAY & TIMINGS PANEL (As requested) -->
-    <div class="khaiwal-panel">
-        <div class="khaiwal-header">✨ Gali Disawar King Online Game Time & Rates ✨</div>
+    <!-- FLOATING / STICKY GAME PLAY & TIMINGS PANEL (Moves with screen)[cite: 14] -->
+    <div class="floating-banner">
+        <div class="khaiwal-header">✨ Download GaliDisawarKingg App & Game Play ✨</div>
         
         <table class="khaiwal-table">
             <tr><td>BULANDSHAHR CITY</td><td>09:00 AM</td></tr>
@@ -368,7 +370,7 @@
         </div>
 
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="khaiwal-action-btn">
-            📥 ऐप डाउनलोड करें और गेम प्ले करें
+            📥 Download GaliDisawarKingg App
         </a>
     </div>
 
