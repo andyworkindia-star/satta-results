@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Results & Charts Dashboard</title>
+    <title>Live Results & Monthly Charts Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -132,6 +132,45 @@
             background: #ffffff;
             color: #b45309;
             border-color: #ca8a04;
+        }
+
+        /* Monthly Chart Section Styles */
+        .monthly-section {
+            background: #ffffff;
+            margin: 15px 12px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .monthly-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e293b;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .month-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+        .month-btn {
+            flex: 1;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .month-btn:hover {
+            background-color: #1d4ed8;
         }
     </style>
 </head>
@@ -273,6 +312,15 @@
         <div class="game-scores">
             <div class="score-box">15</div>
             <div class="score-box">95</div>
+        </div>
+    </div>
+
+    <!-- Monthly Chart Navigation Section -->
+    <div class="monthly-section">
+        <div class="monthly-title">📅 Select Month Chart</div>
+        <div class="month-buttons">
+            <a href="#" class="month-btn">Sep 2026</a>
+            <a href="#" class="month-btn">Nov 2026</a>
         </div>
     </div>
 
