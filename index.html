@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gali Disawar Kingg Results</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- SheetJS Library for reading Excel files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
         body { background-color: #0f172a; color: #333; display: flex; justify-content: center; min-height: 100vh; }
@@ -52,6 +54,7 @@
         input, select { padding: 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 14px; outline: none; }
         .admin-btn { background: #10b981; color: white; border: none; padding: 10px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 5px; }
         .admin-btn:hover { background: #059669; }
+        .excel-box { margin-top: 15px; border-top: 1px dashed #475569; padding-top: 15px; }
     </style>
 </head>
 <body>
@@ -69,7 +72,7 @@
         ⚠️ Disclaimer: Independent informational portal. <a href="#">Read More</a>
     </div>
 
-    <!-- Date & Main Title Header (Corrected Date Order) -->
+    <!-- Date & Main Title Header -->
     <div class="date-header">
         ⚡ Fast Results of October 15, 2026 & October 14, 2026
     </div>
@@ -213,12 +216,8 @@
                     <th>GALI</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr><td>01</td><td>XX</td><td>42</td><td>67</td><td>93</td></tr>
-                <tr><td>02</td><td>52</td><td>05</td><td>81</td><td>01</td></tr>
-                <tr><td>03</td><td>18</td><td>58</td><td>95</td><td>68</td></tr>
-                <tr><td>14</td><td>97</td><td>11</td><td>XX</td><td>XX</td></tr>
-                <tr><td>15</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
+            <tbody id="monthlyChartBody">
+                <tr><td colspan="5">Loading chart...</td></tr>
             </tbody>
         </table>
         <div class="month-buttons">
@@ -241,7 +240,7 @@
         <!-- Update Panel (Hidden by default) -->
         <div id="panelBox" style="display: none;">
             <div class="form-group">
-                <label>Game Select Karein</label>
+                <label>Game Select Karein (Live Result)</label>
                 <select id="gameName">
                     <option value="BULANDSHAHR_CITY">BULANDSHAHR CITY</option>
                     <option value="ALIGARH_CITY">ALIGARH CITY</option>
@@ -261,7 +260,14 @@
                 <input type="text" id="resultScore" placeholder="Jaise: 45">
             </div>
 
-            <button class="admin-btn" onclick="updateResult()">Update Result Now</button>
+            <button class="admin-btn" onclick="updateResult()">Update Live Result</button>
+
+            <!-- Excel Uploader Box inside Admin Panel -->
+            <div class="excel-box">
+                <label style="color: #38bdf8; font-weight: bold; margin-bottom: 6px; display: block;">📂 Excel Chart Data Upload Karein</label>
+                <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" style="margin-bottom: 8px; font-size: 12px;">
+                <button class="admin-btn" style="background: #2563eb;" onclick="uploadExcelData()">Upload & Save Chart</button>
+            </div>
         </div>
     </div>
 
@@ -299,6 +305,31 @@
         }
     });
 
+    // Monthly Chart Data sync
+    const chartRef = ref(db, 'monthly_chart/october_2026');
+    onValue(chartRef, (snapshot) => {
+        const chartData = snapshot.val();
+        const tbody = document.getElementById('monthlyChartBody');
+        if (chartData) {
+            tbody.innerHTML = '';
+            const sortedDates = Object.keys(chartData).sort((a, b) => parseInt(a) - parseInt(b));
+            sortedDates.forEach(date => {
+                const row = chartData[date];
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${date}</td>
+                        <td>${row.dswr || '--'}</td>
+                        <td>${row.frbd || '--'}</td>
+                        <td>${row.gzbd || '--'}</td>
+                        <td>${row.gali || '--'}</td>
+                    </tr>
+                `;
+            });
+        } else {
+            tbody.innerHTML = `<tr><td colspan="5">Koi data uplabdh nahi hai. Admin se upload karein.</td></tr>`;
+        }
+    });
+
     // Admin Login Function (Password: 12345)
     window.checkLogin = function() {
         const pass = document.getElementById('adminPass').value;
@@ -311,7 +342,7 @@
         }
     }
 
-    // Update Result Function
+    // Update Live Result Function
     window.updateResult = async function() {
         const game = document.getElementById('gameName').value;
         const score = document.getElementById('resultScore').value.trim();
@@ -332,6 +363,48 @@
             console.error("Error: ", e);
             alert("Update karne me error aayi!");
         }
+    }
+
+    // Excel File Upload & Parse Function
+    window.uploadExcelData = function() {
+        const fileInput = document.getElementById('excelFile');
+        const file = fileInput.files[0];
+        if(!file) {
+            alert("Kripya pehle Excel file select karein!");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+            try {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, {type: 'array'});
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+                const jsonRows = XLSX.utils.sheet_to_json(worksheet);
+
+                let chartObj = {};
+                jsonRows.forEach(row => {
+                    let d = row.date || row.DATE || row.Date;
+                    if(d) {
+                        chartObj[String(d).padStart(2, '0')] = {
+                            dswr: row.dswr || row.DSWR || '--',
+                            frbd: row.frbd || row.FRBD || '--',
+                            gzbd: row.gzbd || row.GZBD || '--',
+                            gali: row.gali || row.GALI || '--'
+                        };
+                    }
+                });
+
+                await set(ref(db, 'monthly_chart/october_2026'), chartObj);
+                alert("Excel ka saara data successfully database me save ho gaya!");
+                fileInput.value = '';
+            } catch (err) {
+                console.error(err);
+                alert("File padhne me error aayi. Kripya check karein ki format sahi hai.");
+            }
+        };
+        reader.readAsArrayBuffer(file);
     }
 </script>
 
