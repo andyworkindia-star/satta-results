@@ -34,8 +34,8 @@
         .download-btn { background-color: #28a745; color: white; padding: 12px 28px; text-decoration: none; font-weight: bold; border-radius: 6px; display: inline-block; margin-top: 12px; font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: background 0.2s; }
         .download-btn:hover { background-color: #218838; }
 
-        .update-bar { background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; padding: 12px 20px; text-align: center; font-size: 13px; font-weight: 500; }
-        .update-bar a { color: #fff; text-decoration: underline; font-weight: 600; }
+        .update-bar { background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; padding: 12px 20px; text-align: center; font-size: 12px; font-weight: 500; line-height: 1.5; }
+        .update-bar a { color: #fff; text-decoration: underline; font-weight: 700; cursor: pointer; }
         
         .date-header { background: linear-gradient(135deg, #10b981, #059669); color: white; text-align: center; padding: 16px; font-size: 15px; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); letter-spacing: 0.5px; }
         
@@ -119,6 +119,35 @@
         .month-btn { flex: 1; background-color: #2563eb; color: white; border: none; padding: 11px; border-radius: 6px; font-size: 13px; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; transition: background 0.2s; }
         .month-btn:hover { background-color: #1d4ed8; }
 
+        /* Terms Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 15px;
+        }
+        .modal-content {
+            background: #ffffff;
+            color: #1e293b;
+            width: 100%;
+            max-width: 650px;
+            max-height: 85vh;
+            border-radius: 12px;
+            padding: 25px;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .modal-header { font-size: 20px; font-weight: 700; color: #0284c7; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .close-btn { background: #ef4444; color: white; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .close-btn:hover { background: #dc2626; }
+        .modal-body { font-size: 13px; line-height: 1.6; color: #334155; }
+        .modal-body h3 { font-size: 14px; font-weight: 700; color: #0f172a; margin-top: 12px; margin-bottom: 4px; }
+
         .admin-section { background: #1e293b; margin: 25px 15px 30px 15px; padding: 22px; border-radius: 12px; color: #fff; box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
         .admin-section h3 { text-align: center; color: #38bdf8; font-size: 18px; margin-bottom: 16px; font-weight: 700; }
         .form-group { margin-bottom: 14px; display: flex; flex-direction: column; }
@@ -139,12 +168,14 @@
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
     </header>
 
+    <!-- Top Alert Bar with Clickable Read More link -->
     <div class="update-bar">
-        ⚠️ Disclaimer: Independent informational portal. <a href="#">Read More</a>
+        GaliDisawarKing is an independent information platform. All content is provided for general informational purposes only. Users are responsible for verifying information and complying with applicable laws. We are not affiliated with third parties unless expressly stated. <a onclick="openModal()">Read More...</a>
     </div>
 
+    <!-- Corrected Date Header Order: Oct 14 & Oct 15 -->
     <div class="date-header">
-        ⚡ Fast Results of October 15, 2026 & October 14, 2026
+        ⚡ Fast Results of October 14, 2026 & October 15, 2026
     </div>
 
     <div class="section-title">
@@ -371,6 +402,62 @@
 
 </div>
 
+<!-- Terms of Service Modal Popup -->
+<div id="termsModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span>Terms of Service</span>
+            <button class="close-btn" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <p><strong>Effective Date:</strong> October 15, 2026</p>
+            
+            <h3>1. ACCEPTANCE OF TERMS</h3>
+            <p>Welcome to GaliDisawarKing. These Terms of Service govern your access to and use of our website, its content, features, and related services. By visiting or using this website, you acknowledge that you have read and understood these Terms. If you do not agree with any part of these Terms, please discontinue using the website.</p>
+
+            <h3>2. ABOUT OUR WEBSITE</h3>
+            <p>GaliDisawarKing is an independently operated online platform that may publish gaming-related updates, results, general information, and other relevant content.<br>Our website is intended to provide information for general reference purposes. Unless expressly stated otherwise, we are not officially associated with any third-party company, organization, or service mentioned on the website.<br>We do not guarantee that all published information will always be accurate, complete, current, or available without interruption.</p>
+
+            <h3>3. INFORMATIONAL PURPOSES</h3>
+            <p>All content available on GaliDisawarKing is provided for general informational purposes only. Nothing published on this website should be interpreted as financial, legal, or professional advice.<br>Users should independently verify information before relying on it. We are not responsible for decisions made solely on the basis of content published on this platform.</p>
+
+            <h3>4. USER ELIGIBILITY AND LEGAL COMPLIANCE</h3>
+            <p>Users are responsible for ensuring that their access to and use of this website complies with the laws applicable in their location.<br>Where access to particular content or activities is restricted by law, users must refrain from accessing or participating in those activities. Nothing on this website is intended to encourage unlawful conduct or to override any applicable legal restriction.</p>
+
+            <h3>5. THIRD-PARTY WEBSITES AND SERVICES</h3>
+            <p>Our website may contain references or links to third-party websites, platforms, or services. Such external resources are operated independently and are not under our direct control.<br>We do not guarantee the accuracy, security, availability, or policies of third-party websites. Visiting an external website is at your own discretion, and you should review its terms and privacy policy before using it.</p>
+
+            <h3>6. INTELLECTUAL PROPERTY</h3>
+            <p>Unless otherwise indicated, the original text, design elements, branding, and other materials created for GaliDisawarKing are protected by applicable intellectual property laws.<br>You may not reproduce, republish, distribute, or commercially exploit our original content without prior authorization, except where permitted by applicable law.<br>Third-party names, trademarks, and logos remain the property of their respective owners.</p>
+
+            <h3>7. ACCEPTABLE USE</h3>
+            <p>By using this website, you agree not to:</p>
+            <ul>
+                <li>Use the website for any unlawful purpose.</li>
+                <li>Attempt to disrupt, damage, or interfere with the website's operation or security.</li>
+                <li>Copy or collect website content through automated methods in a manner that violates these Terms or applicable law.</li>
+                <li>Misrepresent your identity or misuse the website to harm other users or third parties.</li>
+            </ul>
+            <p>We reserve the right to take reasonable action against activities that violate these Terms or threaten the proper operation of the website.</p>
+
+            <h3>8. DISCLAIMER OF WARRANTIES</h3>
+            <p>The website and its content are provided on an “as available” basis, to the extent permitted by applicable law. We make no guarantee that the website will be uninterrupted, error-free, or free from technical issues.<br>To the extent permitted by law, we disclaim warranties that cannot otherwise be excluded under applicable legislation.</p>
+
+            <h3>9. LIMITATION OF LIABILITY</h3>
+            <p>To the extent permitted by applicable law, GaliDisawarKing and its operators shall not be liable for indirect or consequential losses arising from the use of, or inability to use, the website or from reliance on its published information.<br>Nothing in these Terms excludes or limits liability where such exclusion or limitation is prohibited by applicable law.</p>
+
+            <h3>10. PRIVACY</h3>
+            <p>Your use of this website may also be governed by our Privacy Policy, which explains how information is collected, used, stored, and protected. Please review the Privacy Policy for further details.</p>
+
+            <h3>11. CHANGES TO THESE TERMS</h3>
+            <p>We may update or revise these Terms of Service from time to time to reflect changes in our website, services, or applicable requirements. Updated terms will be published on this page along with the revised effective date.<br>Continued use of the website after changes are published constitutes acceptance of the revised Terms, to the extent permitted by law.</p>
+
+            <h3>12. CONTACT INFORMATION</h3>
+            <p>If you have any questions about these Terms of Service, please contact us through the Contact Us page available on GaliDisawarKing.<br>Thank you for visiting GaliDisawarKing.</p>
+        </div>
+    </div>
+</div>
+
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
@@ -478,11 +565,11 @@
                         const box14 = document.getElementById(`live-14-${gameKey}`);
                         if (box14) {
                             let val14 = day14 ? day14[mName] : '--';
-                            if (!val14 || val14 === '--') box14.innerText = '--';
+                            if (!val14 || val14 === '--') box14.innerHTML = '--';
                             else {
                                 let str14 = String(val14).trim();
                                 if (str14.length === 1) str14 = '0' + str14;
-                                box14.innerText = str14;
+                                box14.innerHTML = str14;
                             }
                         }
 
@@ -494,7 +581,7 @@
                                     box15.innerHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
                                     box15.className = "";
                                 } else {
-                                    box15.innerText = '--';
+                                    box15.innerHTML = '--';
                                     box15.className = "score-box";
                                 }
                             } else {
@@ -522,6 +609,14 @@
     }
 
     window.loadChartData();
+
+    // Modal Control Functions
+    window.openModal = function() {
+        document.getElementById('termsModal').style.display = 'flex';
+    }
+    window.closeModal = function() {
+        document.getElementById('termsModal').style.display = 'none';
+    }
 
     window.checkLogin = function() {
         const pass = document.getElementById('adminPass').value;
