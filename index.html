@@ -83,7 +83,7 @@
         }
         .download-btn:hover { background: #059669; }
 
-        /* FLOATING CORNER BUTTON (Opens popup on click) */
+        /* FLOATING CORNER BUTTON */
         .floating-app-btn {
             position: fixed;
             bottom: 25px;
@@ -277,9 +277,10 @@
         
         .table-scroll-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-        .monthly-table { width: 100%; min-width: 550px; border-collapse: collapse; text-align: center; font-size: 12px; }
-        .monthly-table th, .monthly-table td { padding: 8px 6px; border: 1px solid #334155; font-weight: 600; color: #e2e8f0; white-space: nowrap; }
-        .monthly-table th { background-color: #0f172a; color: #38bdf8; border: 1px solid #334155; font-size: 11px; }
+        /* EQUAL WIDTH FOR ALL TABLE COLUMNS */
+        .monthly-table { width: 100%; min-width: 550px; border-collapse: collapse; text-align: center; font-size: 12px; table-layout: fixed; }
+        .monthly-table th, .monthly-table td { padding: 8px 4px; border: 1px solid #334155; font-weight: 600; color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 14.28%; }
+        .monthly-table th { background-color: #0f172a; color: #38bdf8; border: 1px solid #334155; font-size: 10px; text-transform: uppercase; }
         .monthly-table tr:nth-child(even) { background-color: #0f172a; }
         
         .monthly-table th:first-child,
@@ -289,13 +290,14 @@
             background-color: #0f172a;
             z-index: 2;
             border-right: 2px solid #3b82f6;
+            width: 50px !important;
         }
         .monthly-table th:first-child {
             background-color: #1e293b;
             z-index: 3;
         }
 
-        .highlight-digit { background-color: #78350f !important; color: #fde047 !important; font-weight: bold; display: inline-block; padding: 2px 6px; border-radius: 4px; }
+        .highlight-digit { background-color: #78350f !important; color: #fde047 !important; font-weight: bold; display: inline-block; padding: 2px 4px; border-radius: 4px; }
 
         .month-buttons { display: flex; gap: 10px; margin-top: 12px; }
         .month-btn { flex: 1; background-color: #0f172a; color: #93c5fd; border: 1px solid #334155; padding: 10px; border-radius: 6px; font-size: 12px; font-weight: 600; text-align: center; cursor: pointer; transition: background 0.2s; }
@@ -342,7 +344,6 @@
 </head>
 <body>
 
-<!-- FLOATING CORNER BUTTON -->
 <button class="floating-app-btn" onclick="openAppModal()">
     📥 Download GaliDisawarKingg App
 </button>
@@ -392,12 +393,12 @@
                     <thead>
                         <tr>
                             <th>DATE</th>
-                            <th>DELHI BAZAR</th>
-                            <th>SHREE GANESH</th>
-                            <th>FARIDABAD</th>
-                            <th>GHAZIABAD</th>
+                            <th>DELHI</th>
+                            <th>SHREE</th>
+                            <th>FBD</th>
+                            <th>GZB</th>
                             <th>GALI</th>
-                            <th>DISAWAR</th>
+                            <th>DSW</th>
                         </tr>
                     </thead>
                     <tbody id="monthlyChartBody1">
@@ -416,14 +417,14 @@
         <div class="chart-container">
             <div class="chart-heading" id="chartHeading2">Other Markets Chart - Oct 2026</div>
             <div class="table-scroll-container">
-                <table class="monthly-table">
+                <table class="monthly-table" style="table-layout: fixed;">
                     <thead>
                         <tr>
                             <th>DATE</th>
-                            <th>BULANDSHAHR CITY</th>
-                            <th>ALIGARH CITY</th>
-                            <th>NOIDA NCR</th>
-                            <th>MATHURA KING</th>
+                            <th>BULAND</th>
+                            <th>ALIGARH</th>
+                            <th>NOIDA</th>
+                            <th>MATHURA</th>
                         </tr>
                     </thead>
                     <tbody id="monthlyChartBody2">
