@@ -35,7 +35,6 @@
             .container { border-radius: 12px; min-height: auto; margin-bottom: 30px; border: 1px solid #334155; }
         }
         
-        /* Clean Professional Header */
         .app-header { 
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
             color: white; 
@@ -231,7 +230,6 @@
         .modal-body { font-size: 12px; line-height: 1.6; color: #cbd5e1; }
         .modal-body h3 { font-size: 13px; font-weight: 700; color: #f8fafc; margin-top: 10px; margin-bottom: 3px; }
 
-        /* Admin Form Controls */
         .form-group { margin-bottom: 12px; display: flex; flex-direction: column; }
         label { font-size: 12px; margin-bottom: 4px; color: #93c5fd; font-weight: 600; }
         input, select { padding: 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 13px; outline: none; }
@@ -268,9 +266,7 @@
     </div>
 
     <!-- MARKETS LIST CONTAINER -->
-    <div id="marketsListContainer">
-        <!-- Rendered smoothly via JS -->
-    </div>
+    <div id="marketsListContainer"></div>
 
     <div class="tables-wrapper">
         <div class="chart-container">
@@ -380,8 +376,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label>New Result Number (Correction / Update)</label>
-                    <input type="text" id="resultScore" placeholder="Jaise: 45 ya --">
+                    <label>Date (Jaise: 15)</label>
+                    <input type="text" id="resultDateInput" value="15" placeholder="Date daalein">
+                </div>
+
+                <div class="form-group">
+                    <label>New Result Number (Score)</label>
+                    <input type="text" id="resultScore" placeholder="Jaise: 45">
                 </div>
 
                 <div class="form-group">
@@ -389,7 +390,7 @@
                     <input type="text" id="gameTimeInput" placeholder="Jaise: at 06:00 PM">
                 </div>
 
-                <button class="admin-btn" onclick="updateMarketData()">Save Changes / Result</button>
+                <button class="admin-btn" onclick="updateMarketData()">Save Result / Time</button>
 
                 <div class="excel-box">
                     <label style="color: #60a5fa; font-weight: bold; margin-bottom: 6px; display: block;">📂 Poore Saal ka Excel Data Upload Karein</label>
@@ -516,9 +517,22 @@
             if (chartData) {
                 tbody1.innerHTML = '';
                 tbody2.innerHTML = '';
-                const sortedDates = Object.keys(chartData).sort((a, b) => parseInt(a) - parseInt(b));
                 
-                sortedDates.forEach(date => {
+                // Sirf wahi dates filter honge jinka data available hai (no blank rows)
+                const activeDates = Object.keys(chartData).filter(date => {
+                    const r = chartData[date];
+                    if (!r) return false;
+                    // Check if at least one market has a valid result
+                    return Object.values(r).some(val => val && val !== '--' && val !== 'XX');
+                }).sort((a, b) => parseInt(a) - parseInt(b));
+                
+                if(activeDates.length === 0) {
+                    tbody1.innerHTML = `<tr><td colspan="7">Is maah ka koi result declare nahi hua hai.</td></tr>`;
+                    tbody2.innerHTML = `<tr><td colspan="5">Is maah ka koi result declare nahi hua hai.</td></tr>`;
+                    return;
+                }
+
+                activeDates.forEach(date => {
                     const r = chartData[date];
                     let dateStr = String(date).padStart(2, '0');
 
@@ -579,6 +593,7 @@
 
     window.updateMarketData = async function() {
         const gameKey = document.getElementById('gameName').value;
+        const targetDate = document.getElementById('resultDateInput').value.trim() || '15';
         const newScore = document.getElementById('resultScore').value.trim();
         const newTime = document.getElementById('gameTimeInput').value.trim();
 
@@ -587,7 +602,7 @@
             const mName = marketObj ? marketObj.name : gameKey;
 
             if(newScore) {
-                await set(ref(db, `yearly_charts_2026/Oct/15/${mName}`), newScore);
+                await set(ref(db, `yearly_charts_2026/Oct/${targetDate}/${mName}`), newScore);
             }
             if(newTime) {
                 await set(ref(db, `market_times/${gameKey}`), newTime);
