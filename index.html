@@ -16,6 +16,7 @@
         .game-name-col { text-align: left; font-weight: bold; width: 50%; }
         .date-col { width: 25%; font-weight: bold; font-size: 17px; color: #d9534f; }
         tr:nth-child(even) { background-color: #f9f9f9; }
+        .highlight-row { background-color: #f1c40f !important; color: #000; }
     </style>
 </head>
 <body>
@@ -45,6 +46,7 @@
 
     <!-- Firebase Scripts -->
     <script type="module">
+        import { initializeApp } from "https://www.gstatic.10.12.0/firebase-app.js"; // Standard import
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
@@ -61,41 +63,53 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
+        // Aapke bataye gaye exact kram mein markets, aur DISAWAR hamesha sabse neeche
         const markets = [
             "BULANDSHAHR CITY",
+            "ALIGARH CITY",
+            "NOIDA NCR",
             "DELHI BAZAR",
             "SHREE GANESH",
             "FARIDABAD",
+            "MATHURA KING",
             "GHAZIABAD",
             "GALI",
-            "DISAWAR",
-            "NOIDA NCR"
+            "DISAWAR"
         ];
 
         const dbRef = ref(db, 'Oct 2026');
+        
         onValue(dbRef, (snapshot) => {
+            const tableBody = document.getElementById('chart-body');
+            
+            if (!snapshot.exists()) {
+                tableBody.innerHTML = `<tr><td colspan="3" style="text-align:center;">Data not found!</td></tr>`;
+                return;
+            }
+
             const octData = snapshot.val() || {};
             const d13 = octData['13'] || {};
             const d14 = octData['14'] || {};
             
-            const tableBody = document.getElementById('chart-body');
             tableBody.innerHTML = ""; 
             
             markets.forEach(market => {
                 let res13 = "--";
                 let res14 = "--";
                 
-                // Direct key match for 13th
                 for (let k in d13) {
-                    if (k.toUpperCase().trim() === market.toUpperCase().trim()) {
+                    let cleanK = k.toUpperCase().trim();
+                    let cleanMarket = market.toUpperCase().trim();
+                    if (cleanK === cleanMarket || (cleanMarket === "SHREE GANESH" && cleanK.includes("SHREE"))) {
                         res13 = d13[k];
                         break;
                     }
                 }
 
-                // Direct key match for 14th
                 for (let k in d14) {
-                    if (k.toUpperCase().trim() === market.toUpperCase().trim()) {
+                    let cleanK = k.toUpperCase().trim();
+                    let cleanMarket = market.toUpperCase().trim();
+                    if (cleanK === cleanMarket || (cleanMarket === "SHREE GANESH" && cleanK.includes("SHREE"))) {
                         res14 = d14[k];
                         break;
                     }
