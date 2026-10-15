@@ -10,6 +10,11 @@
         body { background-color: #0f172a; color: #333; display: flex; justify-content: center; min-height: 100vh; }
         .container { width: 100%; max-width: 480px; background: #f8fafc; box-shadow: 0 10px 25px rgba(0,0,0,0.3); min-height: 100vh; display: flex; flex-direction: column; }
         
+        /* App Download Header Styles */
+        .app-header { background-color: #1e3c72; color: white; padding: 15px; text-align: center; }
+        .download-btn { background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; margin-top: 10px; font-size: 14px; }
+        .download-btn:hover { background-color: #218838; }
+
         .update-bar { background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; padding: 10px 15px; text-align: center; font-size: 12px; font-weight: 500; }
         .update-bar a { color: #fff; text-decoration: underline; font-weight: 600; }
         
@@ -46,17 +51,18 @@
         input, select { padding: 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 14px; outline: none; }
         .admin-btn { background: #10b981; color: white; border: none; padding: 10px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 5px; }
         .admin-btn:hover { background: #059669; }
-        .hidden { display: none; }
     </style>
 </head>
 <body>
-<!-- Main Header with App Download Button -->
-<header style="background-color: #1e3c72; color: white; padding: 15px; text-align: center;">
-    <h2>Satta King Fast Results</h2>
-    <p>Hamari Official Android App download karein!</p>
-    <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; margin-top: 10px;">📥 Download Android App</a>
-</header>
+
 <div class="container">
+    <!-- App Download Header (Ab Container ke andar bilkul sahi fit hai) -->
+    <header class="app-header">
+        <h2>Satta King Fast Results</h2>
+        <p style="font-size: 13px; margin-top: 4px;">Hamari Official Android App download karein!</p>
+        <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
+    </header>
+
     <!-- Top Alert Bar -->
     <div class="update-bar">
         ⚠️ Disclaimer: Independent informational portal. <a href="#">Read More</a>
@@ -234,7 +240,7 @@
         </div>
 
         <!-- Update Panel (Hidden by default) -->
-<div id="panelBox" style="display: none;">
+        <div id="panelBox" style="display: none;">
             <div class="form-group">
                 <label>Game Select Karein</label>
                 <select id="gameName">
@@ -298,7 +304,6 @@
     window.checkLogin = function() {
         const pass = document.getElementById('adminPass').value;
         if(pass === "12345") {
-            // Yeh login box ko chupayega aur update panel ko dikhayega
             document.getElementById('loginBox').style.display = 'none';
             document.getElementById('panelBox').style.display = 'block';
             alert("Login Successful!");
