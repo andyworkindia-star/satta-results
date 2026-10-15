@@ -83,6 +83,84 @@
         }
         .download-btn:hover { background: #059669; }
 
+        /* Custom Khaiwal / Game Play Panel (As requested) */
+        .khaiwal-panel {
+            background: #fffdf5;
+            color: #2b2b2b;
+            margin: 12px;
+            padding: 16px;
+            border-radius: 12px;
+            border: 2px solid #f59e0b;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+        }
+        .khaiwal-header {
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: #78350f;
+            margin-bottom: 10px;
+        }
+        .khaiwal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+        .khaiwal-table th, .khaiwal-table td {
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            border-bottom: 1px solid #f3f4f6;
+            color: #1f2937;
+            text-align: left;
+        }
+        .khaiwal-table td:last-child {
+            text-align: right;
+            color: #2563eb;
+        }
+        .rate-box-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .rate-card {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #78350f;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .khaiwal-footer-text {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #b45309;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .khaiwal-action-btn {
+            background: #10b981;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            display: block;
+            text-align: center;
+            font-size: 13px;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+            transition: background 0.2s;
+        }
+        .khaiwal-action-btn:hover { background: #059669; }
+
         .update-bar { 
             background: #1e1b4b; 
             color: #cbd5e1; 
@@ -195,7 +273,6 @@
         .monthly-table th { background-color: #0f172a; color: #38bdf8; border: 1px solid #334155; font-size: 11px; }
         .monthly-table tr:nth-child(even) { background-color: #0f172a; }
         
-        /* STICKY DATE COLUMN CSS */
         .monthly-table th:first-child,
         .monthly-table td:first-child {
             position: sticky;
@@ -264,6 +341,37 @@
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
     </header>
 
+    <!-- CUSTOM GAME PLAY & TIMINGS PANEL (As requested) -->
+    <div class="khaiwal-panel">
+        <div class="khaiwal-header">✨ Gali Disawar King Online Game Time & Rates ✨</div>
+        
+        <table class="khaiwal-table">
+            <tr><td>BULANDSHAHR CITY</td><td>09:00 AM</td></tr>
+            <tr><td>ALIGARH CITY</td><td>11:45 AM</td></tr>
+            <tr><td>NOIDA NCR</td><td>01:45 PM</td></tr>
+            <tr><td>DELHI BAZAR</td><td>02:50 PM</td></tr>
+            <tr><td>SHREE GANESH</td><td>03:50 PM</td></tr>
+            <tr><td>FARIDABAD</td><td>05:50 PM</td></tr>
+            <tr><td>MATHURA KING</td><td>08:20 PM</td></tr>
+            <tr><td>GHAZIABAD</td><td>09:30 PM</td></tr>
+            <tr><td>GALI</td><td>11:20 PM</td></tr>
+            <tr><td>DISAWAR</td><td>04:30 AM</td></tr>
+        </table>
+
+        <div class="rate-box-row">
+            <div class="rate-card">🎯 जोड़ी रेट: 10 के 900</div>
+            <div class="rate-card">🎯 हरूफ रेट: 10 के 90</div>
+        </div>
+
+        <div class="khaiwal-footer-text">
+            डाउनलोड बटन पर क्लिक करें, और घर बैठे सुरक्षित और पूर्ण विश्वास से गेम प्ले करें |
+        </div>
+
+        <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="khaiwal-action-btn">
+            📥 ऐप डाउनलोड करें और गेम प्ले करें
+        </a>
+    </div>
+
     <div class="update-bar">
         <strong>DISCLAIMER:</strong> GaliDisawarKing is an independent information platform. All content is provided for general informational purposes only. Users are responsible for verifying information and complying with applicable laws. We are not affiliated with third parties unless expressly stated. <a onclick="openTermsModal()">Read More...</a>
     </div>
@@ -280,18 +388,17 @@
         </div>
     </div>
 
-    <!-- EXACT MATCHED INITIAL STATIC VALUES FOR 14 & 15 OCT -->
     <div id="marketsListContainer">
-        <div class="result-card"><div class="game-info"><div class="game-name">BULANDSHAHR CITY</div><div class="game-time">at 09:20 AM</div></div><div class="game-scores"><div class="score-box">70</div><div class="score-box">59</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">ALIGARH CITY</div><div class="game-time">at 12:30 PM</div></div><div class="game-scores"><div class="score-box">35</div><div class="score-box">47</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">NOIDA NCR</div><div class="game-time">at 02:27 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">83</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">DELHI BAZAR</div><div class="game-time">at 03:00 PM</div></div><div class="game-scores"><div class="score-box">25</div><div class="score-box">07</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">SHREE GANESH</div><div class="game-time">at 03:52 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">56</div></div></div>
-        <div class="result-card highlight"><div class="game-info"><div class="game-name">FARIDABAD</div><div class="game-time">at 06:00 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">48</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">MATHURA KING</div><div class="game-time">at 08:40 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">44</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">GHAZIABAD</div><div class="game-time">at 09:55 PM</div></div><div class="game-scores"><div class="score-box">80</div><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">GALI</div><div class="game-time">at 11:25 PM</div></div><div class="game-scores"><div class="score-box">81</div><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">DISAWAR</div><div class="game-time">at 05:00 AM</div></div><div class="game-scores"><div class="score-box">97</div><div class="score-box">42</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">BULANDSHAHR CITY</div><div class="game-time">at 09:00 AM</div></div><div class="game-scores"><div class="score-box">70</div><div class="score-box">59</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">ALIGARH CITY</div><div class="game-time">at 11:45 AM</div></div><div class="game-scores"><div class="score-box">35</div><div class="score-box">47</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">NOIDA NCR</div><div class="game-time">at 01:45 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">83</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">DELHI BAZAR</div><div class="game-time">at 02:50 PM</div></div><div class="game-scores"><div class="score-box">25</div><div class="score-box">07</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">SHREE GANESH</div><div class="game-time">at 03:50 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">56</div></div></div>
+        <div class="result-card highlight"><div class="game-info"><div class="game-name">FARIDABAD</div><div class="game-time">at 05:50 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">48</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">MATHURA KING</div><div class="game-time">at 08:20 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">44</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">GHAZIABAD</div><div class="game-time">at 09:30 PM</div></div><div class="game-scores"><div class="score-box">80</div><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">GALI</div><div class="game-time">at 11:20 PM</div></div><div class="game-scores"><div class="score-box">81</div><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">DISAWAR</div><div class="game-time">at 04:30 AM</div></div><div class="game-scores"><div class="score-box">97</div><div class="score-box">42</div></div></div>
     </div>
 
     <div class="tables-wrapper">
@@ -361,17 +468,17 @@
         <div class="modal-body">
             <p><strong>Effective Date:</strong> October 15, 2026</p>
             <h3>1. ACCEPTANCE OF TERMS</h3>
-            <p>Welcome to GaliDisawarKing. These Terms of Service govern your access to and use of our website, its content, features, and related services. By visiting or using this website, you acknowledge that you have read and understood these Terms. If you do not agree with any part of these Terms, please discontinue using the website.</p>
+            <p>Welcome to GaliDisawarKing. These Terms of Service govern your access to and use of our website, its content, features, and related services.</p>
             <h3>2. ABOUT OUR WEBSITE</h3>
             <p>GaliDisawarKing is an independently operated online platform that may publish gaming-related updates, results, general information, and other relevant content.</p>
             <h3>3. INFORMATIONAL PURPOSES</h3>
-            <p>All content available on GaliDisawarKing is provided for general informational purposes only. Nothing published on this website should be interpreted as financial, legal, or professional advice.</p>
+            <p>All content available on GaliDisawarKing is provided for general informational purposes only.</p>
             <h3>4. USER ELIGIBILITY AND LEGAL COMPLIANCE</h3>
             <p>Users are responsible for ensuring that their access to and use of this website complies with the laws applicable in their location.</p>
             <h3>5. THIRD-PARTY WEBSITES AND SERVICES</h3>
             <p>Our website may contain references or links to third-party websites, platforms, or services.</p>
             <h3>6. INTELLECTUAL PROPERTY</h3>
-            <p>Unless otherwise indicated, the original text, design elements, branding, and other materials created for GaliDisawarKing are protected by applicable intellectual property laws.</p>
+            <p>Unless otherwise indicated, original text and materials are protected by applicable intellectual property laws.</p>
             <h3>7. ACCEPTABLE USE</h3>
             <p>By using this website, you agree not to violate any policies or terms mentioned herein.</p>
             <h3>8. DISCLAIMER OF WARRANTIES</h3>
@@ -469,16 +576,16 @@
     let currentMonthIndex = 9; // October
 
     const defaultMarkets = [
-        { id: 'BULANDSHAHR_CITY', name: 'BULANDSHAHR CITY', time: 'at 09:20 AM', highlight: false },
-        { id: 'ALIGARH_CITY', name: 'ALIGARH CITY', time: 'at 12:30 PM', highlight: false },
-        { id: 'NOIDA_NCR', name: 'NOIDA NCR', time: 'at 02:27 PM', highlight: false },
-        { id: 'DELHI_BAZAR', name: 'DELHI BAZAR', time: 'at 03:00 PM', highlight: false },
-        { id: 'SHREE_GANESH', name: 'SHREE GANESH', time: 'at 03:52 PM', highlight: false },
-        { id: 'FARIDABAD', name: 'FARIDABAD', time: 'at 06:00 PM', highlight: true },
-        { id: 'MATHURA_KING', name: 'MATHURA KING', time: 'at 08:40 PM', highlight: false },
-        { id: 'GHAZIABAD', name: 'GHAZIABAD', time: 'at 09:55 PM', highlight: false },
-        { id: 'GALI', name: 'GALI', time: 'at 11:25 PM', highlight: false },
-        { id: 'DISAWAR', name: 'DISAWAR', time: 'at 05:00 AM', highlight: false }
+        { id: 'BULANDSHAHR_CITY', name: 'BULANDSHAHR CITY', time: '09:00 AM', highlight: false },
+        { id: 'ALIGARH_CITY', name: 'ALIGARH CITY', time: '11:45 AM', highlight: false },
+        { id: 'NOIDA_NCR', name: 'NOIDA NCR', time: '01:45 PM', highlight: false },
+        { id: 'DELHI_BAZAR', name: 'DELHI BAZAR', time: '02:50 PM', highlight: false },
+        { id: 'SHREE_GANESH', name: 'SHREE GANESH', time: '03:50 PM', highlight: false },
+        { id: 'FARIDABAD', name: 'FARIDABAD', time: '05:50 PM', highlight: true },
+        { id: 'MATHURA_KING', name: 'MATHURA KING', time: '08:20 PM', highlight: false },
+        { id: 'GHAZIABAD', name: 'GHAZIABAD', time: '09:30 PM', highlight: false },
+        { id: 'GALI', name: 'GALI', time: '11:20 PM', highlight: false },
+        { id: 'DISAWAR', name: 'DISAWAR', time: '04:30 AM', highlight: false }
     ];
 
     const commonDigits = ["11", "16", "61", "66", "22", "27", "72", "77", "33", "83", "88", "38", "44", "99", "49", "94", "05", "50", "55", "00"];
@@ -524,7 +631,7 @@
                 <div class="result-card ${market.highlight ? 'highlight' : ''}">
                     <div class="game-info">
                         <div class="game-name">${market.name}</div>
-                        <div class="game-time">${mTime}</div>
+                        <div class="game-time">at ${mTime}</div>
                     </div>
                     <div class="game-scores">
                         <div class="score-box">${str14}</div>
