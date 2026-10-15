@@ -195,6 +195,20 @@
         .monthly-table th { background-color: #0f172a; color: #38bdf8; border: 1px solid #334155; font-size: 11px; }
         .monthly-table tr:nth-child(even) { background-color: #0f172a; }
         
+        /* STICKY DATE COLUMN CSS */
+        .monthly-table th:first-child,
+        .monthly-table td:first-child {
+            position: sticky;
+            left: 0;
+            background-color: #0f172a;
+            z-index: 2;
+            border-right: 2px solid #3b82f6;
+        }
+        .monthly-table th:first-child {
+            background-color: #1e293b;
+            z-index: 3;
+        }
+
         .highlight-digit { background-color: #78350f !important; color: #fde047 !important; font-weight: bold; display: inline-block; padding: 2px 6px; border-radius: 4px; }
 
         .month-buttons { display: flex; gap: 10px; margin-top: 12px; }
@@ -250,7 +264,6 @@
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
     </header>
 
-    <!-- DISCLAIMER BAR FIXED WITH CLEAR DISCLAIMER LABEL -->
     <div class="update-bar">
         <strong>DISCLAIMER:</strong> GaliDisawarKing is an independent information platform. All content is provided for general informational purposes only. Users are responsible for verifying information and complying with applicable laws. We are not affiliated with third parties unless expressly stated. <a onclick="openTermsModal()">Read More...</a>
     </div>
@@ -267,7 +280,7 @@
         </div>
     </div>
 
-    <!-- MARKETS LIST CONTAINER PRE-FILLED WITH STATIC DEFAULT DATA -->
+    <!-- EXACT MATCHED INITIAL STATIC VALUES FOR 14 & 15 OCT -->
     <div id="marketsListContainer">
         <div class="result-card"><div class="game-info"><div class="game-name">BULANDSHAHR CITY</div><div class="game-time">at 09:20 AM</div></div><div class="game-scores"><div class="score-box">70</div><div class="score-box">59</div></div></div>
         <div class="result-card"><div class="game-info"><div class="game-name">ALIGARH CITY</div><div class="game-time">at 12:30 PM</div></div><div class="game-scores"><div class="score-box">35</div><div class="score-box">47</div></div></div>
@@ -338,7 +351,7 @@
     </div>
 </div>
 
-<!-- TERMS MODAL WITH ALL 12 POINTS FULLY INCLUDED -->
+<!-- TERMS MODAL -->
 <div id="termsModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
@@ -347,49 +360,30 @@
         </div>
         <div class="modal-body">
             <p><strong>Effective Date:</strong> October 15, 2026</p>
-            
             <h3>1. ACCEPTANCE OF TERMS</h3>
             <p>Welcome to GaliDisawarKing. These Terms of Service govern your access to and use of our website, its content, features, and related services. By visiting or using this website, you acknowledge that you have read and understood these Terms. If you do not agree with any part of these Terms, please discontinue using the website.</p>
-
             <h3>2. ABOUT OUR WEBSITE</h3>
-            <p>GaliDisawarKing is an independently operated online platform that may publish gaming-related updates, results, general information, and other relevant content.<br>Our website is intended to provide information for general reference purposes. Unless expressly stated otherwise, we are not officially associated with any third-party company, organization, or service mentioned on the website.<br>We do not guarantee that all published information will always be accurate, complete, current, or available without interruption.</p>
-
+            <p>GaliDisawarKing is an independently operated online platform that may publish gaming-related updates, results, general information, and other relevant content.</p>
             <h3>3. INFORMATIONAL PURPOSES</h3>
-            <p>All content available on GaliDisawarKing is provided for general informational purposes only. Nothing published on this website should be interpreted as financial, legal, or professional advice.<br>Users should independently verify information before relying on it. We are not responsible for decisions made solely on the basis of content published on this platform.</p>
-
+            <p>All content available on GaliDisawarKing is provided for general informational purposes only. Nothing published on this website should be interpreted as financial, legal, or professional advice.</p>
             <h3>4. USER ELIGIBILITY AND LEGAL COMPLIANCE</h3>
-            <p>Users are responsible for ensuring that their access to and use of this website complies with the laws applicable in their location.<br>Where access to particular content or activities is restricted by law, users must refrain from accessing or participating in those activities. Nothing on this website is intended to encourage unlawful conduct or to override any applicable legal restriction.</p>
-
+            <p>Users are responsible for ensuring that their access to and use of this website complies with the laws applicable in their location.</p>
             <h3>5. THIRD-PARTY WEBSITES AND SERVICES</h3>
-            <p>Our website may contain references or links to third-party websites, platforms, or services. Such external resources are operated independently and are not under our direct control.<br>We do not guarantee the accuracy, security, availability, or policies of third-party websites. Visiting an external website is at your own discretion, and you should review its terms and privacy policy before using it.</p>
-
+            <p>Our website may contain references or links to third-party websites, platforms, or services.</p>
             <h3>6. INTELLECTUAL PROPERTY</h3>
-            <p>Unless otherwise indicated, the original text, design elements, branding, and other materials created for GaliDisawarKing are protected by applicable intellectual property laws.<br>You may not reproduce, republish, distribute, or commercially exploit our original content without prior authorization, except where permitted by applicable law.<br>Third-party names, trademarks, and logos remain the property of their respective owners.</p>
-
+            <p>Unless otherwise indicated, the original text, design elements, branding, and other materials created for GaliDisawarKing are protected by applicable intellectual property laws.</p>
             <h3>7. ACCEPTABLE USE</h3>
-            <p>By using this website, you agree not to:</p>
-            <ul>
-                <li>Use the website for any unlawful purpose.</li>
-                <li>Attempt to disrupt, damage, or interfere with the website's operation or security.</li>
-                <li>Copy or collect website content through automated methods in a manner that violates these Terms or applicable law.</li>
-                <li>Misrepresent your identity or misuse the website to harm other users or third parties.</li>
-            </ul>
-            <p>We reserve the right to take reasonable action against activities that violate these Terms or threaten the proper operation of the website.</p>
-
+            <p>By using this website, you agree not to violate any policies or terms mentioned herein.</p>
             <h3>8. DISCLAIMER OF WARRANTIES</h3>
-            <p>The website and its content are provided on an “as available” basis, to the extent permitted by applicable law. We make no guarantee that the website will be uninterrupted, error-free, or free from technical issues.<br>To the extent permitted by law, we disclaim warranties that cannot otherwise be excluded under applicable legislation.</p>
-
+            <p>The website and its content are provided on an “as available” basis.</p>
             <h3>9. LIMITATION OF LIABILITY</h3>
-            <p>To the extent permitted by applicable law, GaliDisawarKing and its operators shall not be liable for indirect or consequential losses arising from the use of, or inability to use, the website or from reliance on its published information.<br>Nothing in these Terms excludes or limits liability where such exclusion or limitation is prohibited by applicable law.</p>
-
+            <p>GaliDisawarKing and its operators shall not be liable for indirect or consequential losses.</p>
             <h3>10. PRIVACY</h3>
-            <p>Your use of this website may also be governed by our Privacy Policy, which explains how information is collected, used, stored, and protected. Please review the Privacy Policy for further details.</p>
-
+            <p>Your use of this website may also be governed by our Privacy Policy.</p>
             <h3>11. CHANGES TO THESE TERMS</h3>
-            <p>We may update or revise these Terms of Service from time to time to reflect changes in our website, services, or applicable requirements. Updated terms will be published on this page along with the revised effective date.<br>Continued use of the website after changes are published constitutes acceptance of the revised Terms, to the extent permitted by law.</p>
-
+            <p>We may update or revise these Terms of Service from time to time.</p>
             <h3>12. CONTACT INFORMATION</h3>
-            <p>If you have any questions about these Terms of Service, please contact us through the Contact Us page available on GaliDisawarKing.<br>Thank you for visiting GaliDisawarKing.</p>
+            <p>If you have any questions about these Terms of Service, please contact us.</p>
         </div>
     </div>
 </div>
