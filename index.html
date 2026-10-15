@@ -12,7 +12,6 @@
         
         body { background: #0b1120; color: #1e293b; display: flex; justify-content: center; min-height: 100vh; padding: 0; }
         
-        /* Professional Desktop & Mobile Wrapper Layout */
         .container { 
             width: 100%; 
             max-width: 900px; 
@@ -39,10 +38,11 @@
         .update-bar { background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; padding: 12px 20px; text-align: center; font-size: 13px; font-weight: 500; }
         .update-bar a { color: #fff; text-decoration: underline; font-weight: 600; }
         
-        .date-header { background: linear-gradient(135deg, #10b981, #059669); color: white; text-align: center; padding: 16px; font-size: 16px; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); letter-spacing: 0.5px; }
+        .date-header { background: linear-gradient(135deg, #10b981, #059669); color: white; text-align: center; padding: 16px; font-size: 15px; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); letter-spacing: 0.5px; }
         
-        .section-title { background-color: #fce7f3; color: #be185d; padding: 12px 20px; font-weight: 700; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; border-left: 5px solid #be185d; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .section-days { font-size: 12px; font-weight: 600; color: #831843; text-transform: none; }
+        /* Section Title with Two Dates Header */
+        .section-title { background-color: #fce7f3; color: #be185d; padding: 12px 20px; font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-left: 5px solid #be185d; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .section-dates-header { display: flex; gap: 20px; font-size: 11px; font-weight: 700; color: #831843; text-transform: none; }
         
         .result-card { background: #ffffff; margin: 10px 15px; padding: 14px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 3px 6px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; transition: transform 0.1s ease; }
         .result-card:hover { transform: translateY(-1px); border-color: #cbd5e1; }
@@ -50,11 +50,26 @@
         .game-name { font-weight: 700; font-size: 15px; color: #1e293b; }
         .game-time { font-size: 12px; color: #64748b; margin-top: 3px; }
         
-        .game-scores { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-        .score-box { background: #f1f5f9; padding: 8px 14px; border-radius: 6px; font-size: 18px; font-weight: 700; color: #0f172a; min-width: 50px; text-align: center; border: 1px solid #cbd5e1; }
+        .game-scores { display: flex; gap: 10px; align-items: center; }
+        .score-box { background: #f1f5f9; padding: 8px 12px; border-radius: 6px; font-size: 16px; font-weight: 700; color: #0f172a; min-width: 48px; text-align: center; border: 1px solid #cbd5e1; }
         .result-card.highlight .score-box { background: #ffffff; color: #b45309; border-color: #ca8a04; }
 
-        /* Tables Wrapper for Desktop professional side-by-side or stacked clean layout */
+        /* Loading Spinner CSS */
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 3px solid #cbd5e1;
+            border-top: 3px solid #2563eb;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Tables Wrapper */
         .tables-wrapper {
             display: flex;
             flex-direction: column;
@@ -62,7 +77,6 @@
             padding: 5px 10px;
         }
 
-        /* Monthly Chart Table Styles - Full Unabbreviated Market Names */
         .chart-container { background: #ffffff; margin: 10px 5px; padding: 18px; border-radius: 10px; border: 1px solid #cbd5e1; overflow-x: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
         .chart-heading { background: #0284c7; color: white; text-align: center; padding: 12px; font-size: 15px; font-weight: 700; border-radius: 6px; margin-bottom: 14px; letter-spacing: 0.5px; }
         
@@ -71,7 +85,6 @@
         .monthly-table th { background-color: #f59e0b; color: #fff; border: 1px solid #d97706; font-weight: 700; font-size: 11px; letter-spacing: 0.3px; }
         .monthly-table tr:nth-child(even) { background-color: #f8fafc; }
         
-        /* Highlight style for Common Digits */
         .highlight-digit { background-color: #fef08a !important; color: #b45309 !important; font-weight: bold; display: inline-block; width: 100%; padding: 3px 0; border-radius: 3px; }
 
         .month-buttons { display: flex; gap: 12px; margin-top: 15px; }
@@ -110,10 +123,13 @@
         ⚡ Fast Results of October 15, 2026 & October 14, 2026
     </div>
 
-    <!-- Live Section with Days aligned inline -->
+    <!-- Live Section with Two Dates Column Headers -->
     <div class="section-title">
         <span>Live Results</span>
-        <span class="section-days">Thu. 15th | Wed. 14th</span>
+        <div class="section-dates-header">
+            <span>Wed. 14th</span>
+            <span>Thu. 15th (Live)</span>
+        </div>
     </div>
 
     <!-- BULANDSHAHR CITY -->
@@ -123,7 +139,8 @@
             <div class="game-time">at 09:20 AM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="score-BULANDSHAHR_CITY">--</div>
+            <div class="score-box">70</div>
+            <div class="score-box" id="score-BULANDSHAHR_CITY"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -134,7 +151,8 @@
             <div class="game-time">at 12:30 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="score-ALIGARH_CITY">--</div>
+            <div class="score-box">35</div>
+            <div class="score-box" id="score-ALIGARH_CITY"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -145,7 +163,8 @@
             <div class="game-time">at 02:27 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="score-NOIDA_NCR">--</div>
+            <div class="score-box">--</div>
+            <div class="score-box" id="score-NOIDA_NCR"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -156,7 +175,8 @@
             <div class="game-time">at 03:00 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="score-DELHI_BAZAR">--</div>
+            <div class="score-box">25</div>
+            <div class="score-box" id="score-DELHI_BAZAR"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -167,7 +187,8 @@
             <div class="game-time">at 03:52 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="score-SHREE_GANESH">--</div>
+            <div class="score-box">--</div>
+            <div class="score-box" id="score-SHREE_GANESH"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -178,7 +199,8 @@
             <div class="game-time">at 06:00 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="score-FARIDABAD">--</div>
+            <div class="score-box">--</div>
+            <div class="score-box" id="score-FARIDABAD"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -189,7 +211,8 @@
             <div class="game-time">at 08:40 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="score-MATHURA_KING">--</div>
+            <div class="score-box">--</div>
+            <div class="score-box" id="score-MATHURA_KING"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -200,7 +223,8 @@
             <div class="game-time">at 09:55 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="score-GHAZIABAD">--</div>
+            <div class="score-box">--</div>
+            <div class="score-box" id="score-GHAZIABAD"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -211,7 +235,8 @@
             <div class="game-time">at 11:25 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="score-GALI">--</div>
+            <div class="score-box">--</div>
+            <div class="score-box" id="score-GALI"><div class="spinner"></div></div>
         </div>
     </div>
 
@@ -222,13 +247,14 @@
             <div class="game-time">at 05:00 AM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box" id="score-DISAWAR">--</div>
+            <div class="score-box">--</div>
+            <div class="score-box" id="score-DISAWAR"><div class="spinner"></div></div>
         </div>
     </div>
 
-    <!-- TABLES SECTION WITH FULL UNABBREVIATED MARKET NAMES -->
+    <!-- TABLES SECTION -->
     <div class="tables-wrapper">
-        <!-- TABLE 1: Main Markets (Delhi Bazar, Shree Ganesh, Faridabad, Ghaziabad, Gali, Disawar) -->
+        <!-- TABLE 1: Main Markets -->
         <div class="chart-container">
             <div class="chart-heading" id="chartHeading1">Main Result Chart - Oct 2026</div>
             <table class="monthly-table">
@@ -254,7 +280,7 @@
             </div>
         </div>
 
-        <!-- TABLE 2: Other Markets (Bulandshahr City, Aligarh City, Noida Ncr, Mathura King) -->
+        <!-- TABLE 2: Other Markets -->
         <div class="chart-container">
             <div class="chart-heading" id="chartHeading2">Other Markets Chart - Oct 2026</div>
             <table class="monthly-table">
@@ -347,7 +373,6 @@
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let currentMonthIndex = 9; // October
 
-    // Common Digits to Highlight
     const commonDigits = ["11", "16", "61", "66", "22", "27", "72", "77", "33", "83", "88", "38", "44", "99", "49", "94", "05", "50", "55", "00"];
 
     function formatScore(val) {
@@ -362,7 +387,7 @@
         return str;
     }
 
-    // Live result sync
+    // Live result sync with Spinner if not available
     const resultsRef = ref(db, 'results');
     onValue(resultsRef, (snapshot) => {
         const data = snapshot.val();
@@ -371,8 +396,9 @@
                 const scoreBox = document.getElementById(`score-${game}`);
                 if (scoreBox) {
                     let rawVal = data[game].score;
-                    if (!rawVal || rawVal === '--') scoreBox.innerHTML = '--';
-                    else {
+                    if (!rawVal || rawVal === '--') {
+                        scoreBox.innerHTML = `<div class="spinner"></div>`;
+                    } else {
                         let str = String(rawVal).trim();
                         if (str === '0' || str === '100') str = '00';
                         else if (str.length === 1) str = '0' + str;
@@ -383,7 +409,7 @@
         }
     });
 
-    // Load Chart Data for Both Tables with Full Market Names
+    // Load Chart Data
     window.loadChartData = function() {
         const currentMonthName = months[currentMonthIndex];
         document.getElementById('chartHeading1').innerText = `Main Result Chart - ${currentMonthName} 2026`;
@@ -414,7 +440,6 @@
                     const r = chartData[date];
                     let dateStr = String(date).padStart(2, '0');
 
-                    // Table 1 Data (Full names)
                     tbody1.innerHTML += `
                         <tr>
                             <td>${dateStr}</td>
@@ -427,7 +452,6 @@
                         </tr>
                     `;
 
-                    // Table 2 Data (Full names)
                     tbody2.innerHTML += `
                         <tr>
                             <td>${dateStr}</td>
