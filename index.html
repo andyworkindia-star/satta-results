@@ -40,29 +40,30 @@
         
         .date-header { background: linear-gradient(135deg, #10b981, #059669); color: white; text-align: center; padding: 16px; font-size: 15px; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); letter-spacing: 0.5px; }
         
-        /* Section Title with Two Dates Header */
+        /* Section Title with Inline Dates */
         .section-title { background-color: #fce7f3; color: #be185d; padding: 12px 20px; font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-left: 5px solid #be185d; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .section-dates-header { display: flex; gap: 20px; font-size: 11px; font-weight: 700; color: #831843; text-transform: none; }
+        .section-days { font-size: 11px; font-weight: 600; color: #831843; text-transform: none; }
         
+        /* Game Card Styles */
         .result-card { background: #ffffff; margin: 10px 15px; padding: 14px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 3px 6px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; transition: transform 0.1s ease; }
         .result-card:hover { transform: translateY(-1px); border-color: #cbd5e1; }
         .result-card.highlight { background: linear-gradient(135deg, #fef08a, #fde047); border-color: #facc15; }
         .game-name { font-weight: 700; font-size: 15px; color: #1e293b; }
         .game-time { font-size: 12px; color: #64748b; margin-top: 3px; }
         
-        .game-scores { display: flex; gap: 10px; align-items: center; }
+        .game-scores { display: flex; gap: 12px; align-items: center; }
         .score-box { background: #f1f5f9; padding: 8px 12px; border-radius: 6px; font-size: 16px; font-weight: 700; color: #0f172a; min-width: 48px; text-align: center; border: 1px solid #cbd5e1; }
         .result-card.highlight .score-box { background: #ffffff; color: #b45309; border-color: #ca8a04; }
 
-        /* Loading Spinner CSS */
+        /* Wait / Loading Spinner Style */
+        .wait-box { font-size: 11px; font-weight: 600; color: #d97706; display: flex; align-items: center; gap: 5px; background: #fef3c7; padding: 6px 10px; border-radius: 6px; border: 1px solid #fcd34d; }
         .spinner {
-            width: 18px;
-            height: 18px;
-            border: 3px solid #cbd5e1;
-            border-top: 3px solid #2563eb;
+            width: 12px;
+            height: 12px;
+            border: 2px solid #d97706;
+            border-top: 2px solid transparent;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin: auto;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -123,13 +124,10 @@
         ⚡ Fast Results of October 15, 2026 & October 14, 2026
     </div>
 
-    <!-- Live Section with Two Dates Column Headers -->
+    <!-- Live Section with Days aligned inline -->
     <div class="section-title">
         <span>Live Results</span>
-        <div class="section-dates-header">
-            <span>Wed. 14th</span>
-            <span>Thu. 15th (Live)</span>
-        </div>
+        <span class="section-days">Wed. 14th | Thu. 15th</span>
     </div>
 
     <!-- BULANDSHAHR CITY -->
@@ -140,7 +138,7 @@
         </div>
         <div class="game-scores">
             <div class="score-box">70</div>
-            <div class="score-box" id="score-BULANDSHAHR_CITY"><div class="spinner"></div></div>
+            <div class="score-box" id="score-BULANDSHAHR_CITY">72</div>
         </div>
     </div>
 
@@ -152,7 +150,7 @@
         </div>
         <div class="game-scores">
             <div class="score-box">35</div>
-            <div class="score-box" id="score-ALIGARH_CITY"><div class="spinner"></div></div>
+            <div class="score-box" id="score-ALIGARH_CITY">18</div>
         </div>
     </div>
 
@@ -164,7 +162,7 @@
         </div>
         <div class="game-scores">
             <div class="score-box">--</div>
-            <div class="score-box" id="score-NOIDA_NCR"><div class="spinner"></div></div>
+            <div class="score-box" id="score-NOIDA_NCR">45</div>
         </div>
     </div>
 
@@ -176,7 +174,7 @@
         </div>
         <div class="game-scores">
             <div class="score-box">25</div>
-            <div class="score-box" id="score-DELHI_BAZAR"><div class="spinner"></div></div>
+            <div class="score-box" id="score-DELHI_BAZAR">90</div>
         </div>
     </div>
 
@@ -188,7 +186,7 @@
         </div>
         <div class="game-scores">
             <div class="score-box">--</div>
-            <div class="score-box" id="score-SHREE_GANESH"><div class="spinner"></div></div>
+            <div class="score-box" id="score-SHREE_GANESH">12</div>
         </div>
     </div>
 
@@ -200,7 +198,7 @@
         </div>
         <div class="game-scores">
             <div class="score-box">--</div>
-            <div class="score-box" id="score-FARIDABAD"><div class="spinner"></div></div>
+            <div class="score-box" id="score-FARIDABAD">88</div>
         </div>
     </div>
 
@@ -212,11 +210,11 @@
         </div>
         <div class="game-scores">
             <div class="score-box">--</div>
-            <div class="score-box" id="score-MATHURA_KING"><div class="spinner"></div></div>
+            <div class="score-box" id="score-MATHURA_KING">34</div>
         </div>
     </div>
 
-    <!-- GHAZIABAD -->
+    <!-- GHAZIABAD (Pending - Wait...) -->
     <div class="result-card">
         <div>
             <div class="game-name">GHAZIABAD</div>
@@ -224,11 +222,13 @@
         </div>
         <div class="game-scores">
             <div class="score-box">--</div>
-            <div class="score-box" id="score-GHAZIABAD"><div class="spinner"></div></div>
+            <div id="score-GHAZIABAD">
+                <div class="wait-box"><div class="spinner"></div> Wait...</div>
+            </div>
         </div>
     </div>
 
-    <!-- GALI -->
+    <!-- GALI (Pending - Wait...) -->
     <div class="result-card">
         <div>
             <div class="game-name">GALI</div>
@@ -236,7 +236,9 @@
         </div>
         <div class="game-scores">
             <div class="score-box">--</div>
-            <div class="score-box" id="score-GALI"><div class="spinner"></div></div>
+            <div id="score-GALI">
+                <div class="wait-box"><div class="spinner"></div> Wait...</div>
+            </div>
         </div>
     </div>
 
@@ -247,8 +249,8 @@
             <div class="game-time">at 05:00 AM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">--</div>
-            <div class="score-box" id="score-DISAWAR"><div class="spinner"></div></div>
+            <div class="score-box">15</div>
+            <div class="score-box" id="score-DISAWAR">--</div>
         </div>
     </div>
 
@@ -387,7 +389,7 @@
         return str;
     }
 
-    // Live result sync with Spinner if not available
+    // Live result sync with Wait spinner or score
     const resultsRef = ref(db, 'results');
     onValue(resultsRef, (snapshot) => {
         const data = snapshot.val();
@@ -396,13 +398,14 @@
                 const scoreBox = document.getElementById(`score-${game}`);
                 if (scoreBox) {
                     let rawVal = data[game].score;
-                    if (!rawVal || rawVal === '--') {
-                        scoreBox.innerHTML = `<div class="spinner"></div>`;
+                    if (!rawVal || rawVal === '--' || rawVal === 'Wait...') {
+                        scoreBox.innerHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
                     } else {
                         let str = String(rawVal).trim();
                         if (str === '0' || str === '100') str = '00';
                         else if (str.length === 1) str = '0' + str;
                         scoreBox.innerHTML = str;
+                        scoreBox.className = "score-box";
                     }
                 }
             }
