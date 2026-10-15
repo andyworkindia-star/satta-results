@@ -277,23 +277,16 @@
         
         .table-scroll-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-        /* EQUAL WIDTH FOR ALL COLUMNS */
-        .monthly-table { width: 100%; min-width: 550px; border-collapse: collapse; text-align: center; font-size: 12px; table-layout: fixed; }
+        /* FIXED WIDTH BASED ON 'DATE' HEADING WORD */
+        .monthly-table { width: 100%; min-width: 580px; border-collapse: collapse; text-align: center; font-size: 12px; table-layout: fixed; }
         .monthly-table th, .monthly-table td { padding: 8px 4px; border: 1px solid #334155; font-weight: 600; color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .monthly-table th { background-color: #0f172a; color: #38bdf8; border: 1px solid #334155; font-size: 10px; text-transform: uppercase; }
         .monthly-table tr:nth-child(even) { background-color: #0f172a; }
         
-        /* Column widths for Table 1 (Date + 6 Markets = 7 columns) */
-        .monthly-table.table-7col th, .monthly-table.table-7col td { width: 14.28%; }
-        .monthly-table.table-7col th:first-child, .monthly-table.table-7col td:first-child { width: 50px !important; }
-
-        /* Column widths for Table 2 (Date + 4 Markets = 5 columns) */
-        .monthly-table.table-5col th, .monthly-table.table-5col td { width: 20%; }
-        .monthly-table.table-5col th:first-child, .monthly-table.table-5col td:first-child { width: 50px !important; }
-
-        /* STICKY DATE COLUMN */
-        .monthly-table th:first-child,
-        .monthly-table td:first-child {
+        /* Date Column: Sized precisely to fit the word 'DATE' comfortably */
+        .monthly-table th:first-child, .monthly-table td:first-child {
+            width: 68px !important;
+            min-width: 68px !important;
             position: sticky;
             left: 0;
             background-color: #0f172a;
@@ -303,6 +296,18 @@
         .monthly-table th:first-child {
             background-color: #1e293b;
             z-index: 3;
+        }
+
+        /* Table 1: Remaining width divided equally among 6 market columns */
+        .monthly-table.table-7col th:not(:first-child), 
+        .monthly-table.table-7col td:not(:first-child) { 
+            width: calc((100% - 68px) / 6); 
+        }
+
+        /* Table 2: Remaining width divided equally among 4 market columns */
+        .monthly-table.table-5col th:not(:first-child), 
+        .monthly-table.table-5col td:not(:first-child) { 
+            width: calc((100% - 68px) / 4); 
         }
 
         .highlight-digit { background-color: #78350f !important; color: #fde047 !important; font-weight: bold; display: inline-block; padding: 2px 4px; border-radius: 4px; }
