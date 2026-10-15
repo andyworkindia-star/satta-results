@@ -39,20 +39,20 @@
         .game-scores { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
         .score-box { background: #f1f5f9; padding: 6px 12px; border-radius: 6px; font-size: 16px; font-weight: 700; color: #0f172a; min-width: 45px; text-align: center; border: 1px solid #cbd5e1; }
 
-        /* Monthly Chart Table Styles - Fixed Equal Width for all columns */
+        /* Monthly Chart Table Styles */
         .chart-container { background: #ffffff; margin: 15px 12px; padding: 15px; border-radius: 10px; border: 1px solid #e2e8f0; overflow-x: auto; }
-        .chart-heading { background: #0284c7; color: white; text-align: center; padding: 10px; font-size: 14px; font-weight: 700; border-radius: 6px; margin-bottom: 12px; }
+        .chart-heading { background: #0284c7; color: white; text-align: center; padding: 10px; font-size: 13px; font-weight: 700; border-radius: 6px; margin-bottom: 12px; }
         
-        .monthly-table { width: 100%; table-layout: fixed; border-collapse: collapse; text-align: center; font-size: 10px; }
-        .monthly-table th, .monthly-table td { width: 9.09%; padding: 6px 1px; border: 1px solid #cbd5e1; font-weight: 600; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .monthly-table th { background-color: #f59e0b; color: #fff; border: 1px solid #d97706; font-weight: 700; font-size: 9.5px; }
+        .monthly-table { width: 100%; table-layout: fixed; border-collapse: collapse; text-align: center; font-size: 11px; }
+        .monthly-table th, .monthly-table td { padding: 6px 2px; border: 1px solid #cbd5e1; font-weight: 600; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .monthly-table th { background-color: #f59e0b; color: #fff; border: 1px solid #d97706; font-weight: 700; font-size: 10px; }
         .monthly-table tr:nth-child(even) { background-color: #f8fafc; }
         
         /* Highlight style for Common Digits */
         .highlight-digit { background-color: #fef08a !important; color: #b45309 !important; font-weight: bold; display: inline-block; width: 100%; padding: 2px 0; border-radius: 3px; }
 
         .month-buttons { display: flex; gap: 10px; margin-top: 15px; }
-        .month-btn { flex: 1; background-color: #2563eb; color: white; border: none; padding: 10px; border-radius: 6px; font-size: 13px; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; transition: background 0.2s; }
+        .month-btn { flex: 1; background-color: #2563eb; color: white; border: none; padding: 10px; border-radius: 6px; font-size: 12px; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; transition: background 0.2s; }
         .month-btn:hover { background-color: #1d4ed8; }
 
         /* Embedded Admin Panel Styles */
@@ -202,34 +202,53 @@
         </div>
     </div>
 
-    <!-- Monthly Chart Table Section -->
+    <!-- TABLE 1: Main Markets (Delhi Bazar, Shree Ganesh, Faridabad, Ghaziabad, Gali, Disawar) -->
     <div class="chart-container">
-        <div class="chart-heading" id="chartHeading">Monthly Result Chart - Oct 2026</div>
+        <div class="chart-heading" id="chartHeading1">Main Result Chart - Oct 2026</div>
         <table class="monthly-table">
             <thead>
                 <tr>
-                    <th>DATE</th>
-                    <th>BULAND</th>
-                    <th>ALIGARH</th>
-                    <th>NOIDA</th>
-                    <th>DELHI</th>
-                    <th>SHREE</th>
-                    <th>FRBD</th>
-                    <th>MATHURA</th>
-                    <th>GZBD</th>
-                    <th>GALI</th>
-                    <th>DSWR</th>
+                    <th style="width: 14.28%;">DATE</th>
+                    <th style="width: 14.28%;">DELHI</th>
+                    <th style="width: 14.28%;">SHREE</th>
+                    <th style="width: 14.28%;">FRBD</th>
+                    <th style="width: 14.28%;">GZBD</th>
+                    <th style="width: 14.28%;">GALI</th>
+                    <th style="width: 14.28%;">DSWR</th>
                 </tr>
             </thead>
-            <tbody id="monthlyChartBody">
-                <tr><td colspan="11">Loading chart...</td></tr>
+            <tbody id="monthlyChartBody1">
+                <tr><td colspan="7">Loading chart...</td></tr>
             </tbody>
         </table>
         
-        <!-- Previous and Next Month Buttons -->
         <div class="month-buttons">
-            <button class="month-btn" id="prevBtn" onclick="changeMonth(-1)">⬅️ Sep 2026</button>
-            <button class="month-btn" id="nextBtn" onclick="changeMonth(1)">Nov 2026 ➡️</button>
+            <button class="month-btn" id="prevBtn1" onclick="changeMonth(-1)">⬅️ Sep 2026</button>
+            <button class="month-btn" id="nextBtn1" onclick="changeMonth(1)">Nov 2026 ➡️</button>
+        </div>
+    </div>
+
+    <!-- TABLE 2: Other Markets (Bulandshahr, Aligarh, Noida, Mathura King) -->
+    <div class="chart-container">
+        <div class="chart-heading" id="chartHeading2">Other Markets Chart - Oct 2026</div>
+        <table class="monthly-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">DATE</th>
+                    <th style="width: 20%;">BULAND</th>
+                    <th style="width: 20%;">ALIGARH</th>
+                    <th style="width: 20%;">NOIDA</th>
+                    <th style="width: 20%;">MATHURA</th>
+                </tr>
+            </thead>
+            <tbody id="monthlyChartBody2">
+                <tr><td colspan="5">Loading chart...</td></tr>
+            </tbody>
+        </table>
+        
+        <div class="month-buttons">
+            <button class="month-btn" id="prevBtn2" onclick="changeMonth(-1)">⬅️ Sep 2026</button>
+            <button class="month-btn" id="nextBtn2" onclick="changeMonth(1)">Nov 2026 ➡️</button>
         </div>
     </div>
 
@@ -304,7 +323,6 @@
     // Common Digits to Highlight
     const commonDigits = ["11", "16", "61", "66", "22", "27", "72", "77", "33", "83", "88", "38", "44", "99", "49", "94", "05", "50", "55", "00"];
 
-    // Number formatting & highlighting helper function
     function formatScore(val) {
         if (!val || val === '--' || val === 'XX') return '--';
         let str = String(val).trim();
@@ -338,48 +356,68 @@
         }
     });
 
-    // Load Chart Data based on currentMonthIndex
+    // Load Chart Data for Both Tables
     window.loadChartData = function() {
         const currentMonthName = months[currentMonthIndex];
-        document.getElementById('chartHeading').innerText = `Monthly Result Chart - ${currentMonthName} 2026`;
+        document.getElementById('chartHeading1').innerText = `Main Result Chart - ${currentMonthName} 2026`;
+        document.getElementById('chartHeading2').innerText = `Other Markets Chart - ${currentMonthName} 2026`;
 
         let prevIndex = (currentMonthIndex - 1 + 12) % 12;
         let nextIndex = (currentMonthIndex + 1) % 12;
-        document.getElementById('prevBtn').innerText = `⬅️ ${months[prevIndex]} 2026`;
-        document.getElementById('nextBtn').innerText = `${months[nextIndex]} 2026 ➡️`;
+        let btnTextPrev = `⬅️ ${months[prevIndex]} 2026`;
+        let btnTextNext = `${months[nextIndex]} 2026 ➡️`;
+
+        document.getElementById('prevBtn1').innerText = btnTextPrev;
+        document.getElementById('nextBtn1').innerText = btnTextNext;
+        document.getElementById('prevBtn2').innerText = btnTextPrev;
+        document.getElementById('nextBtn2').innerText = btnTextNext;
         
         const chartRef = ref(db, `yearly_charts_2026/${currentMonthName}`);
         onValue(chartRef, (snapshot) => {
             const chartData = snapshot.val();
-            const tbody = document.getElementById('monthlyChartBody');
+            const tbody1 = document.getElementById('monthlyChartBody1');
+            const tbody2 = document.getElementById('monthlyChartBody2');
+            
             if (chartData) {
-                tbody.innerHTML = '';
+                tbody1.innerHTML = '';
+                tbody2.innerHTML = '';
                 const sortedDates = Object.keys(chartData).sort((a, b) => parseInt(a) - parseInt(b));
+                
                 sortedDates.forEach(date => {
                     const r = chartData[date];
-                    tbody.innerHTML += `
+                    let dateStr = String(date).padStart(2, '0');
+
+                    // Table 1 Data (Delhi Bazar, Shree Ganesh, Faridabad, Ghaziabad, Gali, Disawar)
+                    tbody1.innerHTML += `
                         <tr>
-                            <td>${String(date).padStart(2, '0')}</td>
-                            <td>${formatScore(r['BULANDSHAHR CITY'])}</td>
-                            <td>${formatScore(r['ALIGARH CITY'])}</td>
-                            <td>${formatScore(r['NOIDA NCR'])}</td>
+                            <td>${dateStr}</td>
                             <td>${formatScore(r['DELHI BAZAR'])}</td>
                             <td>${formatScore(r['SHREE GANESH'])}</td>
                             <td>${formatScore(r['FARIDABAD'])}</td>
-                            <td>${formatScore(r['MATHURA KING'])}</td>
                             <td>${formatScore(r['GHAZIABAD'])}</td>
                             <td>${formatScore(r['GALI'])}</td>
                             <td>${formatScore(r['DISAWAR'])}</td>
                         </tr>
                     `;
+
+                    // Table 2 Data (Bulandshahr City, Aligarh City, Noida Ncr, Mathura King)
+                    tbody2.innerHTML += `
+                        <tr>
+                            <td>${dateStr}</td>
+                            <td>${formatScore(r['BULANDSHAHR CITY'])}</td>
+                            <td>${formatScore(r['ALIGARH CITY'])}</td>
+                            <td>${formatScore(r['NOIDA NCR'])}</td>
+                            <td>${formatScore(r['MATHURA KING'])}</td>
+                        </tr>
+                    `;
                 });
             } else {
-                tbody.innerHTML = `<tr><td colspan="11">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
+                tbody1.innerHTML = `<tr><td colspan="7">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
+                tbody2.innerHTML = `<tr><td colspan="5">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
             }
         }, { onlyOnce: true });
     }
 
-    // Change Month Function on Button Click
     window.changeMonth = function(direction) {
         currentMonthIndex += direction;
         if (currentMonthIndex < 0) currentMonthIndex = 11;
@@ -387,7 +425,6 @@
         window.loadChartData();
     }
 
-    // Initial load
     setTimeout(() => { window.loadChartData(); }, 1000);
 
     // Admin Login Function (Password: 12345)
@@ -402,7 +439,6 @@
         }
     }
 
-    // Update Live Result Function
     window.updateResult = async function() {
         const game = document.getElementById('gameName').value;
         const score = document.getElementById('resultScore').value.trim();
@@ -425,7 +461,6 @@
         }
     }
 
-    // Excel File Upload & Parse Function for Full Year Data
     window.uploadExcelData = function() {
         const fileInput = document.getElementById('excelFile');
         const file = fileInput.files[0];
