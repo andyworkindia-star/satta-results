@@ -40,37 +40,60 @@
         
         .date-header { background: linear-gradient(135deg, #10b981, #059669); color: white; text-align: center; padding: 16px; font-size: 15px; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); letter-spacing: 0.5px; }
         
-        /* Section Title with Inline Dates */
         .section-title { background-color: #fce7f3; color: #be185d; padding: 12px 20px; font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-left: 5px solid #be185d; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .section-days { font-size: 11px; font-weight: 600; color: #831843; text-transform: none; }
+        .section-days { display: flex; gap: 28px; font-size: 11px; font-weight: 700; color: #831843; text-transform: none; }
         
-        /* Game Card Styles */
-        .result-card { background: #ffffff; margin: 10px 15px; padding: 14px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 3px 6px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; transition: transform 0.1s ease; }
-        .result-card:hover { transform: translateY(-1px); border-color: #cbd5e1; }
+        .result-card { background: #ffffff; margin: 10px 15px; padding: 14px 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 3px 6px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
         .result-card.highlight { background: linear-gradient(135deg, #fef08a, #fde047); border-color: #facc15; }
         .game-name { font-weight: 700; font-size: 15px; color: #1e293b; }
         .game-time { font-size: 12px; color: #64748b; margin-top: 3px; }
         
         .game-scores { display: flex; gap: 12px; align-items: center; }
-        .score-box { background: #f1f5f9; padding: 8px 12px; border-radius: 6px; font-size: 16px; font-weight: 700; color: #0f172a; min-width: 48px; text-align: center; border: 1px solid #cbd5e1; }
+        
+        .score-box { 
+            background: #f1f5f9; 
+            padding: 8px 0; 
+            border-radius: 6px; 
+            font-size: 16px; 
+            font-weight: 700; 
+            color: #0f172a; 
+            width: 58px; 
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #cbd5e1; 
+        }
         .result-card.highlight .score-box { background: #ffffff; color: #b45309; border-color: #ca8a04; }
 
-        /* Wait / Loading Spinner Style */
-        .wait-box { font-size: 11px; font-weight: 600; color: #d97706; display: flex; align-items: center; gap: 5px; background: #fef3c7; padding: 6px 10px; border-radius: 6px; border: 1px solid #fcd34d; }
+        .wait-box { 
+            font-size: 10px; 
+            font-weight: 600; 
+            color: #d97706; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: 4px; 
+            background: #fef3c7; 
+            width: 58px; 
+            height: 38px;
+            border-radius: 6px; 
+            border: 1px solid #fcd34d; 
+        }
         .spinner {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border: 2px solid #d97706;
             border-top: 2px solid transparent;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            animation: spin 1.6s linear infinite;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        /* Tables Wrapper */
+        /* Tables Wrapper with Smooth Horizontal Scroll for Mobile */
         .tables-wrapper {
             display: flex;
             flex-direction: column;
@@ -78,15 +101,21 @@
             padding: 5px 10px;
         }
 
-        .chart-container { background: #ffffff; margin: 10px 5px; padding: 18px; border-radius: 10px; border: 1px solid #cbd5e1; overflow-x: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .chart-container { background: #ffffff; margin: 10px 5px; padding: 18px; border-radius: 10px; border: 1px solid #cbd5e1; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
         .chart-heading { background: #0284c7; color: white; text-align: center; padding: 12px; font-size: 15px; font-weight: 700; border-radius: 6px; margin-bottom: 14px; letter-spacing: 0.5px; }
         
-        .monthly-table { width: 100%; table-layout: fixed; border-collapse: collapse; text-align: center; font-size: 12px; }
-        .monthly-table th, .monthly-table td { padding: 8px 3px; border: 1px solid #cbd5e1; font-weight: 600; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .table-scroll-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .monthly-table { width: 100%; min-width: 550px; border-collapse: collapse; text-align: center; font-size: 12px; }
+        .monthly-table th, .monthly-table td { padding: 9px 6px; border: 1px solid #cbd5e1; font-weight: 600; color: #1e293b; white-space: nowrap; }
         .monthly-table th { background-color: #f59e0b; color: #fff; border: 1px solid #d97706; font-weight: 700; font-size: 11px; letter-spacing: 0.3px; }
         .monthly-table tr:nth-child(even) { background-color: #f8fafc; }
         
-        .highlight-digit { background-color: #fef08a !important; color: #b45309 !important; font-weight: bold; display: inline-block; width: 100%; padding: 3px 0; border-radius: 3px; }
+        .highlight-digit { background-color: #fef08a !important; color: #b45309 !important; font-weight: bold; display: inline-block; padding: 2px 6px; border-radius: 3px; }
 
         .month-buttons { display: flex; gap: 12px; margin-top: 15px; }
         .month-btn { flex: 1; background-color: #2563eb; color: white; border: none; padding: 11px; border-radius: 6px; font-size: 13px; font-weight: 600; text-align: center; text-decoration: none; cursor: pointer; transition: background 0.2s; }
@@ -127,7 +156,10 @@
     <!-- Live Section with Days aligned inline -->
     <div class="section-title">
         <span>Live Results</span>
-        <span class="section-days">Wed. 14th | Thu. 15th</span>
+        <div class="section-days">
+            <span>Wed. 14th</span>
+            <span>Thu. 15th</span>
+        </div>
     </div>
 
     <!-- BULANDSHAHR CITY -->
@@ -137,8 +169,8 @@
             <div class="game-time">at 09:20 AM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">70</div>
-            <div class="score-box" id="score-BULANDSHAHR_CITY">72</div>
+            <div class="score-box" id="live-14-BULANDSHAHR_CITY">--</div>
+            <div class="score-box" id="live-15-BULANDSHAHR_CITY">--</div>
         </div>
     </div>
 
@@ -149,8 +181,8 @@
             <div class="game-time">at 12:30 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">35</div>
-            <div class="score-box" id="score-ALIGARH_CITY">18</div>
+            <div class="score-box" id="live-14-ALIGARH_CITY">--</div>
+            <div class="score-box" id="live-15-ALIGARH_CITY">--</div>
         </div>
     </div>
 
@@ -161,8 +193,8 @@
             <div class="game-time">at 02:27 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">--</div>
-            <div class="score-box" id="score-NOIDA_NCR">45</div>
+            <div class="score-box" id="live-14-NOIDA_NCR">--</div>
+            <div class="score-box" id="live-15-NOIDA_NCR">--</div>
         </div>
     </div>
 
@@ -173,8 +205,8 @@
             <div class="game-time">at 03:00 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">25</div>
-            <div class="score-box" id="score-DELHI_BAZAR">90</div>
+            <div class="score-box" id="live-14-DELHI_BAZAR">--</div>
+            <div class="score-box" id="live-15-DELHI_BAZAR">--</div>
         </div>
     </div>
 
@@ -185,8 +217,8 @@
             <div class="game-time">at 03:52 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">--</div>
-            <div class="score-box" id="score-SHREE_GANESH">12</div>
+            <div class="score-box" id="live-14-SHREE_GANESH">--</div>
+            <div class="score-box" id="live-15-SHREE_GANESH">--</div>
         </div>
     </div>
 
@@ -197,8 +229,8 @@
             <div class="game-time">at 06:00 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">--</div>
-            <div class="score-box" id="score-FARIDABAD">88</div>
+            <div class="score-box" id="live-14-FARIDABAD">--</div>
+            <div class="score-box" id="live-15-FARIDABAD">--</div>
         </div>
     </div>
 
@@ -209,36 +241,32 @@
             <div class="game-time">at 08:40 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">--</div>
-            <div class="score-box" id="score-MATHURA_KING">34</div>
+            <div class="score-box" id="live-14-MATHURA_KING">--</div>
+            <div class="score-box" id="live-15-MATHURA_KING">--</div>
         </div>
     </div>
 
-    <!-- GHAZIABAD (Pending - Wait...) -->
+    <!-- GHAZIABAD -->
     <div class="result-card">
         <div>
             <div class="game-name">GHAZIABAD</div>
             <div class="game-time">at 09:55 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">--</div>
-            <div id="score-GHAZIABAD">
-                <div class="wait-box"><div class="spinner"></div> Wait...</div>
-            </div>
+            <div class="score-box" id="live-14-GHAZIABAD">--</div>
+            <div id="live-15-GHAZIABAD"><div class="wait-box"><div class="spinner"></div> Wait...</div></div>
         </div>
     </div>
 
-    <!-- GALI (Pending - Wait...) -->
+    <!-- GALI -->
     <div class="result-card">
         <div>
             <div class="game-name">GALI</div>
             <div class="game-time">at 11:25 PM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">--</div>
-            <div id="score-GALI">
-                <div class="wait-box"><div class="spinner"></div> Wait...</div>
-            </div>
+            <div class="score-box" id="live-14-GALI">--</div>
+            <div id="live-15-GALI"><div class="wait-box"><div class="spinner"></div> Wait...</div></div>
         </div>
     </div>
 
@@ -249,32 +277,34 @@
             <div class="game-time">at 05:00 AM</div>
         </div>
         <div class="game-scores">
-            <div class="score-box">15</div>
-            <div class="score-box" id="score-DISAWAR">--</div>
+            <div class="score-box" id="live-14-DISAWAR">--</div>
+            <div class="score-box" id="live-15-DISAWAR">--</div>
         </div>
     </div>
 
-    <!-- TABLES SECTION -->
+    <!-- TABLES SECTION WITH MOVING / SCROLLABLE TABLE VIEW -->
     <div class="tables-wrapper">
         <!-- TABLE 1: Main Markets -->
         <div class="chart-container">
             <div class="chart-heading" id="chartHeading1">Main Result Chart - Oct 2026</div>
-            <table class="monthly-table">
-                <thead>
-                    <tr>
-                        <th style="width: 12%;">DATE</th>
-                        <th style="width: 14.6%;">DELHI BAZAR</th>
-                        <th style="width: 14.6%;">SHREE GANESH</th>
-                        <th style="width: 14.6%;">FARIDABAD</th>
-                        <th style="width: 14.6%;">GHAZIABAD</th>
-                        <th style="width: 14.6%;">GALI</th>
-                        <th style="width: 14.6%;">DISAWAR</th>
-                    </tr>
-                </thead>
-                <tbody id="monthlyChartBody1">
-                    <tr><td colspan="7">Loading chart...</td></tr>
-                </tbody>
-            </table>
+            <div class="table-scroll-container">
+                <table class="monthly-table">
+                    <thead>
+                        <tr>
+                            <th>DATE</th>
+                            <th>DELHI BAZAR</th>
+                            <th>SHREE GANESH</th>
+                            <th>FARIDABAD</th>
+                            <th>GHAZIABAD</th>
+                            <th>GALI</th>
+                            <th>DISAWAR</th>
+                        </tr>
+                    </thead>
+                    <tbody id="monthlyChartBody1">
+                        <tr><td colspan="7">Loading chart...</td></tr>
+                    </tbody>
+                </table>
+            </div>
             
             <div class="month-buttons">
                 <button class="month-btn" id="prevBtn1" onclick="changeMonth(-1)">⬅️ Sep 2026</button>
@@ -285,20 +315,22 @@
         <!-- TABLE 2: Other Markets -->
         <div class="chart-container">
             <div class="chart-heading" id="chartHeading2">Other Markets Chart - Oct 2026</div>
-            <table class="monthly-table">
-                <thead>
-                    <tr>
-                        <th style="width: 16%;">DATE</th>
-                        <th style="width: 21%;">BULANDSHAHR CITY</th>
-                        <th style="width: 21%;">ALIGARH CITY</th>
-                        <th style="width: 21%;">NOIDA NCR</th>
-                        <th style="width: 21%;">MATHURA KING</th>
-                    </tr>
-                </thead>
-                <tbody id="monthlyChartBody2">
-                    <tr><td colspan="5">Loading chart...</td></tr>
-                </tbody>
-            </table>
+            <div class="table-scroll-container">
+                <table class="monthly-table">
+                    <thead>
+                        <tr>
+                            <th>DATE</th>
+                            <th>BULANDSHAHR CITY</th>
+                            <th>ALIGARH CITY</th>
+                            <th>NOIDA NCR</th>
+                            <th>MATHURA KING</th>
+                        </tr>
+                    </thead>
+                    <tbody id="monthlyChartBody2">
+                        <tr><td colspan="5">Loading chart...</td></tr>
+                    </tbody>
+                </table>
+            </div>
             
             <div class="month-buttons">
                 <button class="month-btn" id="prevBtn2" onclick="changeMonth(-1)">⬅️ Sep 2026</button>
@@ -389,30 +421,20 @@
         return str;
     }
 
-    // Live result sync with Wait spinner or score
-    const resultsRef = ref(db, 'results');
-    onValue(resultsRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            for (const game in data) {
-                const scoreBox = document.getElementById(`score-${game}`);
-                if (scoreBox) {
-                    let rawVal = data[game].score;
-                    if (!rawVal || rawVal === '--' || rawVal === 'Wait...') {
-                        scoreBox.innerHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
-                    } else {
-                        let str = String(rawVal).trim();
-                        if (str === '0' || str === '100') str = '00';
-                        else if (str.length === 1) str = '0' + str;
-                        scoreBox.innerHTML = str;
-                        scoreBox.className = "score-box";
-                    }
-                }
-            }
-        }
-    });
+    const marketKeyMap = {
+        'BULANDSHAHR_CITY': 'BULANDSHAHR CITY',
+        'ALIGARH_CITY': 'ALIGARH CITY',
+        'NOIDA_NCR': 'NOIDA NCR',
+        'DELHI_BAZAR': 'DELHI BAZAR',
+        'SHREE_GANESH': 'SHREE GANESH',
+        'FARIDABAD': 'FARIDABAD',
+        'MATHURA_KING': 'MATHURA KING',
+        'GHAZIABAD': 'GHAZIABAD',
+        'GALI': 'GALI',
+        'DISAWAR': 'DISAWAR'
+    };
 
-    // Load Chart Data
+    // Load Chart Data & Live Results directly from Oct 2026 Database
     window.loadChartData = function() {
         const currentMonthName = months[currentMonthIndex];
         document.getElementById('chartHeading1').innerText = `Main Result Chart - ${currentMonthName} 2026`;
@@ -420,13 +442,10 @@
 
         let prevIndex = (currentMonthIndex - 1 + 12) % 12;
         let nextIndex = (currentMonthIndex + 1) % 12;
-        let btnTextPrev = `⬅️ ${months[prevIndex]} 2026`;
-        let btnTextNext = `${months[nextIndex]} 2026 ➡️`;
-
-        document.getElementById('prevBtn1').innerText = btnTextPrev;
-        document.getElementById('nextBtn1').innerText = btnTextNext;
-        document.getElementById('prevBtn2').innerText = btnTextPrev;
-        document.getElementById('nextBtn2').innerText = btnTextNext;
+        document.getElementById('prevBtn1').innerText = `⬅️ ${months[prevIndex]} 2026`;
+        document.getElementById('nextBtn1').innerText = `${months[nextIndex]} 2026 ➡️`;
+        document.getElementById('prevBtn2').innerText = `⬅️ ${months[prevIndex]} 2026`;
+        document.getElementById('nextBtn2').innerText = `${months[nextIndex]} 2026 ➡️`;
         
         const chartRef = ref(db, `yearly_charts_2026/${currentMonthName}`);
         onValue(chartRef, (snapshot) => {
@@ -465,6 +484,44 @@
                         </tr>
                     `;
                 });
+
+                // Populate Live Results for Oct 14 (date '14') and Oct 15 (date '15') from database
+                if (currentMonthName === 'Oct') {
+                    const day14 = chartData['14'] || chartData['14'];
+                    const day15 = chartData['15'] || chartData['15'];
+
+                    for (const gameKey in marketKeyMap) {
+                        const mName = marketKeyMap[gameKey];
+                        
+                        // 14th Oct result
+                        const box14 = document.getElementById(`live-14-${gameKey}`);
+                        if (box14) {
+                            let val14 = day14 ? day14[mName] : '--';
+                            if (!val14 || val14 === '--') box14.innerText = '--';
+                            else {
+                                let str14 = String(val14).trim();
+                                if (str14.length === 1) str14 = '0' + str14;
+                                box14.innerText = str14;
+                            }
+                        }
+
+                        // 15th Oct result (Live)
+                        const box15 = document.getElementById(`live-15-${gameKey}`);
+                        if (box15) {
+                            let val15 = day15 ? day15[mName] : '--';
+                            if (!val15 || val15 === '--' || val15 === 'Wait...') {
+                                box15.innerHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
+                                box15.className = "";
+                            } else {
+                                let str15 = String(val15).trim();
+                                if (str15.length === 1) str15 = '0' + str15;
+                                box15.innerHTML = str15;
+                                box15.className = "score-box";
+                            }
+                        }
+                    }
+                }
+
             } else {
                 tbody1.innerHTML = `<tr><td colspan="7">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
                 tbody2.innerHTML = `<tr><td colspan="5">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
