@@ -277,16 +277,16 @@
         
         .table-scroll-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-        /* FIXED WIDTH BASED ON 'DATE' HEADING WORD */
-        .monthly-table { width: 100%; min-width: 580px; border-collapse: collapse; text-align: center; font-size: 12px; table-layout: fixed; }
+        /* UNIFORM TABLE WIDTHS FOR EXACT MATCHING */
+        .monthly-table { width: 100%; min-width: 520px; border-collapse: collapse; text-align: center; font-size: 12px; table-layout: fixed; }
         .monthly-table th, .monthly-table td { padding: 8px 4px; border: 1px solid #334155; font-weight: 600; color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .monthly-table th { background-color: #0f172a; color: #38bdf8; border: 1px solid #334155; font-size: 10px; text-transform: uppercase; }
         .monthly-table tr:nth-child(even) { background-color: #0f172a; }
         
-        /* Date Column: Sized precisely to fit the word 'DATE' comfortably */
+        /* Strict Date Column Width (Exact fit for digits like 01, 02) */
         .monthly-table th:first-child, .monthly-table td:first-child {
-            width: 68px !important;
-            min-width: 68px !important;
+            width: 42px !important;
+            min-width: 42px !important;
             position: sticky;
             left: 0;
             background-color: #0f172a;
@@ -298,16 +298,10 @@
             z-index: 3;
         }
 
-        /* Table 1: Remaining width divided equally among 6 market columns */
-        .monthly-table.table-7col th:not(:first-child), 
-        .monthly-table.table-7col td:not(:first-child) { 
-            width: calc((100% - 68px) / 6); 
-        }
-
-        /* Table 2: Remaining width divided equally among 4 market columns */
-        .monthly-table.table-5col th:not(:first-child), 
-        .monthly-table.table-5col td:not(:first-child) { 
-            width: calc((100% - 68px) / 4); 
+        /* Both tables share the exact same market column width layout based on 6 columns reference */
+        .monthly-table th:not(:first-child), 
+        .monthly-table td:not(:first-child) { 
+            width: calc((100% - 42px) / 6); 
         }
 
         .highlight-digit { background-color: #78350f !important; color: #fde047 !important; font-weight: bold; display: inline-block; padding: 2px 4px; border-radius: 4px; }
@@ -427,7 +421,7 @@
             </div>
         </div>
 
-        <div class="chart-container">
+      <div class="chart-container">
             <div class="chart-heading" id="chartHeading2">Other Markets Chart - Oct 2026</div>
             <div class="table-scroll-container">
                 <table class="monthly-table table-5col">
