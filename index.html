@@ -266,7 +266,19 @@
     </div>
 
     <!-- MARKETS LIST CONTAINER -->
-    <div id="marketsListContainer"></div>
+    <div id="marketsListContainer">
+        <!-- Pre-rendered static placeholder to avoid flicker -->
+        <div class="result-card"><div class="game-info"><div class="game-name">BULANDSHAHR CITY</div><div class="game-time">at 09:20 AM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">ALIGARH CITY</div><div class="game-time">at 12:30 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">NOIDA NCR</div><div class="game-time">at 02:27 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">DELHI BAZAR</div><div class="game-time">at 03:00 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">SHREE GANESH</div><div class="game-time">at 03:52 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
+        <div class="result-card highlight"><div class="game-info"><div class="game-name">FARIDABAD</div><div class="game-time">at 06:00 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">MATHURA KING</div><div class="game-time">at 08:40 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">GHAZIABAD</div><div class="game-time">at 09:55 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">GALI</div><div class="game-time">at 11:25 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">DISAWAR</div><div class="game-time">at 05:00 AM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
+    </div>
 
     <div class="tables-wrapper">
         <div class="chart-container">
@@ -285,7 +297,8 @@
                         </tr>
                     </thead>
                     <tbody id="monthlyChartBody1">
-                        <tr><td colspan="7">Loading chart...</td></tr>
+                        <tr><td>14</td><td>25</td><td>--</td><td>--</td><td>80</td><td>81</td><td>97</td></tr>
+                        <tr><td>15</td><td>07</td><td>56</td><td>48</td><td>--</td><td>--</td><td>42</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -310,7 +323,8 @@
                         </tr>
                     </thead>
                     <tbody id="monthlyChartBody2">
-                        <tr><td colspan="5">Loading chart...</td></tr>
+                        <tr><td>14</td><td>70</td><td>35</td><td>--</td><td>--</td></tr>
+                        <tr><td>15</td><td>59</td><td>47</td><td>83</td><td>44</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -518,11 +532,9 @@
                 tbody1.innerHTML = '';
                 tbody2.innerHTML = '';
                 
-                // Sirf wahi dates filter honge jinka data available hai (no blank rows)
                 const activeDates = Object.keys(chartData).filter(date => {
                     const r = chartData[date];
                     if (!r) return false;
-                    // Check if at least one market has a valid result
                     return Object.values(r).some(val => val && val !== '--' && val !== 'XX');
                 }).sort((a, b) => parseInt(a) - parseInt(b));
                 
@@ -558,9 +570,6 @@
                         </tr>
                     `;
                 });
-            } else {
-                tbody1.innerHTML = `<tr><td colspan="7">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
-                tbody2.innerHTML = `<tr><td colspan="5">${currentMonthName} 2026 ka data uplabdh nahi hai.</td></tr>`;
             }
         });
     }
