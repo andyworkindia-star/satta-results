@@ -83,81 +83,88 @@
         }
         .download-btn:hover { background: #059669; }
 
-        /* FLOATING / STICKY MOVING BANNER (Stays on screen as user scrolls) */
-        .floating-banner {
-            position: sticky;
-            top: 10px;
-            z-index: 999;
-            background: #fffdf5;
-            color: #2b2b2b;
-            margin: 10px 12px;
-            padding: 14px;
-            border-radius: 12px;
-            border: 2px solid #f59e0b;
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
-        }
-        .khaiwal-header {
-            text-align: center;
-            font-size: 14px;
+        /* FLOATING CORNER BUTTON (Opens popup on click) */
+        .floating-app-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 2px solid #34d399;
             font-weight: 700;
-            color: #78350f;
-            margin-bottom: 8px;
+            font-size: 13px;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+            cursor: pointer;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: pulse-glow 2s infinite;
         }
+        @keyframes pulse-glow {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Khaiwal Table inside Modal */
         .khaiwal-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 10px;
-            background: #ffffff;
+            margin-bottom: 12px;
+            background: #0f172a;
             border-radius: 8px;
             overflow: hidden;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #334155;
         }
         .khaiwal-table th, .khaiwal-table td {
-            padding: 6px 10px;
+            padding: 8px 12px;
             font-size: 12px;
             font-weight: 600;
-            border-bottom: 1px solid #f3f4f6;
-            color: #1f2937;
+            border-bottom: 1px solid #1e293b;
+            color: #e2e8f0;
             text-align: left;
         }
         .khaiwal-table td:last-child {
             text-align: right;
-            color: #2563eb;
+            color: #38bdf8;
         }
         .rate-box-row {
             display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
+            gap: 10px;
+            margin-bottom: 12px;
         }
         .rate-card {
             flex: 1;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            padding: 8px;
-            border-radius: 6px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            padding: 10px;
+            border-radius: 8px;
             text-align: center;
             font-size: 12px;
             font-weight: 700;
-            color: #78350f;
+            color: #fde047;
         }
         .khaiwal-footer-text {
             text-align: center;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
-            color: #b45309;
-            margin-bottom: 8px;
-            line-height: 1.4;
+            color: #fbbf24;
+            margin-bottom: 14px;
+            line-height: 1.5;
         }
         .khaiwal-action-btn {
             background: #10b981;
             color: white;
-            padding: 10px;
-            border-radius: 6px;
+            padding: 12px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
             display: block;
             text-align: center;
-            font-size: 12px;
+            font-size: 13px;
             box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
             transition: background 0.2s;
         }
@@ -303,22 +310,22 @@
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 10000;
             padding: 15px;
         }
         .modal-content {
             background: #1e293b;
             color: #f8fafc;
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             max-height: 85vh;
-            border-radius: 10px;
-            padding: 22px;
+            border-radius: 12px;
+            padding: 20px;
             overflow-y: auto;
             border: 1px solid #475569;
             position: relative;
         }
-        .modal-header { font-size: 16px; font-weight: 700; color: #60a5fa; margin-bottom: 12px; border-bottom: 1px solid #334155; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .modal-header { font-size: 14px; font-weight: 700; color: #60a5fa; margin-bottom: 12px; border-bottom: 1px solid #334155; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center; text-align: center; }
         .close-btn { background: #ef4444; color: white; border: none; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .modal-body { font-size: 12px; line-height: 1.6; color: #cbd5e1; }
         .modal-body h3 { font-size: 13px; font-weight: 700; color: #f8fafc; margin-top: 10px; margin-bottom: 3px; }
@@ -335,6 +342,11 @@
 </head>
 <body>
 
+<!-- FLOATING CORNER BUTTON -->
+<button class="floating-app-btn" onclick="openAppModal()">
+    📥 Download GaliDisawarKingg App
+</button>
+
 <div class="container">
     <header class="app-header">
         <button class="admin-trigger-btn" onclick="openAdminModal()">🔐 Admin Login</button>
@@ -342,37 +354,6 @@
         <p style="font-size: 12px; margin-top: 5px; color: #93c5fd;">Hamari Official Android App download karein!</p>
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
     </header>
-
-    <!-- FLOATING / STICKY GAME PLAY & TIMINGS PANEL (Moves with screen)[cite: 14] -->
-    <div class="floating-banner">
-        <div class="khaiwal-header">✨ Download GaliDisawarKingg App & Game Play ✨</div>
-        
-        <table class="khaiwal-table">
-            <tr><td>BULANDSHAHR CITY</td><td>09:00 AM</td></tr>
-            <tr><td>ALIGARH CITY</td><td>11:45 AM</td></tr>
-            <tr><td>NOIDA NCR</td><td>01:45 PM</td></tr>
-            <tr><td>DELHI BAZAR</td><td>02:50 PM</td></tr>
-            <tr><td>SHREE GANESH</td><td>03:50 PM</td></tr>
-            <tr><td>FARIDABAD</td><td>05:50 PM</td></tr>
-            <tr><td>MATHURA KING</td><td>08:20 PM</td></tr>
-            <tr><td>GHAZIABAD</td><td>09:30 PM</td></tr>
-            <tr><td>GALI</td><td>11:20 PM</td></tr>
-            <tr><td>DISAWAR</td><td>04:30 AM</td></tr>
-        </table>
-
-        <div class="rate-box-row">
-            <div class="rate-card">🎯 जोड़ी रेट: 10 के 900</div>
-            <div class="rate-card">🎯 हरूफ रेट: 10 के 90</div>
-        </div>
-
-        <div class="khaiwal-footer-text">
-            डाउनलोड बटन पर क्लिक करें, और घर बैठे सुरक्षित और पूर्ण विश्वास से गेम प्ले करें |
-        </div>
-
-        <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="khaiwal-action-btn">
-            📥 Download GaliDisawarKingg App
-        </a>
-    </div>
 
     <div class="update-bar">
         <strong>DISCLAIMER:</strong> GaliDisawarKing is an independent information platform. All content is provided for general informational purposes only. Users are responsible for verifying information and complying with applicable laws. We are not affiliated with third parties unless expressly stated. <a onclick="openTermsModal()">Read More...</a>
@@ -456,6 +437,43 @@
                 <button class="month-btn" id="prevBtn2" onclick="changeMonth(-1)">⬅️ Sep 2026</button>
                 <button class="month-btn" id="nextBtn2" onclick="changeMonth(1)">Nov 2026 ➡️</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- APP DOWNLOAD POPUP MODAL -->
+<div id="appDownloadModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span>✨ Gali Disawar King Game Time & Rates ✨</span>
+            <button class="close-btn" onclick="closeAppModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <table class="khaiwal-table">
+                <tr><td>BULANDSHAHR CITY</td><td>09:00 AM</td></tr>
+                <tr><td>ALIGARH CITY</td><td>11:45 AM</td></tr>
+                <tr><td>NOIDA NCR</td><td>01:45 PM</td></tr>
+                <tr><td>DELHI BAZAR</td><td>02:50 PM</td></tr>
+                <tr><td>SHREE GANESH</td><td>03:50 PM</td></tr>
+                <tr><td>FARIDABAD</td><td>05:50 PM</td></tr>
+                <tr><td>MATHURA KING</td><td>08:20 PM</td></tr>
+                <tr><td>GHAZIABAD</td><td>09:30 PM</td></tr>
+                <tr><td>GALI</td><td>11:20 PM</td></tr>
+                <tr><td>DISAWAR</td><td>04:30 AM</td></tr>
+            </table>
+
+            <div class="rate-box-row">
+                <div class="rate-card">🎯 जोड़ी रेट: 10 के 900</div>
+                <div class="rate-card">🎯 हरूफ रेट: 10 के 90</div>
+            </div>
+
+            <div class="khaiwal-footer-text">
+                डाउनलोड बटन पर क्लिक करें, और घर बैठे सुरक्षित और पूर्ण विश्वास से गेम प्ले करें |
+            </div>
+
+            <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="khaiwal-action-btn">
+                📥 Download GaliDisawarKingg App
+            </a>
         </div>
     </div>
 </div>
@@ -723,6 +741,10 @@
     }
 
     window.loadChartData();
+
+    // Modal Control Functions
+    window.openAppModal = () => document.getElementById('appDownloadModal').style.display = 'flex';
+    window.closeAppModal = () => document.getElementById('appDownloadModal').style.display = 'none';
 
     window.openTermsModal = () => document.getElementById('termsModal').style.display = 'flex';
     window.closeTermsModal = () => document.getElementById('termsModal').style.display = 'none';
