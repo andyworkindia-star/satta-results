@@ -30,7 +30,25 @@
             border-right: 1px solid #1e293b;
         }
 
-        @media (min-width: 768px) {
+        /* DESKTOP AUTO FIT ADJUSTMENT */
+        @media (min-width: 1024px) {
+            .container { 
+                max-width: 1200px; 
+                border-radius: 12px; 
+                min-height: auto; 
+                margin: 20px auto; 
+                border: 1px solid #334155; 
+            }
+            .monthly-table {
+                width: 100% !important;
+            }
+            .monthly-table th:not(:first-child), 
+            .monthly-table td:not(:first-child) { 
+                width: auto !important; /* Desktop par columns apne aap poori screen par fail jayenge */
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
             body { padding: 20px 10px; background: radial-gradient(circle at top, #1e293b 0%, #060913 100%); }
             .container { border-radius: 12px; min-height: auto; margin-bottom: 30px; border: 1px solid #334155; }
         }
@@ -277,8 +295,8 @@
         
         .table-scroll-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-        /* EXACT FIXED WIDTHS FOR IDENTICAL MARKET COLUMN SIZES ACROSS BOTH TABLES */
-        .monthly-table { border-collapse: collapse; text-align: center; font-size: 12px; table-layout: fixed; }
+        /* MOBILE VIEW FIXED WIDTHS, DESKTOP AUTO EXPAND */
+        .monthly-table { border-collapse: collapse; text-align: center; font-size: 12px; table-layout: fixed; width: 100%; }
         .monthly-table th, .monthly-table td { padding: 8px 4px; border: 1px solid #334155; font-weight: 600; color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .monthly-table th { background-color: #0f172a; color: #38bdf8; border: 1px solid #334155; font-size: 10px; text-transform: uppercase; }
         .monthly-table tr:nth-child(even) { background-color: #0f172a; }
@@ -298,11 +316,11 @@
             z-index: 3;
         }
 
-        /* Fixed identical width for every market column in both tables so they match perfectly */
+        /* Market Columns Width for Mobile */
         .monthly-table th:not(:first-child), 
         .monthly-table td:not(:first-child) { 
-            width: 72px !important;
-            min-width: 72px !important;
+            width: 72px;
+            min-width: 72px;
         }
 
         .highlight-digit { background-color: #78350f !important; color: #fde047 !important; font-weight: bold; display: inline-block; padding: 2px 4px; border-radius: 4px; }
@@ -389,7 +407,7 @@
         <div class="chart-container">
             <div class="chart-heading" id="chartHeading1">Main Result Chart - Oct 2026</div>
             <div class="table-scroll-container">
-                <table class="monthly-table" style="min-width: 330px;">
+                <table class="monthly-table">
                     <thead>
                         <tr>
                             <th>DATE</th>
@@ -415,7 +433,7 @@
         <div class="chart-container">
             <div class="chart-heading" id="chartHeading2">Other Markets Chart - Oct 2026</div>
             <div class="table-scroll-container">
-                <table class="monthly-table" style="min-width: 474px;">
+                <table class="monthly-table">
                     <thead>
                         <tr>
                             <th>DATE</th>
