@@ -9,6 +9,7 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
         
+        /* DATA COPY & SELECTION PROTECTION */
         body { 
             background: #060913; 
             color: #e2e8f0; 
@@ -16,6 +17,10 @@
             justify-content: center; 
             min-height: 100vh; 
             padding: 0; 
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none;    /* Firefox */
+            -ms-user-select: none;     /* IE/Edge */
+            user-select: none;         /* Standard */
         }
         
         .container { 
@@ -405,7 +410,6 @@
     </div>
 
     <div id="marketsListContainer">
-        <!-- Instant Default skeleton placeholder so no empty lag is felt -->
         <div class="result-card"><div class="game-info"><div class="game-name">BULANDSHAHR CITY</div><div class="game-time">at 09:00 AM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
         <div class="result-card"><div class="game-info"><div class="game-name">ALIGARH CITY</div><div class="game-time">at 11:45 AM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
         <div class="result-card"><div class="game-info"><div class="game-name">NOIDA NCR</div><div class="game-time">at 01:45 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
@@ -606,6 +610,18 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    // ANTI-THEFT / COPY BLOCK SCRIPT
+    document.addEventListener('contextmenu', event => event.preventDefault()); // Right-click disable
+    document.addEventListener('keydown', event => {
+        if (event.ctrlKey && (event.key === 'c' || event.key === 'C' || event.key === 'u' || event.key === 'U' || event.key === 's' || event.key === 'S' || event.key === 'p' || event.key === 'P')) {
+            event.preventDefault();
+            alert("Security Alert: Copying or inspecting source code is restricted!");
+        }
+        if (event.key === 'F12') {
+            event.preventDefault();
+        }
+    });
 
     const firebaseConfig = {
         apiKey: "AIzaSyADYsúp73b8lC3kgH6aya_XnisMP1HztcU",
