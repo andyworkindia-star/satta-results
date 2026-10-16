@@ -203,48 +203,51 @@
             letter-spacing: 0.3px; 
         }
         
+        /* EXACT PADDING MATCH WITH .result-card (margin: 8px 12px, padding: 12px 18px) */
         .section-title { 
             background-color: #1e293b; 
             color: #38bdf8; 
+            margin: 8px 12px 0 12px;
             padding: 12px 18px; 
             font-weight: 700; 
             font-size: 12px; 
             letter-spacing: 0.5px; 
             text-transform: uppercase; 
             border-left: 4px solid #3b82f6; 
-            margin-top: 12px; 
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
         }
         
-        /* PERFECT ALIGNMENT FIX FOR DATES OVER THE SCORE BOXES */
+        /* EXACT WIDTH MATCH WITH .game-scores (width: 140px, gap: 10px, score-box width: 65px each) */
         .section-days { 
             display: flex; 
             gap: 10px; 
             font-size: 11px; 
             font-weight: 700; 
             color: #93c5fd; 
-            width: 138px; 
+            width: 140px; 
             justify-content: flex-end; 
-            padding-right: 0px; 
         }
         .section-days span { 
-            width: 60px; 
+            width: 65px; 
             text-align: center; 
             display: inline-block; 
         }
         
         .result-card { 
             background: #1e293b; 
-            margin: 8px 12px; 
+            margin: 0 12px 8px 12px; 
             padding: 12px 18px; 
-            border-radius: 8px; 
+            border-radius: 0 0 8px 8px; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.2); 
             border: 1px solid #334155; 
+            border-top: none;
         }
         .result-card.highlight { background: linear-gradient(135deg, #78350f, #1e293b); border-color: #d97706; }
         
@@ -252,7 +255,7 @@
         .game-name { font-weight: 700; font-size: 14px; color: #f8fafc; }
         .game-time { font-size: 11px; color: #94a3b8; margin-top: 2px; }
         
-        .game-scores { display: flex; gap: 10px; align-items: center; width: 138px; justify-content: flex-end; }
+        .game-scores { display: flex; gap: 10px; align-items: center; width: 140px; justify-content: flex-end; }
         
         .score-box { 
             background: #0f172a; 
@@ -261,7 +264,7 @@
             font-size: 15px; 
             font-weight: 700; 
             color: #38bdf8; 
-            width: 60px; 
+            width: 65px; 
             height: 36px;
             display: flex;
             align-items: center;
@@ -279,7 +282,7 @@
             justify-content: center;
             gap: 4px; 
             background: #451a03; 
-            width: 60px; 
+            width: 65px; 
             height: 36px;
             border-radius: 6px; 
             border: 1px solid #b45309; 
