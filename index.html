@@ -30,7 +30,6 @@
             border-right: 1px solid #1e293b;
         }
 
-        /* DESKTOP AUTO FIT ADJUSTMENT */
         @media (min-width: 1024px) {
             .container { 
                 max-width: 1200px; 
@@ -41,10 +40,6 @@
             }
             .monthly-table {
                 width: 100% !important;
-            }
-            .monthly-table th:not(:first-child), 
-            .monthly-table td:not(:first-child) { 
-                width: auto !important; /* Desktop par columns apne aap poori screen par fail jayenge */
             }
         }
 
@@ -224,7 +219,7 @@
             justify-content: space-between; 
             align-items: center; 
         }
-        .section-days { display: flex; gap: 15px; font-size: 11px; font-weight: 600; color: #93c5fd; width: 120px; justify-content: flex-end; padding-right: 4px; }
+        .section-days { display: flex; gap: 15px; font-size: 11px; font-weight: 600; color: #93c5fd; width: 140px; justify-content: flex-end; padding-right: 4px; }
         
         .result-card { 
             background: #1e293b; 
@@ -243,7 +238,8 @@
         .game-name { font-weight: 700; font-size: 14px; color: #f8fafc; }
         .game-time { font-size: 11px; color: #94a3b8; margin-top: 2px; }
         
-        .game-scores { display: flex; gap: 10px; align-items: center; width: 120px; justify-content: flex-end; }
+        /* Fixed width for game scores container to prevent vertical wrapping */
+        .game-scores { display: flex; gap: 10px; align-items: center; width: 140px; justify-content: flex-end; }
         
         .score-box { 
             background: #0f172a; 
@@ -295,13 +291,11 @@
         
         .table-scroll-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
-        /* MOBILE VIEW FIXED WIDTHS, DESKTOP AUTO EXPAND */
         .monthly-table { border-collapse: collapse; text-align: center; font-size: 12px; table-layout: fixed; width: 100%; }
         .monthly-table th, .monthly-table td { padding: 8px 4px; border: 1px solid #334155; font-weight: 600; color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .monthly-table th { background-color: #0f172a; color: #38bdf8; border: 1px solid #334155; font-size: 10px; text-transform: uppercase; }
         .monthly-table tr:nth-child(even) { background-color: #0f172a; }
         
-        /* Strict Date Column Width */
         .monthly-table th:first-child, .monthly-table td:first-child {
             width: 42px !important;
             min-width: 42px !important;
@@ -316,7 +310,6 @@
             z-index: 3;
         }
 
-        /* Market Columns Width for Mobile */
         .monthly-table th:not(:first-child), 
         .monthly-table td:not(:first-child) { 
             width: 72px;
@@ -329,7 +322,6 @@
         .month-btn { flex: 1; background-color: #0f172a; color: #93c5fd; border: 1px solid #334155; padding: 10px; border-radius: 6px; font-size: 12px; font-weight: 600; text-align: center; cursor: pointer; transition: background 0.2s; }
         .month-btn:hover { background-color: #2563eb; color: #fff; }
 
-        /* Modal Overlays */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
