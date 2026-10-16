@@ -203,7 +203,6 @@
             letter-spacing: 0.3px; 
         }
         
-        /* EXACT PADDING MATCH WITH .result-card (margin: 8px 12px, padding: 12px 18px) */
         .section-title { 
             background-color: #1e293b; 
             color: #38bdf8; 
@@ -221,7 +220,6 @@
             align-items: center; 
         }
         
-        /* EXACT WIDTH MATCH WITH .game-scores (width: 140px, gap: 10px, score-box width: 65px each) */
         .section-days { 
             display: flex; 
             gap: 10px; 
@@ -326,10 +324,11 @@
             z-index: 3;
         }
 
+        /* REDUCED MARKET COLUMN WIDTH FROM 72px TO 58px */
         .monthly-table th:not(:first-child), 
         .monthly-table td:not(:first-child) { 
-            width: 72px;
-            min-width: 72px;
+            width: 58px !important;
+            min-width: 58px !important;
         }
 
         .highlight-digit { background-color: #78350f !important; color: #fde047 !important; font-weight: bold; display: inline-block; padding: 2px 4px; border-radius: 4px; }
