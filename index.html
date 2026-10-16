@@ -368,29 +368,20 @@
         <strong>DISCLAIMER:</strong> GaliDisawarKing is an independent information platform. All content is provided for general informational purposes only. Users are responsible for verifying information and complying with applicable laws. We are not affiliated with third parties unless expressly stated. <a onclick="openTermsModal()">Read More...</a>
     </div>
 
-    <div class="date-header">
-        ⚡ Fast Results of October 14, 2026 & October 15, 2026
+    <div class="date-header" id="topDateHeader">
+        ⚡ Fast Results
     </div>
 
     <div class="section-title">
         <span>Live Results</span>
-        <div class="section-days">
-            <span>WED. 14TH</span>
-            <span>THU. 15TH</span>
+        <div class="section-days" id="liveSectionDays">
+            <span>YESTERDAY</span>
+            <span>TODAY</span>
         </div>
     </div>
 
     <div id="marketsListContainer">
-        <div class="result-card"><div class="game-info"><div class="game-name">BULANDSHAHR CITY</div><div class="game-time">at 09:00 AM</div></div><div class="game-scores"><div class="score-box">70</div><div class="score-box">59</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">ALIGARH CITY</div><div class="game-time">at 11:45 AM</div></div><div class="game-scores"><div class="score-box">35</div><div class="score-box">47</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">NOIDA NCR</div><div class="game-time">at 01:45 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">83</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">DELHI BAZAR</div><div class="game-time">at 02:50 PM</div></div><div class="game-scores"><div class="score-box">25</div><div class="score-box">07</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">SHREE GANESH</div><div class="game-time">at 03:50 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">56</div></div></div>
-        <div class="result-card highlight"><div class="game-info"><div class="game-name">FARIDABAD</div><div class="game-time">at 05:50 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">48</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">MATHURA KING</div><div class="game-time">at 08:20 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">44</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">GHAZIABAD</div><div class="game-time">at 09:30 PM</div></div><div class="game-scores"><div class="score-box">80</div><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">GALI</div><div class="game-time">at 11:20 PM</div></div><div class="game-scores"><div class="score-box">81</div><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">DISAWAR</div><div class="game-time">at 04:30 AM</div></div><div class="game-scores"><div class="score-box">97</div><div class="score-box">42</div></div></div>
+        <!-- Live markets injected dynamically -->
     </div>
 
     <div class="tables-wrapper">
@@ -409,8 +400,7 @@
                         </tr>
                     </thead>
                     <tbody id="monthlyChartBody1">
-                        <tr><td>14</td><td>--</td><td>80</td><td>81</td><td>97</td></tr>
-                        <tr><td>15</td><td>48</td><td>--</td><td>--</td><td>42</td></tr>
+                        <!-- Dynamic rows -->
                     </tbody>
                 </table>
             </div>
@@ -438,8 +428,7 @@
                         </tr>
                     </thead>
                     <tbody id="monthlyChartBody2">
-                        <tr><td>14</td><td>25</td><td>--</td><td>70</td><td>35</td><td>--</td><td>--</td></tr>
-                        <tr><td>15</td><td>07</td><td>56</td><td>59</td><td>47</td><td>83</td><td>44</td></tr>
+                        <!-- Dynamic rows -->
                     </tbody>
                 </table>
             </div>
@@ -560,8 +549,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Date (Jaise: 15)</label>
-                    <input type="text" id="resultDateInput" value="15" placeholder="Date daalein">
+                    <label>Date (Jaise: 16)</label>
+                    <input type="text" id="resultDateInput" value="16" placeholder="Date daalein">
                 </div>
 
                 <div class="form-group">
@@ -633,30 +622,32 @@
         return str;
     }
 
-    function renderMarketsUI(customTimes = {}, liveData14 = {}, liveData15 = {}) {
+    const todayDateNum = 16;
+    const yestDateNum = 15;
+
+    function renderMarketsUI(customTimes = {}, liveDataYest = {}, liveDataToday = {}) {
         const container = document.getElementById('marketsListContainer');
         container.innerHTML = '';
 
+        document.getElementById('topDateHeader').innerText = `⚡ Fast Results of October ${yestDateNum}, 2026 & October ${todayDateNum}, 2026`;
+        document.getElementById('liveSectionDays').innerHTML = `<span>OCT. ${yestDateNum}</span><span>OCT. ${todayDateNum}</span>`;
+
         defaultMarkets.forEach(market => {
             const mTime = customTimes[market.id] || market.time;
-            const val14 = liveData14[market.name] || '--';
-            const val15 = liveData15[market.name] || '--';
+            const valYest = liveDataYest[market.name] || '--';
+            const valToday = liveDataToday[market.name] || '--';
 
-            let score15HTML = '';
-            if (!val15 || val15 === '--' || val15 === 'Wait...') {
-                if(market.id === 'GHAZIABAD' || market.id === 'GALI') {
-                    score15HTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
-                } else {
-                    score15HTML = `<div class="score-box">--</div>`;
-                }
+            let scoreTodayHTML = '';
+            if (!valToday || valToday === '--' || valToday === 'Wait...') {
+                scoreTodayHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
             } else {
-                let str15 = String(val15).trim();
-                if (str15.length === 1) str15 = '0' + str15;
-                score15HTML = `<div class="score-box">${str15}</div>`;
+                let strToday = String(valToday).trim();
+                if (strToday.length === 1) strToday = '0' + strToday;
+                scoreTodayHTML = `<div class="score-box">${strToday}</div>`;
             }
 
-            let str14 = (!val14 || val14 === '--') ? '--' : String(val14).trim();
-            if (str14.length === 1) str14 = '0' + str14;
+            let strYest = (!valYest || valYest === '--') ? '--' : String(valYest).trim();
+            if (strYest.length === 1) strYest = '0' + strYest;
 
             container.innerHTML += `
                 <div class="result-card ${market.highlight ? 'highlight' : ''}">
@@ -665,8 +656,8 @@
                         <div class="game-time">at ${mTime}</div>
                     </div>
                     <div class="game-scores">
-                        <div class="score-box">${str14}</div>
-                        <div>${score15HTML}</div>
+                        <div class="score-box">${strYest}</div>
+                        <div>${scoreTodayHTML}</div>
                     </div>
                 </div>
             `;
@@ -677,7 +668,7 @@
         const timesData = snapshot.val() || {};
         onValue(ref(db, 'yearly_charts_2026/Oct'), (chartSnap) => {
             const octData = chartSnap.val() || {};
-            renderMarketsUI(timesData, octData['14'] || {}, octData['15'] || {});
+            renderMarketsUI(timesData, octData[String(yestDateNum)] || {}, octData[String(todayDateNum)] || {});
         });
     });
 
@@ -718,7 +709,6 @@
                     const r = chartData[date];
                     let dateStr = String(date).padStart(2, '0');
 
-                    // Table 1: FD, GZB, GALI, DS (4 games)
                     tbody1.innerHTML += `
                         <tr>
                             <td>${dateStr}</td>
@@ -729,7 +719,6 @@
                         </tr>
                     `;
 
-                    // Table 2: DB, SHG, BUL.CITY, ALI.CITY, NOIDA NCR, MATHURA KING (6 games)
                     tbody2.innerHTML += `
                         <tr>
                             <td>${dateStr}</td>
@@ -778,7 +767,7 @@
 
     window.updateMarketData = async function() {
         const gameKey = document.getElementById('gameName').value;
-        const targetDate = document.getElementById('resultDateInput').value.trim() || '15';
+        const targetDate = document.getElementById('resultDateInput').value.trim() || '16';
         const newScore = document.getElementById('resultScore').value.trim();
         const newTime = document.getElementById('gameTimeInput').value.trim();
 
