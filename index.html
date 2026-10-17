@@ -404,8 +404,8 @@
     <div class="section-title">
         <span>Live Results</span>
         <div class="section-days" id="liveSectionDays">
-            <span>OCT. 15</span>
             <span>OCT. 16</span>
+            <span>OCT. 17</span>
         </div>
     </div>
 
@@ -581,8 +581,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Date (Jaise: 16)</label>
-                    <input type="text" id="resultDateInput" value="16" placeholder="Date daalein">
+                    <label>Date (Jaise: 17)</label>
+                    <input type="text" id="resultDateInput" value="17" placeholder="Date daalein">
                 </div>
 
                 <div class="form-group">
@@ -666,8 +666,10 @@
         return str;
     }
 
-    const todayDateNum = 16;
-    const yestDateNum = 15;
+    // Dynamic automatic dates (Aaj ki aur Kal ki date)
+    const nowTime = new Date();
+    const todayDateNum = nowTime.getDate(); 
+    const yestDateNum = todayDateNum - 1;
 
     function renderMarketsUI(customTimes = {}, liveDataYest = {}, liveDataToday = {}) {
         const container = document.getElementById('marketsListContainer');
@@ -810,7 +812,7 @@
 
     window.updateMarketData = async function() {
         const gameKey = document.getElementById('gameName').value;
-        const targetDate = document.getElementById('resultDateInput').value.trim() || '16';
+        const targetDate = document.getElementById('resultDateInput').value.trim() || String(todayDateNum);
         const newScore = document.getElementById('resultScore').value.trim();
         const newTime = document.getElementById('gameTimeInput').value.trim();
 
