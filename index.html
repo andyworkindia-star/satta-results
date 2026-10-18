@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gali Disawar Kingg - Ultimate Gaming Portal</title>
+    <meta name="description" content="Gali Disawar Kingg - Fast results, monthly charts, and gaming portal for Faridabad, Ghaziabad, Gali, and Disawar.">
+    <meta name="keywords" content="Gali Disawar King, Satta result, Faridabad result, Ghaziabad result, Gali chart, Disawar chart">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
@@ -17,6 +19,7 @@
             justify-content: center; 
             min-height: 100vh; 
             padding: 0; 
+            padding-bottom: 70px; /* Neeche extra space taaki button content na chupaye */
             -webkit-user-select: none; /* Safari */
             -moz-user-select: none;    /* Firefox */
             -ms-user-select: none;     /* IE/Edge */
@@ -33,6 +36,7 @@
             flex-direction: column; 
             border-left: 1px solid #1e293b;
             border-right: 1px solid #1e293b;
+            padding-bottom: 40px;
         }
 
         @media (min-width: 1024px) {
@@ -101,10 +105,14 @@
         }
         .download-btn:hover { background: #059669; }
 
+        /* Floating Button ko thoda upar shift kiya gaya hai taaki content na chhupe */
         .floating-app-btn {
             position: fixed;
-            bottom: 25px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
+            left: 15px;
+            max-width: 400px;
+            margin: 0 auto;
             background: #10b981;
             color: white;
             padding: 12px 20px;
@@ -117,12 +125,13 @@
             z-index: 9999;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
             animation: pulse-glow 2s infinite;
         }
         @keyframes pulse-glow {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
@@ -389,7 +398,7 @@
     <header class="app-header">
         <button class="admin-trigger-btn" onclick="openAdminModal()">🔐 Admin Login</button>
         <h2>Gali Disawar Kingg</h2>
-        <p style="font-size: 12px; margin-top: 5px; color: #93c5fd;">Hamari Official Android App download karein!</p>
+        <p style="font-size: 12px; margin-top: 5px; color: #93c5fd; line-height: 1.4;">Hamar Android App Download Kren Aur Ghar Baithe Game Play Kre, Dosto ko Refer Karne Par Company ke Profit Ka 7% Commision Paayeen, Abhi Download Kre Aur Game Play kren aur Dosto ko Share kre.</p>
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
     </header>
 
