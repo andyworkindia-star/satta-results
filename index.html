@@ -727,7 +727,7 @@
 
     onValue(ref(db, 'market_times'), (snapshot) => {
         const timesData = snapshot.val() || {};
-        onValue(ref(db, 'yearly_charts_2026/Oct'), (chartSnap) => {
+        onValue(ref(db, 'MonthlyCharts/Oct 2026'), (chartSnap) => {
             const octData = chartSnap.val() || {};
             renderMarketsUI(timesData, octData[String(yestDateNum)] || {}, octData[String(todayDateNum)] || {});
         });
@@ -735,8 +735,9 @@
 
     window.loadChartData = function() {
         const currentMonthName = months[currentMonthIndex];
-        document.getElementById('chartHeading1').innerText = `Main Result Chart - ${currentMonthName} 2026`;
-        document.getElementById('chartHeading2').innerText = `Other Markets Chart - ${currentMonthName} 2026`;
+        const cacheKey = `${currentMonthName} 2026`;
+        document.getElementById('chartHeading1').innerText = `Main Result Chart - ${cacheKey}`;
+        document.getElementById('chartHeading2').innerText = `Other Markets Chart - ${cacheKey}`;
 
         let prevIndex = (currentMonthIndex - 1 + 12) % 12;
         let nextIndex = (currentMonthIndex + 1) % 12;
@@ -745,7 +746,7 @@
         document.getElementById('prevBtn2').innerText = `⬅️ ${months[prevIndex]} 2026`;
         document.getElementById('nextBtn2').innerText = `${months[nextIndex]} 2026 ➡️`;
         
-        onValue(ref(db, `yearly_charts_2026/${currentMonthName}`), (snapshot) => {
+        onValue(ref(db, `MonthlyCharts/${cacheKey}`), (snapshot) => {
             const chartData = snapshot.val();
             const tbody1 = document.getElementById('monthlyChartBody1');
             const tbody2 = document.getElementById('monthlyChartBody2');
@@ -792,6 +793,9 @@
                         </tr>
                     `;
                 });
+            } else {
+                tbody1.innerHTML = `<tr><td colspan="5">No Data Found</td></tr>`;
+                tbody2.innerHTML = `<tr><td colspan="7">No Data Found</td></tr>`;
             }
         });
     }
@@ -834,9 +838,11 @@
         try {
             const marketObj = defaultMarkets.find(m => m.id === gameKey);
             const mName = marketObj ? marketObj.name : gameKey;
+            const currentMonthName = months[currentMonthIndex];
+            const cacheKey = `${currentMonthName} 2026`;
 
             if(newScore) {
-                await set(ref(db, `yearly_charts_2026/Oct/${targetDate}/${mName}`), newScore);
+                await set(ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${mName}`), newScore);
             }
             if(newTime) {
                 await set(ref(db, `market_times/${gameKey}`), newTime);
@@ -888,7 +894,8 @@
                 });
 
                 for(let month in groupedData) {
-                    await set(ref(db, `yearly_charts_2026/${month}`), groupedData[month]);
+                    let fullMonthKey = `${month} 2026`;
+                    await set(ref(db, `MonthlyCharts/${fullMonthKey}`), groupedData[month]);
                 }
                 alert("Poora saal ka data successfully upload ho gaya!");
                 fileInput.value = '';
