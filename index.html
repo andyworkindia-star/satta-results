@@ -232,29 +232,16 @@
         }
         .result-card.highlight .score-box { background: #451a03; color: #fde047; border-color: rgba(180, 83, 9, 0.5); }
 
-        .wait-box { 
-            font-size: 10px; 
-            font-weight: 700; 
-            color: var(--neon-gold); 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            gap: 4px; 
-            background: rgba(69, 26, 3, 0.6); 
-            width: 68px; 
-            height: 38px;
-            border-radius: 8px; 
-            border: 1px solid rgba(180, 83, 9, 0.4); 
+        /* Skeleton Shimmer Loading Effect */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.2s infinite;
+            border-radius: 6px;
         }
-        .spinner {
-            width: 9px;
-            height: 9px;
-            border: 2px solid var(--neon-gold);
-            border-top: 2px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        .skeleton-box { width: 68px; height: 38px; display: inline-block; }
 
         .tables-wrapper { display: flex; flex-direction: column; gap: 16px; padding: 6px 12px; margin-top: 10px; }
 
@@ -427,16 +414,17 @@
     </div>
 
     <div id="marketsListContainer">
-        <div class="result-card"><div class="game-info"><div class="game-name">BULANDSHAHR CITY</div><div class="game-time">at 09:00 AM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">ALIGARH CITY</div><div class="game-time">at 11:45 AM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">NOIDA NCR</div><div class="game-time">at 01:45 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">DELHI BAZAR</div><div class="game-time">at 02:50 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">SHREE GANESH</div><div class="game-time">at 03:50 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
-        <div class="result-card highlight"><div class="game-info"><div class="game-name">FARIDABAD</div><div class="game-time">at 05:50 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">MATHURA KING</div><div class="game-time">at 08:20 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">GHAZIABAD</div><div class="game-time">at 09:30 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">GALI</div><div class="game-time">at 11:20 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">DISAWAR</div><div class="game-time">at 04:30 AM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box">--</div></div></div>
+        <!-- Professional Skeleton Loaders for Instant Feedback -->
+        <div class="result-card"><div class="game-info"><div class="game-name">BULANDSHAHR CITY</div><div class="game-time">at 09:00 AM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">ALIGARH CITY</div><div class="game-time">at 11:45 AM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">NOIDA NCR</div><div class="game-time">at 01:45 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">DELHI BAZAR</div><div class="game-time">at 02:50 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">SHREE GANESH</div><div class="game-time">at 03:50 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
+        <div class="result-card highlight"><div class="game-info"><div class="game-name">FARIDABAD</div><div class="game-time">at 05:50 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">MATHURA KING</div><div class="game-time">at 08:20 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">GHAZIABAD</div><div class="game-time">at 09:30 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">GALI</div><div class="game-time">at 11:20 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">DISAWAR</div><div class="game-time">at 04:30 AM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
     </div>
 
     <div class="tables-wrapper">
@@ -453,7 +441,9 @@
                             <th>DS</th>
                         </tr>
                     </thead>
-                    <tbody id="monthlyChartBody1"></tbody>
+                    <tbody id="monthlyChartBody1">
+                        <tr><td colspan="5" class="skeleton" style="height: 35px;"></td></tr>
+                    </tbody>
                 </table>
             </div>
             
@@ -478,7 +468,9 @@
                             <th>M-KING</th>
                         </tr>
                     </thead>
-                    <tbody id="monthlyChartBody2"></tbody>
+                    <tbody id="monthlyChartBody2">
+                        <tr><td colspan="7" class="skeleton" style="height: 35px;"></td></tr>
+                    </tbody>
                 </table>
             </div>
             
@@ -626,7 +618,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, onValue, set, enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => {
@@ -651,6 +643,13 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+
+    // Enable local caching for lightning fast instant loads on subsequent visits
+    try {
+        enableIndexedDbPersistence(db).catch((err) => {
+            console.log("Persistence already enabled or offline mode active.");
+        });
+    } catch(e) {}
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let currentMonthIndex = 9;
@@ -686,16 +685,13 @@
     const todayDateNum = nowTime.getDate(); 
     const yestDateNum = todayDateNum - 1;
 
-    // 1. Fetch Live Results from GamesMaster and MonthlyCharts simultaneously
     function initLiveResults() {
         document.getElementById('topDateHeader').innerText = `⚡ Fast Results of October ${yestDateNum}, 2026 & October ${todayDateNum}, 2026`;
         document.getElementById('liveSectionDays').innerHTML = `<span>OCT. ${yestDateNum}</span><span>OCT. ${todayDateNum}</span>`;
 
-        // Listen to GamesMaster for times & today live scores
         onValue(ref(db, 'GamesMaster'), (snapshot) => {
             const gamesMasterData = snapshot.val() || {};
             
-            // Also listen to MonthlyCharts for yesterday's score and today's backup
             onValue(ref(db, 'MonthlyCharts/Oct 2026'), (chartSnap) => {
                 const octData = chartSnap.val() || {};
                 const padYest = String(yestDateNum).padStart(2, '0');
@@ -711,7 +707,6 @@
                     const gmInfo = gamesMasterData[market.name] || {};
                     const mTime = gmInfo.resultTimeStr || gmInfo.closeTimeStr || market.time;
                     
-                    // Priority: GamesMaster resultNumber if not 'Wait...', else MonthlyCharts today data
                     let valToday = '--';
                     if (gmInfo.resultNumber && gmInfo.resultNumber !== 'Wait...' && gmInfo.resultNumber !== '--') {
                         valToday = gmInfo.resultNumber;
@@ -860,7 +855,6 @@
             const cacheKey = `${currentMonthName} 2026`;
 
             if(newScore) {
-                // Update both MonthlyCharts and GamesMaster for full sync
                 await set(ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${gameKey}`), newScore);
                 await set(ref(db, `GamesMaster/${gameKey}/resultNumber`), newScore);
             }
