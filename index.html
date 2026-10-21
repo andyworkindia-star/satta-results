@@ -232,16 +232,29 @@
         }
         .result-card.highlight .score-box { background: #451a03; color: #fde047; border-color: rgba(180, 83, 9, 0.5); }
 
-        /* Skeleton Shimmer Loading Effect */
-        .skeleton {
-            background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.2s infinite;
-            border-radius: 6px;
+        .wait-box { 
+            font-size: 10px; 
+            font-weight: 700; 
+            color: var(--neon-gold); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: 4px; 
+            background: rgba(69, 26, 3, 0.6); 
+            width: 68px; 
+            height: 38px;
+            border-radius: 8px; 
+            border: 1px solid rgba(180, 83, 9, 0.4); 
         }
-        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
-        .skeleton-box { width: 68px; height: 38px; display: inline-block; }
+        .spinner {
+            width: 9px;
+            height: 9px;
+            border: 2px solid var(--neon-gold);
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .tables-wrapper { display: flex; flex-direction: column; gap: 16px; padding: 6px 12px; margin-top: 10px; }
 
@@ -414,17 +427,17 @@
     </div>
 
     <div id="marketsListContainer">
-        <!-- Professional Skeleton Loaders for Instant Feedback -->
-        <div class="result-card"><div class="game-info"><div class="game-name">BULANDSHAHR CITY</div><div class="game-time">at 09:00 AM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">ALIGARH CITY</div><div class="game-time">at 11:45 AM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">NOIDA NCR</div><div class="game-time">at 01:45 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">DELHI BAZAR</div><div class="game-time">at 02:50 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">SHREE GANESH</div><div class="game-time">at 03:50 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
-        <div class="result-card highlight"><div class="game-info"><div class="game-name">FARIDABAD</div><div class="game-time">at 05:50 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">MATHURA KING</div><div class="game-time">at 08:20 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">GHAZIABAD</div><div class="game-time">at 09:30 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">GALI</div><div class="game-time">at 11:20 PM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
-        <div class="result-card"><div class="game-info"><div class="game-name">DISAWAR</div><div class="game-time">at 04:30 AM</div></div><div class="game-scores"><div class="skeleton skeleton-box"></div><div class="skeleton skeleton-box"></div></div></div>
+        <!-- Default fallback rendered instantly from cache if available -->
+        <div class="result-card"><div class="game-info"><div class="game-name">BULANDSHAHR CITY</div><div class="game-time">at 09:00 AM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box"><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">ALIGARH CITY</div><div class="game-time">at 11:45 AM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box"><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">NOIDA NCR</div><div class="game-time">at 01:45 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box"><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">DELHI BAZAR</div><div class="game-time">at 02:50 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box"><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">SHREE GANESH</div><div class="game-time">at 03:50 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box"><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div></div>
+        <div class="result-card highlight"><div class="game-info"><div class="game-name">FARIDABAD</div><div class="game-time">at 05:50 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box"><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">MATHURA KING</div><div class="game-time">at 08:20 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box"><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">GHAZIABAD</div><div class="game-time">at 09:30 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box"><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">GALI</div><div class="game-time">at 11:20 PM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box"><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div></div>
+        <div class="result-card"><div class="game-info"><div class="game-name">DISAWAR</div><div class="game-time">at 04:30 AM</div></div><div class="game-scores"><div class="score-box">--</div><div class="score-box"><div class="wait-box"><div class="spinner"></div> Wait...</div></div></div></div>
     </div>
 
     <div class="tables-wrapper">
@@ -441,9 +454,7 @@
                             <th>DS</th>
                         </tr>
                     </thead>
-                    <tbody id="monthlyChartBody1">
-                        <tr><td colspan="5" class="skeleton" style="height: 35px;"></td></tr>
-                    </tbody>
+                    <tbody id="monthlyChartBody1"></tbody>
                 </table>
             </div>
             
@@ -468,9 +479,7 @@
                             <th>M-KING</th>
                         </tr>
                     </thead>
-                    <tbody id="monthlyChartBody2">
-                        <tr><td colspan="7" class="skeleton" style="height: 35px;"></td></tr>
-                    </tbody>
+                    <tbody id="monthlyChartBody2"></tbody>
                 </table>
             </div>
             
@@ -618,7 +627,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, onValue, set, enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, onValue, set, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => {
@@ -643,13 +652,6 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-
-    // Enable local caching for lightning fast instant loads on subsequent visits
-    try {
-        enableIndexedDbPersistence(db).catch((err) => {
-            console.log("Persistence already enabled or offline mode active.");
-        });
-    } catch(e) {}
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let currentMonthIndex = 9;
@@ -685,67 +687,79 @@
     const todayDateNum = nowTime.getDate(); 
     const yestDateNum = todayDateNum - 1;
 
-    function initLiveResults() {
-        document.getElementById('topDateHeader').innerText = `⚡ Fast Results of October ${yestDateNum}, 2026 & October ${todayDateNum}, 2026`;
-        document.getElementById('liveSectionDays').innerHTML = `<span>OCT. ${yestDateNum}</span><span>OCT. ${todayDateNum}</span>`;
+    document.getElementById('topDateHeader').innerText = `⚡ Fast Results of October ${yestDateNum}, 2026 & October ${todayDateNum}, 2026`;
+    document.getElementById('liveSectionDays').innerHTML = `<span>OCT. ${yestDateNum}</span><span>OCT. ${todayDateNum}</span>`;
 
-        onValue(ref(db, 'GamesMaster'), (snapshot) => {
-            const gamesMasterData = snapshot.val() || {};
+    // --- INSTANT LOCALSTORAGE CACHE RENDERING FOR 0.1s SPEED ---
+    function renderMarketsUI(gamesMasterData, octData) {
+        const padYest = String(yestDateNum).padStart(2, '0');
+        const padToday = String(todayDateNum).padStart(2, '0');
+        
+        const yestData = octData[yestDateNum] || octData[padYest] || octData[String(yestDateNum)] || {};
+        const todayChartData = octData[todayDateNum] || octData[padToday] || octData[String(todayDateNum)] || {};
+
+        const container = document.getElementById('marketsListContainer');
+        container.innerHTML = '';
+
+        defaultMarkets.forEach(market => {
+            const gmInfo = gamesMasterData[market.name] || {};
+            const mTime = gmInfo.resultTimeStr || gmInfo.closeTimeStr || market.time;
             
-            onValue(ref(db, 'MonthlyCharts/Oct 2026'), (chartSnap) => {
-                const octData = chartSnap.val() || {};
-                const padYest = String(yestDateNum).padStart(2, '0');
-                const padToday = String(todayDateNum).padStart(2, '0');
-                
-                const yestData = octData[yestDateNum] || octData[padYest] || octData[String(yestDateNum)] || {};
-                const todayChartData = octData[todayDateNum] || octData[padToday] || octData[String(todayDateNum)] || {};
+            let valToday = '--';
+            if (gmInfo.resultNumber && gmInfo.resultNumber !== 'Wait...' && gmInfo.resultNumber !== '--') {
+                valToday = gmInfo.resultNumber;
+            } else {
+                valToday = todayChartData[market.name] || '--';
+            }
 
-                const container = document.getElementById('marketsListContainer');
-                container.innerHTML = '';
+            const valYest = yestData[market.name] || '--';
 
-                defaultMarkets.forEach(market => {
-                    const gmInfo = gamesMasterData[market.name] || {};
-                    const mTime = gmInfo.resultTimeStr || gmInfo.closeTimeStr || market.time;
-                    
-                    let valToday = '--';
-                    if (gmInfo.resultNumber && gmInfo.resultNumber !== 'Wait...' && gmInfo.resultNumber !== '--') {
-                        valToday = gmInfo.resultNumber;
-                    } else {
-                        valToday = todayChartData[market.name] || '--';
-                    }
+            let scoreTodayHTML = '';
+            if (!valToday || valToday === '--' || valToday === 'Wait...') {
+                scoreTodayHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
+            } else {
+                let strToday = String(valToday).trim();
+                if (strToday.length === 1) strToday = '0' + strToday;
+                scoreTodayHTML = `<div class="score-box">${strToday}</div>`;
+            }
 
-                    const valYest = yestData[market.name] || '--';
+            let strYest = (!valYest || valYest === '--') ? '--' : String(valYest).trim();
+            if (strYest.length === 1) strYest = '0' + strYest;
 
-                    let scoreTodayHTML = '';
-                    if (!valToday || valToday === '--' || valToday === 'Wait...') {
-                        scoreTodayHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
-                    } else {
-                        let strToday = String(valToday).trim();
-                        if (strToday.length === 1) strToday = '0' + strToday;
-                        scoreTodayHTML = `<div class="score-box">${strToday}</div>`;
-                    }
-
-                    let strYest = (!valYest || valYest === '--') ? '--' : String(valYest).trim();
-                    if (strYest.length === 1) strYest = '0' + strYest;
-
-                    container.innerHTML += `
-                        <div class="result-card ${market.highlight ? 'highlight' : ''}">
-                            <div class="game-info">
-                                <div class="game-name">${market.name}</div>
-                                <div class="game-time">at ${mTime}</div>
-                            </div>
-                            <div class="game-scores">
-                                <div class="score-box">${strYest}</div>
-                                <div>${scoreTodayHTML}</div>
-                            </div>
-                        </div>
-                    `;
-                });
-            });
+            container.innerHTML += `
+                <div class="result-card ${market.highlight ? 'highlight' : ''}">
+                    <div class="game-info">
+                        <div class="game-name">${market.name}</div>
+                        <div class="game-time">at ${mTime}</div>
+                    </div>
+                    <div class="game-scores">
+                        <div class="score-box">${strYest}</div>
+                        <div>${scoreTodayHTML}</div>
+                    </div>
+                </div>
+            `;
         });
     }
 
-    initLiveResults();
+    // 1. Load instantly from LocalStorage if available (Zero Delay)
+    const cachedGM = localStorage.getItem('cache_games_master');
+    const cachedOct = localStorage.getItem('cache_oct_chart');
+    if(cachedGM && cachedOct) {
+        renderMarketsUI(JSON.parse(cachedGM), JSON.parse(cachedOct));
+    }
+
+    // 2. Fetch fresh data from Firebase in background and update cache
+    onValue(ref(db, 'GamesMaster'), (gmSnap) => {
+        const gmData = gmSnap.val() || {};
+        localStorage.setItem('cache_games_master', JSON.stringify(gmData));
+
+        onValue(ref(db, 'MonthlyCharts/Oct 2026'), (chartSnap) => {
+            const octData = chartSnap.val() || {};
+            localStorage.setItem('cache_oct_chart', JSON.stringify(octData));
+
+            renderMarketsUI(gmData, octData);
+        });
+    });
 
     window.loadChartData = function() {
         const currentMonthName = months[currentMonthIndex];
@@ -760,54 +774,65 @@
         document.getElementById('prevBtn2').innerText = `⬅️ ${months[prevIndex]} 2026`;
         document.getElementById('nextBtn2').innerText = `${months[nextIndex]} 2026 ➡️`;
         
+        // Check cache for monthly chart first
+        const cachedChart = localStorage.getItem(`cache_chart_${cacheKey}`);
+        if(cachedChart) {
+            buildChartTables(JSON.parse(cachedChart));
+        }
+
         onValue(ref(db, `MonthlyCharts/${cacheKey}`), (snapshot) => {
             const chartData = snapshot.val();
-            const tbody1 = document.getElementById('monthlyChartBody1');
-            const tbody2 = document.getElementById('monthlyChartBody2');
-            
             if (chartData) {
-                tbody1.innerHTML = '';
-                tbody2.innerHTML = '';
-                
-                const activeDates = Object.keys(chartData).filter(date => {
-                    const r = chartData[date];
-                    if (!r) return false;
-                    return Object.values(r).some(val => val && val !== '--' && val !== 'XX');
-                }).sort((a, b) => parseInt(a) - parseInt(b));
-                
-                if(activeDates.length === 0) {
-                    tbody1.innerHTML = `<tr><td colspan="5">Is maah ka koi result declare nahi hua hai.</td></tr>`;
-                    tbody2.innerHTML = `<tr><td colspan="7">Is maah ka koi result declare nahi hua hai.</td></tr>`;
-                    return;
-                }
-
-                activeDates.forEach(date => {
-                    const r = chartData[date];
-                    let dateStr = String(date).padStart(2, '0');
-
-                    tbody1.innerHTML += `
-                        <tr>
-                            <td>${dateStr}</td>
-                            <td>${formatScore(r['FARIDABAD'])}</td>
-                            <td>${formatScore(r['GHAZIABAD'])}</td>
-                            <td>${formatScore(r['GALI'])}</td>
-                            <td>${formatScore(r['DISAWAR'])}</td>
-                        </tr>
-                    `;
-
-                    tbody2.innerHTML += `
-                        <tr>
-                            <td>${dateStr}</td>
-                            <td>${formatScore(r['DELHI BAZAR'])}</td>
-                            <td>${formatScore(r['SHREE GANESH'])}</td>
-                            <td>${formatScore(r['BULANDSHAHR CITY'])}</td>
-                            <td>${formatScore(r['ALIGARH CITY'])}</td>
-                            <td>${formatScore(r['NOIDA NCR'])}</td>
-                            <td>${formatScore(r['MATHURA KING'])}</td>
-                        </tr>
-                    `;
-                });
+                localStorage.setItem(`cache_chart_${cacheKey}`, JSON.stringify(chartData));
+                buildChartTables(chartData);
             }
+        });
+    }
+
+    function buildChartTables(chartData) {
+        const tbody1 = document.getElementById('monthlyChartBody1');
+        const tbody2 = document.getElementById('monthlyChartBody2');
+        
+        tbody1.innerHTML = '';
+        tbody2.innerHTML = '';
+        
+        const activeDates = Object.keys(chartData).filter(date => {
+            const r = chartData[date];
+            if (!r) return false;
+            return Object.values(r).some(val => val && val !== '--' && val !== 'XX');
+        }).sort((a, b) => parseInt(a) - parseInt(b));
+        
+        if(activeDates.length === 0) {
+            tbody1.innerHTML = `<tr><td colspan="5">Is maah ka koi result declare nahi hua hai.</td></tr>`;
+            tbody2.innerHTML = `<tr><td colspan="7">Is maah ka koi result declare nahi hua hai.</td></tr>`;
+            return;
+        }
+
+        activeDates.forEach(date => {
+            const r = chartData[date];
+            let dateStr = String(date).padStart(2, '0');
+
+            tbody1.innerHTML += `
+                <tr>
+                    <td>${dateStr}</td>
+                    <td>${formatScore(r['FARIDABAD'])}</td>
+                    <td>${formatScore(r['GHAZIABAD'])}</td>
+                    <td>${formatScore(r['GALI'])}</td>
+                    <td>${formatScore(r['DISAWAR'])}</td>
+                </tr>
+            `;
+
+            tbody2.innerHTML += `
+                <tr>
+                    <td>${dateStr}</td>
+                    <td>${formatScore(r['DELHI BAZAR'])}</td>
+                    <td>${formatScore(r['SHREE GANESH'])}</td>
+                    <td>${formatScore(r['BULANDSHAHR CITY'])}</td>
+                    <td>${formatScore(r['ALIGARH CITY'])}</td>
+                    <td>${formatScore(r['NOIDA NCR'])}</td>
+                    <td>${formatScore(r['MATHURA KING'])}</td>
+                </tr>
+            `;
         });
     }
 
@@ -861,10 +886,12 @@
             if(newTime) {
                 await set(ref(db, `GamesMaster/${gameKey}/resultTimeStr`), newTime);
             }
+            localStorage.clear(); // Clear local cache to force refresh on update
             alert("Successfully update ho gaya!");
             document.getElementById('resultScore').value = '';
             document.getElementById('gameTimeInput').value = '';
             closeAdminModal();
+            window.location.reload();
         } catch(e) {
             console.error(e);
             alert("Error aayi update karne me!");
@@ -911,10 +938,10 @@
                     let fullMonthKey = `${month} 2026`;
                     await set(ref(db, `MonthlyCharts/${fullMonthKey}`), groupedData[month]);
                 }
+                localStorage.clear();
                 alert("Poora saal ka data successfully upload ho gaya!");
                 fileInput.value = '';
-                window.loadChartData();
-                closeAdminModal();
+                window.location.reload();
             } catch (err) {
                 console.error(err);
                 alert("File read karne me error aayi.");
