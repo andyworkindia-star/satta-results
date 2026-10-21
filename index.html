@@ -656,13 +656,13 @@
     let currentMonthIndex = 9;
 
     const defaultMarkets = [
-        { id: 'BULANDSHAHR CITY', name: 'BULANDSHAHR CITY', time: '09:00 AM', highlight: false },
-        { id: 'ALIGARH CITY', name: 'ALIGARH CITY', time: '11:45 AM', highlight: false },
-        { id: 'NOIDA NCR', name: 'NOIDA NCR', time: '01:45 PM', highlight: false },
-        { id: 'DELHI BAZAR', name: 'DELHI BAZAR', time: '02:50 PM', highlight: false },
-        { id: 'SHREE GANESH', name: 'SHREE GANESH', time: '03:50 PM', highlight: false },
+        { id: 'BULANDSHAHR_CITY', name: 'BULANDSHAHR CITY', time: '09:00 AM', highlight: false },
+        { id: 'ALIGARH_CITY', name: 'ALIGARH CITY', time: '11:45 AM', highlight: false },
+        { id: 'NOIDA_NCR', name: 'NOIDA NCR', time: '01:45 PM', highlight: false },
+        { id: 'DELHI_BAZAR', name: 'DELHI BAZAR', time: '02:50 PM', highlight: false },
+        { id: 'SHREE_GANESH', name: 'SHREE GANESH', time: '03:50 PM', highlight: false },
         { id: 'FARIDABAD', name: 'FARIDABAD', time: '05:50 PM', highlight: true },
-        { id: 'MATHURA KING', name: 'MATHURA KING', time: '08:20 PM', highlight: false },
+        { id: 'MATHURA_KING', name: 'MATHURA KING', time: '08:20 PM', highlight: false },
         { id: 'GHAZIABAD', name: 'GHAZIABAD', time: '09:30 PM', highlight: false },
         { id: 'GALI', name: 'GALI', time: '11:20 PM', highlight: false },
         { id: 'DISAWAR', name: 'DISAWAR', time: '04:30 AM', highlight: false }
@@ -729,7 +729,12 @@
         const timesData = snapshot.val() || {};
         onValue(ref(db, 'MonthlyCharts/Oct 2026'), (chartSnap) => {
             const octData = chartSnap.val() || {};
-            renderMarketsUI(timesData, octData[String(yestDateNum)] || {}, octData[String(todayDateNum)] || {});
+            // Yahan number aur string dono keys ke liye support de diya hai taaki data turant uth jaye
+            renderMarketsUI(
+                timesData, 
+                octData[yestDateNum] || octData[String(yestDateNum)] || {}, 
+                octData[todayDateNum] || octData[String(todayDateNum)] || {}
+            );
         });
     });
 
