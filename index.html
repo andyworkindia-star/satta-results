@@ -406,7 +406,7 @@
     <header class="app-header">
         <button class="admin-trigger-btn" onclick="openAdminModal()">🔐 Admin Login</button>
         <h2>Gali Disawar Kingg</h2>
-        <p style="font-size: 12px; margin-top: 8px; color: #93c5fd; line-height: 1.5; font-weight: 500;">गेम खेलने के लिए हमारा ऑफिशियल एंड्रॉइड ऐप अभी डाउनलोड करें, और अपने दोस्तों को शेयर करें। रेफेरल में अपना मोबाइल नंबर डालें और कंपनी के मुनाफे पर लाइफटाइम 7% कमीशन पाएं!.</p>
+        <p style="font-size: 12px; margin-top: 8px; color: #93c5fd; line-height: 1.5; font-weight: 500;">गेम खेलने के लिए हमारा ऑफिशियल एंड्रॉइड ऐप अभी डाउनलोड करें, और अपने दोस्तों को शेयर करें। रेफेरल में अपना मोबाइल नंबर डालें और कंपनी के मुनाफे पर लाइफटाइम 7% कमीशन पाएं!</p>
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
     </header>
 
@@ -421,8 +421,8 @@
     <div class="section-title">
         <span>Live Results</span>
         <div class="section-days" id="liveSectionDays">
-            <span>OCT. 18</span>
-            <span>OCT. 19</span>
+            <span>--</span>
+            <span>--</span>
         </div>
     </div>
 
@@ -535,7 +535,7 @@
             <button class="close-btn" onclick="closeTermsModal()">✕</button>
         </div>
         <div class="modal-body">
-            <p><strong>Effective Date:</strong> October 19, 2026</p>
+            <p><strong>Effective Date:</strong> October 21, 2026</p>
             <h3>1. ACCEPTANCE OF TERMS</h3>
             <p>Welcome to GaliDisawarKing. These Terms of Service govern your access to and use of our website, its content, features, and related services.</p>
             <h3>2. ABOUT OUR WEBSITE</h3>
@@ -575,7 +575,7 @@
             <div id="loginBox">
                 <div class="form-group">
                     <label>Admin Password</label>
-                    <input type="password" id="adminPass" placeholder="Password daalein (12345)">
+                    <input type="password" id="adminPass" placeholder="Password daalein">
                 </div>
                 <button class="admin-btn" onclick="checkLogin()">Login</button>
             </div>
@@ -584,13 +584,13 @@
                 <div class="form-group">
                     <label>Market Select Karein</label>
                     <select id="gameName">
-                        <option value="BULANDSHAHR_CITY">BULANDSHAHR CITY</option>
-                        <option value="ALIGARH_CITY">ALIGARH CITY</option>
-                        <option value="NOIDA_NCR">NOIDA NCR</option>
-                        <option value="DELHI_BAZAR">DELHI BAZAR</option>
-                        <option value="SHREE_GANESH">SHREE GANESH</option>
+                        <option value="BULANDSHAHR CITY">BULANDSHAHR CITY</option>
+                        <option value="ALIGARH CITY">ALIGARH CITY</option>
+                        <option value="NOIDA NCR">NOIDA NCR</option>
+                        <option value="DELHI BAZAR">DELHI BAZAR</option>
+                        <option value="SHREE GANESH">SHREE GANESH</option>
                         <option value="FARIDABAD">FARIDABAD</option>
-                        <option value="MATHURA_KING">MATHURA KING</option>
+                        <option value="MATHURA KING">MATHURA KING</option>
                         <option value="GHAZIABAD">GHAZIABAD</option>
                         <option value="GALI">GALI</option>
                         <option value="DISAWAR">DISAWAR</option>
@@ -598,8 +598,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Date (Jaise: 19)</label>
-                    <input type="text" id="resultDateInput" value="19" placeholder="Date daalein">
+                    <label>Date (Automatic Today Date)</label>
+                    <input type="text" id="resultDateInput" placeholder="Date daalein">
                 </div>
 
                 <div class="form-group">
@@ -656,13 +656,13 @@
     let currentMonthIndex = 9;
 
     const defaultMarkets = [
-        { id: 'BULANDSHAHR_CITY', name: 'BULANDSHAHR CITY', time: '09:00 AM', highlight: false },
-        { id: 'ALIGARH_CITY', name: 'ALIGARH CITY', time: '11:45 AM', highlight: false },
-        { id: 'NOIDA_NCR', name: 'NOIDA NCR', time: '01:45 PM', highlight: false },
-        { id: 'DELHI_BAZAR', name: 'DELHI BAZAR', time: '02:50 PM', highlight: false },
-        { id: 'SHREE_GANESH', name: 'SHREE GANESH', time: '03:50 PM', highlight: false },
+        { id: 'BULANDSHAHR CITY', name: 'BULANDSHAHR CITY', time: '09:00 AM', highlight: false },
+        { id: 'ALIGARH CITY', name: 'ALIGARH CITY', time: '11:45 AM', highlight: false },
+        { id: 'NOIDA NCR', name: 'NOIDA NCR', time: '01:45 PM', highlight: false },
+        { id: 'DELHI BAZAR', name: 'DELHI BAZAR', time: '02:50 PM', highlight: false },
+        { id: 'SHREE GANESH', name: 'SHREE GANESH', time: '03:50 PM', highlight: false },
         { id: 'FARIDABAD', name: 'FARIDABAD', time: '05:50 PM', highlight: true },
-        { id: 'MATHURA_KING', name: 'MATHURA KING', time: '08:20 PM', highlight: false },
+        { id: 'MATHURA KING', name: 'MATHURA KING', time: '08:20 PM', highlight: false },
         { id: 'GHAZIABAD', name: 'GHAZIABAD', time: '09:30 PM', highlight: false },
         { id: 'GALI', name: 'GALI', time: '11:20 PM', highlight: false },
         { id: 'DISAWAR', name: 'DISAWAR', time: '04:30 AM', highlight: false }
@@ -793,9 +793,6 @@
                         </tr>
                     `;
                 });
-            } else {
-                tbody1.innerHTML = `<tr><td colspan="5">No Data Found</td></tr>`;
-                tbody2.innerHTML = `<tr><td colspan="7">No Data Found</td></tr>`;
             }
         });
     }
@@ -815,7 +812,11 @@
     window.openTermsModal = () => document.getElementById('termsModal').style.display = 'flex';
     window.closeTermsModal = () => document.getElementById('termsModal').style.display = 'none';
 
-    window.openAdminModal = () => document.getElementById('adminModal').style.display = 'flex';
+    window.openAdminModal = () => {
+        document.getElementById('adminModal').style.display = 'flex';
+        const dTime = new Date();
+        document.getElementById('resultDateInput').value = dTime.getDate();
+    };
     window.closeAdminModal = () => document.getElementById('adminModal').style.display = 'none';
 
     window.checkLogin = function() {
@@ -836,13 +837,11 @@
         const newTime = document.getElementById('gameTimeInput').value.trim();
 
         try {
-            const marketObj = defaultMarkets.find(m => m.id === gameKey);
-            const mName = marketObj ? marketObj.name : gameKey;
             const currentMonthName = months[currentMonthIndex];
             const cacheKey = `${currentMonthName} 2026`;
 
             if(newScore) {
-                await set(ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${mName}`), newScore);
+                await set(ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${gameKey}`), newScore);
             }
             if(newTime) {
                 await set(ref(db, `market_times/${gameKey}`), newTime);
