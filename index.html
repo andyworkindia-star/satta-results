@@ -725,17 +725,22 @@
         });
     }
 
-    onValue(ref(db, 'market_times'), (snapshot) => {
-        const timesData = snapshot.val() || {};
-        onValue(ref(db, 'MonthlyCharts/Oct 2026'), (chartSnap) => {
-            const octData = chartSnap.val() || {};
-            // Yahan number aur string dono keys ke liye support de diya hai taaki data turant uth jaye
-            renderMarketsUI(
-                timesData, 
-                octData[yestDateNum] || octData[String(yestDateNum)] || {}, 
-                octData[todayDateNum] || octData[String(todayDateNum)] || {}
-            );
-        });
+    // Independent listener for live results directly mirroring how chart loads data
+    onValue(ref(db, 'MonthlyCharts/Oct 2026'), (chartSnap) => {
+        const octData = chartSnap.val() || {};
+        
+        onValue(ref(db, 'market_times'), (timeSnap) => {
+            const timesData = timeSnap.val() || {};
+            
+            // Support both number keys (21) and string keys ("21", "01")
+            const padYest = String(yestDateNum).padStart(2, '0');
+            const padToday = String(todayDateNum).padStart(2, '0');
+            
+            const yestData = octData[yestDateNum] || octData[padYest] || octData[String(yestDateNum)] || {};
+            const todayData = octData[todayDateNum] || octData[padToday] || octData[String(todayDateNum)] || {};
+
+            renderMarketsUI(timesData, yestData, todayData);
+        }, { onlyOnce: true });
     });
 
     window.loadChartData = function() {
