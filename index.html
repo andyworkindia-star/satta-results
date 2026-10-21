@@ -656,13 +656,13 @@
     let currentMonthIndex = 9;
 
     const defaultMarkets = [
-        { id: 'BULANDSHAHR_CITY', name: 'BULANDSHAHR CITY', time: '09:00 AM', highlight: false },
-        { id: 'ALIGARH_CITY', name: 'ALIGARH CITY', time: '11:45 AM', highlight: false },
-        { id: 'NOIDA_NCR', name: 'NOIDA NCR', time: '01:45 PM', highlight: false },
-        { id: 'DELHI_BAZAR', name: 'DELHI BAZAR', time: '02:50 PM', highlight: false },
-        { id: 'SHREE_GANESH', name: 'SHREE GANESH', time: '03:50 PM', highlight: false },
+        { id: 'BULANDSHAHR CITY', name: 'BULANDSHAHR CITY', time: '09:00 AM', highlight: false },
+        { id: 'ALIGARH CITY', name: 'ALIGARH CITY', time: '11:45 AM', highlight: false },
+        { id: 'NOIDA NCR', name: 'NOIDA NCR', time: '01:45 PM', highlight: false },
+        { id: 'DELHI BAZAR', name: 'DELHI BAZAR', time: '02:50 PM', highlight: false },
+        { id: 'SHREE GANESH', name: 'SHREE GANESH', time: '03:50 PM', highlight: false },
         { id: 'FARIDABAD', name: 'FARIDABAD', time: '05:50 PM', highlight: true },
-        { id: 'MATHURA_KING', name: 'MATHURA KING', time: '08:20 PM', highlight: false },
+        { id: 'MATHURA KING', name: 'MATHURA KING', time: '08:20 PM', highlight: false },
         { id: 'GHAZIABAD', name: 'GHAZIABAD', time: '09:30 PM', highlight: false },
         { id: 'GALI', name: 'GALI', time: '11:20 PM', highlight: false },
         { id: 'DISAWAR', name: 'DISAWAR', time: '04:30 AM', highlight: false }
@@ -686,62 +686,71 @@
     const todayDateNum = nowTime.getDate(); 
     const yestDateNum = todayDateNum - 1;
 
-    function renderMarketsUI(customTimes = {}, liveDataYest = {}, liveDataToday = {}) {
-        const container = document.getElementById('marketsListContainer');
-        container.innerHTML = '';
-
+    // 1. Fetch Live Results from GamesMaster and MonthlyCharts simultaneously
+    function initLiveResults() {
         document.getElementById('topDateHeader').innerText = `⚡ Fast Results of October ${yestDateNum}, 2026 & October ${todayDateNum}, 2026`;
         document.getElementById('liveSectionDays').innerHTML = `<span>OCT. ${yestDateNum}</span><span>OCT. ${todayDateNum}</span>`;
 
-        defaultMarkets.forEach(market => {
-            const mTime = customTimes[market.id] || market.time;
-            const valYest = liveDataYest[market.name] || '--';
-            const valToday = liveDataToday[market.name] || '--';
+        // Listen to GamesMaster for times & today live scores
+        onValue(ref(db, 'GamesMaster'), (snapshot) => {
+            const gamesMasterData = snapshot.val() || {};
+            
+            // Also listen to MonthlyCharts for yesterday's score and today's backup
+            onValue(ref(db, 'MonthlyCharts/Oct 2026'), (chartSnap) => {
+                const octData = chartSnap.val() || {};
+                const padYest = String(yestDateNum).padStart(2, '0');
+                const padToday = String(todayDateNum).padStart(2, '0');
+                
+                const yestData = octData[yestDateNum] || octData[padYest] || octData[String(yestDateNum)] || {};
+                const todayChartData = octData[todayDateNum] || octData[padToday] || octData[String(todayDateNum)] || {};
 
-            let scoreTodayHTML = '';
-            if (!valToday || valToday === '--' || valToday === 'Wait...') {
-                scoreTodayHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
-            } else {
-                let strToday = String(valToday).trim();
-                if (strToday.length === 1) strToday = '0' + strToday;
-                scoreTodayHTML = `<div class="score-box">${strToday}</div>`;
-            }
+                const container = document.getElementById('marketsListContainer');
+                container.innerHTML = '';
 
-            let strYest = (!valYest || valYest === '--') ? '--' : String(valYest).trim();
-            if (strYest.length === 1) strYest = '0' + strYest;
+                defaultMarkets.forEach(market => {
+                    const gmInfo = gamesMasterData[market.name] || {};
+                    const mTime = gmInfo.resultTimeStr || gmInfo.closeTimeStr || market.time;
+                    
+                    // Priority: GamesMaster resultNumber if not 'Wait...', else MonthlyCharts today data
+                    let valToday = '--';
+                    if (gmInfo.resultNumber && gmInfo.resultNumber !== 'Wait...' && gmInfo.resultNumber !== '--') {
+                        valToday = gmInfo.resultNumber;
+                    } else {
+                        valToday = todayChartData[market.name] || '--';
+                    }
 
-            container.innerHTML += `
-                <div class="result-card ${market.highlight ? 'highlight' : ''}">
-                    <div class="game-info">
-                        <div class="game-name">${market.name}</div>
-                        <div class="game-time">at ${mTime}</div>
-                    </div>
-                    <div class="game-scores">
-                        <div class="score-box">${strYest}</div>
-                        <div>${scoreTodayHTML}</div>
-                    </div>
-                </div>
-            `;
+                    const valYest = yestData[market.name] || '--';
+
+                    let scoreTodayHTML = '';
+                    if (!valToday || valToday === '--' || valToday === 'Wait...') {
+                        scoreTodayHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
+                    } else {
+                        let strToday = String(valToday).trim();
+                        if (strToday.length === 1) strToday = '0' + strToday;
+                        scoreTodayHTML = `<div class="score-box">${strToday}</div>`;
+                    }
+
+                    let strYest = (!valYest || valYest === '--') ? '--' : String(valYest).trim();
+                    if (strYest.length === 1) strYest = '0' + strYest;
+
+                    container.innerHTML += `
+                        <div class="result-card ${market.highlight ? 'highlight' : ''}">
+                            <div class="game-info">
+                                <div class="game-name">${market.name}</div>
+                                <div class="game-time">at ${mTime}</div>
+                            </div>
+                            <div class="game-scores">
+                                <div class="score-box">${strYest}</div>
+                                <div>${scoreTodayHTML}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
         });
     }
 
-    // Independent listener for live results directly mirroring how chart loads data
-    onValue(ref(db, 'MonthlyCharts/Oct 2026'), (chartSnap) => {
-        const octData = chartSnap.val() || {};
-        
-        onValue(ref(db, 'market_times'), (timeSnap) => {
-            const timesData = timeSnap.val() || {};
-            
-            // Support both number keys (21) and string keys ("21", "01")
-            const padYest = String(yestDateNum).padStart(2, '0');
-            const padToday = String(todayDateNum).padStart(2, '0');
-            
-            const yestData = octData[yestDateNum] || octData[padYest] || octData[String(yestDateNum)] || {};
-            const todayData = octData[todayDateNum] || octData[padToday] || octData[String(todayDateNum)] || {};
-
-            renderMarketsUI(timesData, yestData, todayData);
-        }, { onlyOnce: true });
-    });
+    initLiveResults();
 
     window.loadChartData = function() {
         const currentMonthName = months[currentMonthIndex];
@@ -851,10 +860,12 @@
             const cacheKey = `${currentMonthName} 2026`;
 
             if(newScore) {
+                // Update both MonthlyCharts and GamesMaster for full sync
                 await set(ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${gameKey}`), newScore);
+                await set(ref(db, `GamesMaster/${gameKey}/resultNumber`), newScore);
             }
             if(newTime) {
-                await set(ref(db, `market_times/${gameKey}`), newTime);
+                await set(ref(db, `GamesMaster/${gameKey}/resultTimeStr`), newTime);
             }
             alert("Successfully update ho gaya!");
             document.getElementById('resultScore').value = '';
