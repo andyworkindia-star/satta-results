@@ -613,8 +613,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Date (Tarik)</label>
-                        <input type="text" id="resultDateInput" placeholder="Jaise: 4">
+                        <label>Date (Tarik Select Karein)</label>
+                        <select id="resultDateInput"></select>
                     </div>
                 </div>
 
@@ -651,9 +651,7 @@
             event.preventDefault();
             alert("Security Alert: Copying or inspecting source code is restricted!");
         }
-        if (event.key === 'F12') {
-            event.preventDefault();
-        }
+        if (event.key === 'F12') { event.preventDefault(); }
     });
 
     const firebaseConfig = {
@@ -719,7 +717,7 @@
         const todayChartData = chartDataMonth[todayDateNum] || chartDataMonth[padToday] || chartDataMonth[String(todayDateNum)] || {};
 
         const container = document.getElementById('marketsListContainer');
-        container.innerHTML = '';
+        let htmlContent = '';
 
         defaultMarkets.forEach(market => {
             const gmInfo = gamesMasterData[market.name] || {};
@@ -746,7 +744,7 @@
             let strYest = (!valYest || valYest === '--') ? '--' : String(valYest).trim();
             if (strYest.length === 1) strYest = '0' + strYest;
 
-            container.innerHTML += `
+            htmlContent += `
                 <div class="result-card ${market.highlight ? 'highlight' : ''}">
                     <div class="game-info">
                         <div class="game-name">${market.name}</div>
@@ -759,11 +757,13 @@
                 </div>
             `;
         });
+        container.innerHTML = htmlContent;
     }
 
     const currentCacheKey = `${currentMonthNameShort} ${currentYear}`;
     const cachedGM = localStorage.getItem('cache_games_master');
     const cachedCurrentMonth = localStorage.getItem(`cache_chart_${currentCacheKey}`);
+    
     if(cachedGM && cachedCurrentMonth) {
         renderMarketsUI(JSON.parse(cachedGM), JSON.parse(cachedCurrentMonth));
     }
@@ -775,10 +775,9 @@
         onValue(ref(db, `MonthlyCharts/${currentCacheKey}`), (chartSnap) => {
             const chartDataMonth = chartSnap.val() || {};
             localStorage.setItem(`cache_chart_${currentCacheKey}`, JSON.stringify(chartDataMonth));
-
             renderMarketsUI(gmData, chartDataMonth);
-        });
-    });
+        }, { onlyOnce: true });
+    }, { onlyOnce: true });
 
     window.loadChartData = function() {
         const monthName = months[currentMonthIndex];
@@ -798,12 +797,12 @@
             buildChartTables(JSON.parse(cachedChart));
         }
 
-        onValue(ref(db, `MonthlyCharts/${cacheKey}`), (snapshot) => {
+        get(ref(db, `MonthlyCharts/${cacheKey}`)).then((snapshot) => {
             const chartData = snapshot.val();
             if (chartData) {
                 localStorage.setItem(`cache_chart_${cacheKey}`, JSON.stringify(chartData));
                 buildChartTables(chartData);
-            } else {
+            } else if (!cachedChart) {
                 buildChartTables({});
             }
         });
@@ -813,8 +812,8 @@
         const tbody1 = document.getElementById('monthlyChartBody1');
         const tbody2 = document.getElementById('monthlyChartBody2');
         
-        tbody1.innerHTML = '';
-        tbody2.innerHTML = '';
+        let rows1 = '';
+        let rows2 = '';
         
         const activeDates = Object.keys(chartData).filter(date => {
             const r = chartData[date];
@@ -832,7 +831,7 @@
             const r = chartData[date];
             let dateStr = String(date).padStart(2, '0');
 
-            tbody1.innerHTML += `
+            rows1 += `
                 <tr>
                     <td>${dateStr}</td>
                     <td>${formatScore(r['FARIDABAD'])}</td>
@@ -842,7 +841,7 @@
                 </tr>
             `;
 
-            tbody2.innerHTML += `
+            rows2 += `
                 <tr>
                     <td>${dateStr}</td>
                     <td>${formatScore(r['DELHI BAZAR'])}</td>
@@ -854,6 +853,9 @@
                 </tr>
             `;
         });
+
+        tbody1.innerHTML = rows1;
+        tbody2.innerHTML = rows2;
     }
 
     window.changeMonth = function(direction) {
@@ -873,10 +875,22 @@
 
     window.openAdminModal = () => {
         document.getElementById('adminModal').style.display = 'flex';
+        
+        const dateSelect = document.getElementById('resultDateInput');
+        if(dateSelect.children.length === 0) {
+            for(let i = 1; i <= 31; i++) {
+                let opt = document.createElement('option');
+                opt.value = i;
+                opt.innerText = i;
+                dateSelect.appendChild(opt);
+            }
+        }
+
         const dTime = new Date();
-        document.getElementById('resultDateInput').value = dTime.getDate();
+        dateSelect.value = dTime.getDate();
         document.getElementById('adminMonthSelect').value = months[currentMonthIndex];
     };
+    
     window.closeAdminModal = () => document.getElementById('adminModal').style.display = 'none';
 
     window.checkLogin = function() {
@@ -893,7 +907,7 @@
     window.updateMarketData = async function() {
         const gameKey = document.getElementById('gameName').value;
         const selectedMonth = document.getElementById('adminMonthSelect').value;
-        const targetDate = document.getElementById('resultDateInput').value.trim() || String(todayDateNum);
+        const targetDate = document.getElementById('resultDateInput').value;
         const newScore = document.getElementById('resultScore').value.trim();
         const newTime = document.getElementById('gameTimeInput').value.trim();
 
@@ -913,8 +927,7 @@
             alert("Successfully update ho gaya!");
             document.getElementById('resultScore').value = '';
             document.getElementById('gameTimeInput').value = '';
-            // window.location.reload() yahan se hata diya gaya hai taaki admin window apne aap band na ho
-            window.loadChartData(); // Background mein chart update ho jayega
+            window.loadChartData(); 
         } catch(e) {
             console.error(e);
             alert("Error aayi update karne me!");
@@ -964,7 +977,7 @@
                 localStorage.clear();
                 alert("Poora saal ka data successfully upload ho gaya!");
                 fileInput.value = '';
-                window.loadChartData(); // Background mein data refresh ho jayega bina page reload kiye
+                window.loadChartData(); 
             } catch (err) {
                 console.error(err);
                 alert("File read karne me error aayi.");
