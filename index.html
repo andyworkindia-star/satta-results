@@ -563,7 +563,7 @@
     </div>
 </div>
 
-<!-- SECURE ADMIN MODAL WITH EMAIL & PASSWORD -->
+<!-- SECURE ADMIN MODAL WITH DEFAULT DESTINY EMAIL -->
 <div id="adminModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
@@ -574,11 +574,11 @@
             <div id="loginBox">
                 <div class="form-group">
                     <label>Admin Email</label>
-                    <input type="email" id="adminEmail" placeholder="admin@email.com daalein">
+                    <input type="email" id="adminEmail" value="Destiny@galidisawarking.in">
                 </div>
                 <div class="form-group">
                     <label>Admin Password</label>
-                    <input type="password" id="adminPass" placeholder="Password daalein">
+                    <input type="password" id="adminPass">
                 </div>
                 <button class="admin-btn" onclick="checkLogin()">Login</button>
             </div>
@@ -679,7 +679,7 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    const auth = getAuth(app); // Firebase Auth initialized
+    const auth = getAuth(app);
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const monthsFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
