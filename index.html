@@ -442,7 +442,7 @@
 
     <div class="tables-wrapper">
         <div class="chart-container">
-            <div class="chart-heading" id="chartHeading1">Main Result Chart - Oct 2026</div>
+            <div class="chart-heading" id="chartHeading1">Main Result Chart</div>
             <div class="table-scroll-container">
                 <table class="monthly-table">
                     <thead>
@@ -459,13 +459,13 @@
             </div>
             
             <div class="month-buttons">
-                <button class="month-btn" id="prevBtn1" onclick="changeMonth(-1)">⬅️ Sep 2026</button>
-                <button class="month-btn" id="nextBtn1" onclick="changeMonth(1)">Nov 2026 ➡️</button>
+                <button class="month-btn" id="prevBtn1" onclick="changeMonth(-1)">⬅️ Prev</button>
+                <button class="month-btn" id="nextBtn1" onclick="changeMonth(1)">Next ➡️</button>
             </div>
         </div>
 
         <div class="chart-container">
-            <div class="chart-heading" id="chartHeading2">Other Markets Chart - Oct 2026</div>
+            <div class="chart-heading" id="chartHeading2">Other Markets Chart</div>
             <div class="table-scroll-container">
                 <table class="monthly-table">
                     <thead>
@@ -484,8 +484,8 @@
             </div>
             
             <div class="month-buttons">
-                <button class="month-btn" id="prevBtn2" onclick="changeMonth(-1)">⬅️ Sep 2026</button>
-                <button class="month-btn" id="nextBtn2" onclick="changeMonth(1)">Nov 2026 ➡️</button>
+                <button class="month-btn" id="prevBtn2" onclick="changeMonth(-1)">⬅️ Prev</button>
+                <button class="month-btn" id="nextBtn2" onclick="changeMonth(1)">Next ➡️</button>
             </div>
         </div>
     </div>
@@ -654,7 +654,14 @@
     const db = getDatabase(app);
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let currentMonthIndex = 9;
+    const monthsFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    
+    // सिस्टम की असली तारीख से महीने का इंडेक्स डायनेमिक उठाएं (जैसे नवंबर के लिए 10)
+    const nowTime = new Date();
+    let currentMonthIndex = nowTime.getMonth(); 
+    const todayDateNum = nowTime.getDate(); 
+    const yestDateNum = todayDateNum - 1;
+    const currentYear = nowTime.getFullYear();
 
     const defaultMarkets = [
         { id: 'BULANDSHAHR CITY', name: 'BULANDSHAHR CITY', time: '09:00 AM', highlight: false },
@@ -683,20 +690,19 @@
         return str;
     }
 
-    const nowTime = new Date();
-    const todayDateNum = nowTime.getDate(); 
-    const yestDateNum = todayDateNum - 1;
+    const currentMonthNameShort = months[currentMonthIndex];
+    const currentMonthNameFull = monthsFull[currentMonthIndex];
 
-    document.getElementById('topDateHeader').innerText = `⚡ Fast Results of October ${yestDateNum}, 2026 & October ${todayDateNum}, 2026`;
-    document.getElementById('liveSectionDays').innerHTML = `<span>OCT. ${yestDateNum}</span><span>OCT. ${todayDateNum}</span>`;
+    document.getElementById('topDateHeader').innerText = `⚡ Fast Results of ${currentMonthNameFull} ${yestDateNum}, ${currentYear} & ${currentMonthNameFull} ${todayDateNum}, ${currentYear}`;
+    document.getElementById('liveSectionDays').innerHTML = `<span>${currentMonthNameShort.toUpperCase()}. ${yestDateNum}</span><span>${currentMonthNameShort.toUpperCase()}. ${todayDateNum}</span>`;
 
-    // --- INSTANT LOCALSTORAGE CACHE RENDERING FOR 0.1s SPEED ---
-    function renderMarketsUI(gamesMasterData, octData) {
+    // --- RENDER MARKETS UI ---
+    function renderMarketsUI(gamesMasterData, chartDataMonth) {
         const padYest = String(yestDateNum).padStart(2, '0');
         const padToday = String(todayDateNum).padStart(2, '0');
         
-        const yestData = octData[yestDateNum] || octData[padYest] || octData[String(yestDateNum)] || {};
-        const todayChartData = octData[todayDateNum] || octData[padToday] || octData[String(todayDateNum)] || {};
+        const yestData = chartDataMonth[yestDateNum] || chartDataMonth[padYest] || chartDataMonth[String(yestDateNum)] || {};
+        const todayChartData = chartDataMonth[todayDateNum] || chartDataMonth[padToday] || chartDataMonth[String(todayDateNum)] || {};
 
         const container = document.getElementById('marketsListContainer');
         container.innerHTML = '';
@@ -741,40 +747,40 @@
         });
     }
 
-    // 1. Load instantly from LocalStorage if available (Zero Delay)
+    // 1. Initial LocalStorage Cache Read for speed
+    const currentCacheKey = `${currentMonthNameShort} ${currentYear}`;
     const cachedGM = localStorage.getItem('cache_games_master');
-    const cachedOct = localStorage.getItem('cache_oct_chart');
-    if(cachedGM && cachedOct) {
-        renderMarketsUI(JSON.parse(cachedGM), JSON.parse(cachedOct));
+    const cachedCurrentMonth = localStorage.getItem(`cache_chart_${currentCacheKey}`);
+    if(cachedGM && cachedCurrentMonth) {
+        renderMarketsUI(JSON.parse(cachedGM), JSON.parse(cachedCurrentMonth));
     }
 
-    // 2. Fetch fresh data from Firebase in background and update cache
+    // 2. Fetch fresh data from Firebase
     onValue(ref(db, 'GamesMaster'), (gmSnap) => {
         const gmData = gmSnap.val() || {};
         localStorage.setItem('cache_games_master', JSON.stringify(gmData));
 
-        onValue(ref(db, 'MonthlyCharts/Oct 2026'), (chartSnap) => {
-            const octData = chartSnap.val() || {};
-            localStorage.setItem('cache_oct_chart', JSON.stringify(octData));
+        onValue(ref(db, `MonthlyCharts/${currentCacheKey}`), (chartSnap) => {
+            const chartDataMonth = chartSnap.val() || {};
+            localStorage.setItem(`cache_chart_${currentCacheKey}`, JSON.stringify(chartDataMonth));
 
-            renderMarketsUI(gmData, octData);
+            renderMarketsUI(gmData, chartDataMonth);
         });
     });
 
     window.loadChartData = function() {
-        const currentMonthName = months[currentMonthIndex];
-        const cacheKey = `${currentMonthName} 2026`;
-        document.getElementById('chartHeading1').innerText = `Main Result Chart - ${cacheKey}`;
-        document.getElementById('chartHeading2').innerText = `Other Markets Chart - ${cacheKey}`;
+        const monthName = months[currentMonthIndex];
+        const cacheKey = `${monthName} ${currentYear}`;
+        document.getElementById('chartHeading1').innerText = `Main Result Chart - ${monthName} ${currentYear}`;
+        document.getElementById('chartHeading2').innerText = `Other Markets Chart - ${monthName} ${currentYear}`;
 
         let prevIndex = (currentMonthIndex - 1 + 12) % 12;
         let nextIndex = (currentMonthIndex + 1) % 12;
-        document.getElementById('prevBtn1').innerText = `⬅️ ${months[prevIndex]} 2026`;
-        document.getElementById('nextBtn1').innerText = `${months[nextIndex]} 2026 ➡️`;
-        document.getElementById('prevBtn2').innerText = `⬅️ ${months[prevIndex]} 2026`;
-        document.getElementById('nextBtn2').innerText = `${months[nextIndex]} 2026 ➡️`;
+        document.getElementById('prevBtn1').innerText = `⬅️ ${months[prevIndex]} ${currentYear}`;
+        document.getElementById('nextBtn1').innerText = `${months[nextIndex]} ${currentYear} ➡️`;
+        document.getElementById('prevBtn2').innerText = `⬅️ ${months[prevIndex]} ${currentYear}`;
+        document.getElementById('nextBtn2').innerText = `${months[nextIndex]} ${currentYear} ➡️`;
         
-        // Check cache for monthly chart first
         const cachedChart = localStorage.getItem(`cache_chart_${cacheKey}`);
         if(cachedChart) {
             buildChartTables(JSON.parse(cachedChart));
@@ -785,6 +791,8 @@
             if (chartData) {
                 localStorage.setItem(`cache_chart_${cacheKey}`, JSON.stringify(chartData));
                 buildChartTables(chartData);
+            } else {
+                buildChartTables({});
             }
         });
     }
@@ -876,8 +884,8 @@
         const newTime = document.getElementById('gameTimeInput').value.trim();
 
         try {
-            const currentMonthName = months[currentMonthIndex];
-            const cacheKey = `${currentMonthName} 2026`;
+            const monthName = months[currentMonthIndex];
+            const cacheKey = `${monthName} ${currentYear}`;
 
             if(newScore) {
                 await set(ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${gameKey}`), newScore);
@@ -886,7 +894,7 @@
             if(newTime) {
                 await set(ref(db, `GamesMaster/${gameKey}/resultTimeStr`), newTime);
             }
-            localStorage.clear(); // Clear local cache to force refresh on update
+            localStorage.clear(); 
             alert("Successfully update ho gaya!");
             document.getElementById('resultScore').value = '';
             document.getElementById('gameTimeInput').value = '';
@@ -935,7 +943,7 @@
                 });
 
                 for(let month in groupedData) {
-                    let fullMonthKey = `${month} 2026`;
+                    let fullMonthKey = `${month} ${currentYear}`;
                     await set(ref(db, `MonthlyCharts/${fullMonthKey}`), groupedData[month]);
                 }
                 localStorage.clear();
