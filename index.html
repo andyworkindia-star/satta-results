@@ -719,34 +719,15 @@
     document.getElementById('topDateHeader').innerText = `⚡ Fast Results of ${currentMonthNameFull} ${yestDateNum}, ${currentYear} & ${currentMonthNameFull} ${todayDateNum}, ${currentYear}`;
     document.getElementById('liveSectionDays').innerHTML = `<span>${currentMonthNameShort.toUpperCase()}. ${padYestStr}</span><span>${currentMonthNameShort.toUpperCase()}. ${padTodayStr}</span>`;
 
-    function parseTimeString(timeStr) {
-        if (!timeStr) return null;
-        let parts = timeStr.trim().split(' ');
-        if (parts.length < 2) return null;
-        let timeParts = parts[0].split(':');
-        let hours = parseInt(timeParts[0], 10);
-        let minutes = parseInt(timeParts[1], 10);
-        let modifier = parts[1].toUpperCase();
-
-        if (modifier === 'PM' && hours < 12) hours += 12;
-        if (modifier === 'AM' && hours === 12) hours = 0;
-
-        let d = new Date();
-        d.setHours(hours, minutes, 0, 0);
-        return d;
-    }
-
     function renderMarketsUI(gamesMasterData, chartDataMonth) {
         const padYest = String(yestDateNum).padStart(2, '0');
         const padToday = String(todayDateNum).padStart(2, '0');
         
-        // Hamesha chart data se pichle din aur aaj ka data securely fetch karenge
         const yestData = chartDataMonth[padYest] || chartDataMonth[String(yestDateNum)] || {};
         const todayChartData = chartDataMonth[padToday] || chartDataMonth[String(todayDateNum)] || {};
 
         const container = document.getElementById('marketsListContainer');
         let htmlContent = '';
-        const currentTime = new Date();
 
         defaultMarkets.forEach(market => {
             const gmInfo = gamesMasterData[market.name] || {};
@@ -761,16 +742,11 @@
                 }
             }
 
-            let resultDateTime = parseTimeString(mTime);
-            let isTimePassed = true;
-            if (resultDateTime && currentTime < resultDateTime) {
-                isTimePassed = false;
-            }
-
             const valYest = yestData[market.name] || '--';
 
             let scoreTodayHTML = '';
-            if (!isTimePassed || !valToday || valToday === '--' || valToday === 'Wait...') {
+            // Time restriction hata di gayi hai, ab chart/database me result hone par turant dikhega
+            if (!valToday || valToday === '--' || valToday === 'Wait...') {
                 scoreTodayHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
             } else {
                 let strToday = String(valToday).trim();
