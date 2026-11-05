@@ -10,15 +10,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         :root {
-            --bg-deep: #05050a;
-            --surface-card: rgba(18, 20, 37, 0.7);
-            --surface-hover: rgba(27, 31, 58, 0.8);
-            --neon-blue: #0ea5e9;
-            --neon-green: #10b981;
-            --neon-gold: #f59e0b;
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
+            --bg-deep: #f1f5f9;
+            --surface-card: #ffffff;
+            --surface-hover: #f8fafc;
+            --neon-blue: #0284c7;
+            --neon-green: #059669;
+            --neon-gold: #d97706;
+            --border-subtle: #cbd5e1;
+            --text-main: #0f172a;
+            --text-sub: #475569;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -32,15 +32,13 @@
             padding-bottom: 50px;
             -webkit-user-select: none;
             user-select: none;
-            background-image: radial-gradient(circle at 50% -20%, #1e1b4b 0%, var(--bg-deep) 60%);
         }
         
         .container { 
             width: 100%; 
             max-width: 950px; 
             background: var(--surface-card);
-            backdrop-filter: blur(16px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.7); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
@@ -66,7 +64,7 @@
         }
         
         .app-header { 
-            background: linear-gradient(135deg, #090d16 0%, #03050a 100%); 
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); 
             padding: 35px 20px; 
             text-align: center; 
             border-top-left-radius: inherit; 
@@ -78,18 +76,16 @@
             font-size: 30px; 
             font-weight: 800; 
             letter-spacing: 0.5px; 
-            background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #34d399 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #0284c7;
             text-transform: uppercase; 
         }
         .admin-trigger-btn {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: rgba(255, 255, 255, 0.05);
+            background: #f1f5f9;
             border: 1px solid var(--border-subtle);
-            color: #93c5fd;
+            color: #0284c7;
             padding: 7px 14px;
             font-size: 11px;
             font-weight: 700;
@@ -109,7 +105,7 @@
             display: inline-block; 
             margin-top: 18px; 
             font-size: 13px; 
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); 
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2); 
             transition: transform 0.2s; 
         }
         .download-btn:hover { transform: translateY(-2px); }
@@ -128,7 +124,7 @@
             border: 2px solid rgba(52, 211, 153, 0.4);
             font-weight: 800;
             font-size: 13px;
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.5);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
             cursor: pointer;
             z-index: 9999;
             display: flex;
@@ -138,19 +134,18 @@
         }
 
         .update-bar { 
-            background: rgba(30, 27, 75, 0.5); 
-            backdrop-filter: blur(10px);
-            color: #cbd5e1; 
+            background: #fffbeb; 
+            color: #b45309; 
             padding: 14px 20px; 
             text-align: center; 
             font-size: 12px; 
             line-height: 1.6;
-            border-bottom: 1px solid var(--border-subtle);
+            border-bottom: 1px solid #fde68a;
         }
-        .update-bar a { color: #f43f5e; text-decoration: underline; font-weight: 700; cursor: pointer; }
+        .update-bar a { color: #dc2626; text-decoration: underline; font-weight: 700; cursor: pointer; }
         
         .date-header { 
-            background: linear-gradient(135deg, #047857 0%, #065f46 100%); 
+            background: linear-gradient(135deg, #059669 0%, #047857 100%); 
             color: white; 
             text-align: center; 
             padding: 15px; 
@@ -159,7 +154,7 @@
         }
         
         .section-title { 
-            background: rgba(15, 23, 42, 0.7); 
+            background: #f8fafc; 
             color: var(--neon-blue); 
             margin: 14px 16px 0 16px;
             padding: 14px 20px; 
@@ -181,7 +176,7 @@
             gap: 10px; 
             font-size: 11px; 
             font-weight: 800; 
-            color: #93c5fd; 
+            color: #0284c7; 
             width: 150px; 
             justify-content: flex-end; 
         }
@@ -189,14 +184,14 @@
             width: 68px; 
             text-align: center; 
             display: inline-block; 
-            background: rgba(3, 7, 18, 0.6);
+            background: #ffffff;
             padding: 4px 0;
             border-radius: 6px;
             border: 1px solid var(--border-subtle);
         }
         
         .result-card { 
-            background: rgba(20, 27, 45, 0.5); 
+            background: #ffffff; 
             margin: 0 16px 8px 16px; 
             padding: 14px 20px; 
             border-radius: 0 0 12px 12px; 
@@ -207,22 +202,22 @@
             border-top: none;
             transition: background 0.2s;
         }
-        .result-card:hover { background: var(--surface-hover); }
-        .result-card.highlight { background: linear-gradient(135deg, rgba(120, 53, 15, 0.25) 0%, rgba(20, 27, 45, 0.5) 100%); border-color: rgba(217, 119, 6, 0.3); }
+        .result-card:hover { background: #f1f5f9; }
+        .result-card.highlight { background: linear-gradient(135deg, #fef3c7 0%, #ffffff 100%); border-color: #f59e0b; }
         
         .game-info { display: flex; flex-direction: column; }
-        .game-name { font-weight: 800; font-size: 15px; color: #f8fafc; }
+        .game-name { font-weight: 800; font-size: 15px; color: #0f172a; }
         .game-time { font-size: 11px; color: var(--text-sub); margin-top: 2px; font-weight: 600; }
         
         .game-scores { display: flex; gap: 10px; align-items: center; width: 150px; justify-content: flex-end; }
         
         .score-box { 
-            background: #030712; 
+            background: #f8fafc; 
             padding: 6px 0; 
             border-radius: 8px; 
             font-size: 16px; 
             font-weight: 800; 
-            color: var(--neon-blue); 
+            color: #0284c7; 
             width: 68px; 
             height: 38px;
             display: flex;
@@ -230,26 +225,26 @@
             justify-content: center;
             border: 1px solid var(--border-subtle); 
         }
-        .result-card.highlight .score-box { background: #451a03; color: #fde047; border-color: rgba(180, 83, 9, 0.5); }
+        .result-card.highlight .score-box { background: #fef9c3; color: #b45309; border-color: #f59e0b; }
 
         .wait-box { 
             font-size: 10px; 
             font-weight: 700; 
-            color: var(--neon-gold); 
+            color: #d97706; 
             display: flex; 
             align-items: center; 
             justify-content: center;
             gap: 4px; 
-            background: rgba(69, 26, 3, 0.6); 
+            background: #fef3c7; 
             width: 68px; 
             height: 38px;
             border-radius: 8px; 
-            border: 1px solid rgba(180, 83, 9, 0.4); 
+            border: 1px solid #fcd34d; 
         }
         .spinner {
             width: 9px;
             height: 9px;
-            border: 2px solid var(--neon-gold);
+            border: 2px solid #d97706;
             border-top: 2px solid transparent;
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -259,11 +254,12 @@
         .tables-wrapper { display: flex; flex-direction: column; gap: 16px; padding: 6px 12px; margin-top: 10px; }
 
         .chart-container { 
-            background: rgba(20, 27, 45, 0.4); 
+            background: #ffffff; 
             margin: 5px; 
             padding: 20px; 
             border-radius: 16px; 
             border: 1px solid var(--border-subtle); 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
         .chart-heading { 
             background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); 
@@ -279,37 +275,37 @@
         .table-scroll-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
 
         .monthly-table { border-collapse: collapse; text-align: center; font-size: 12px; table-layout: fixed; width: 100%; }
-        .monthly-table th, .monthly-table td { padding: 9px 4px; border: 1px solid var(--border-subtle); font-weight: 700; color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .monthly-table th { background-color: #090d16; color: var(--neon-blue); font-size: 11px; text-transform: uppercase; }
-        .monthly-table tr:nth-child(even) { background-color: rgba(15, 23, 42, 0.3); }
+        .monthly-table th, .monthly-table td { padding: 9px 4px; border: 1px solid var(--border-subtle); font-weight: 700; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .monthly-table th { background-color: #f1f5f9; color: #0284c7; font-size: 11px; text-transform: uppercase; }
+        .monthly-table tr:nth-child(even) { background-color: #f8fafc; }
         
         .monthly-table th:first-child, .monthly-table td:first-child {
             width: 46px !important;
             min-width: 46px !important;
             position: sticky;
             left: 0;
-            background-color: #090d16;
+            background-color: #f1f5f9;
             z-index: 2;
-            border-right: 2px solid var(--neon-blue);
+            border-right: 2px solid #0284c7;
         }
-        .monthly-table th:first-child { background-color: #121826; z-index: 3; }
+        .monthly-table th:first-child { background-color: #e2e8f0; z-index: 3; }
 
         .monthly-table th:not(:first-child), .monthly-table td:not(:first-child) { 
             width: 62px !important;
             min-width: 62px !important;
         }
 
-        .highlight-digit { background-color: #78350f !important; color: #fde047 !important; font-weight: 800; display: inline-block; padding: 2px 6px; border-radius: 6px; }
+        .highlight-digit { background-color: #fef3c7 !important; color: #b45309 !important; font-weight: 800; display: inline-block; padding: 2px 6px; border-radius: 6px; }
 
         .month-buttons { display: flex; gap: 12px; margin-top: 16px; }
-        .month-btn { flex: 1; background-color: #090d16; color: #93c5fd; border: 1px solid var(--border-subtle); padding: 12px; border-radius: 10px; font-size: 12px; font-weight: 700; text-align: center; cursor: pointer; transition: background 0.2s; }
-        .month-btn:hover { background-color: var(--neon-blue); color: #fff; }
+        .month-btn { flex: 1; background-color: #f1f5f9; color: #0284c7; border: 1px solid var(--border-subtle); padding: 12px; border-radius: 10px; font-size: 12px; font-weight: 700; text-align: center; cursor: pointer; transition: background 0.2s; }
+        .month-btn:hover { background-color: #0284c7; color: #fff; }
 
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(3, 5, 10, 0.85);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(5px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -317,8 +313,8 @@
             padding: 15px;
         }
         .modal-content {
-            background: #0e1322;
-            color: #f8fafc;
+            background: #ffffff;
+            color: #0f172a;
             width: 100%;
             max-width: 500px;
             max-height: 85vh;
@@ -326,20 +322,20 @@
             padding: 24px;
             overflow-y: auto;
             border: 1px solid var(--border-subtle);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
             position: relative;
         }
-        .modal-header { font-size: 15px; font-weight: 800; color: #60a5fa; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; text-align: center; }
+        .modal-header { font-size: 15px; font-weight: 800; color: #0284c7; margin-bottom: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; text-align: center; }
         .close-btn { background: #ef4444; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .modal-body { font-size: 12px; line-height: 1.6; color: #cbd5e1; }
-        .modal-body h3 { font-size: 14px; font-weight: 800; color: #f8fafc; margin-top: 14px; margin-bottom: 4px; }
+        .modal-body { font-size: 12px; line-height: 1.6; color: #334155; }
+        .modal-body h3 { font-size: 14px; font-weight: 800; color: #0f172a; margin-top: 14px; margin-bottom: 4px; }
         .modal-body ul { margin-left: 20px; margin-top: 6px; }
 
         .khaiwal-table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 16px;
-            background: #070a14;
+            background: #f8fafc;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border-subtle);
@@ -349,28 +345,28 @@
             font-size: 12px;
             font-weight: 700;
             border-bottom: 1px solid var(--border-subtle);
-            color: #e2e8f0;
+            color: #1e293b;
             text-align: left;
         }
-        .khaiwal-table td:last-child { text-align: right; color: var(--neon-blue); }
+        .khaiwal-table td:last-child { text-align: right; color: #0284c7; }
         
         .rate-box-row { display: flex; gap: 12px; margin-bottom: 16px; }
         .rate-card {
             flex: 1;
-            background: #070a14;
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
             padding: 12px;
             border-radius: 10px;
             text-align: center;
             font-size: 13px;
             font-weight: 800;
-            color: #fde047;
+            color: #b45309;
         }
         .khaiwal-footer-text {
             text-align: center;
             font-size: 12px;
             font-weight: 700;
-            color: var(--neon-gold);
+            color: #d97706;
             margin-bottom: 16px;
             line-height: 1.5;
         }
@@ -384,13 +380,13 @@
             display: block;
             text-align: center;
             font-size: 13px;
-            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.2);
         }
 
         .form-group { margin-bottom: 14px; display: flex; flex-direction: column; }
-        label { font-size: 12px; margin-bottom: 6px; color: #93c5fd; font-weight: 700; }
-        input, select { padding: 12px; border-radius: 10px; border: 1px solid var(--border-subtle); background: #070a14; color: #fff; font-size: 13px; outline: none; }
-        input:focus, select:focus { border-color: var(--neon-blue); }
+        label { font-size: 12px; margin-bottom: 6px; color: #0284c7; font-weight: 700; }
+        input, select { padding: 12px; border-radius: 10px; border: 1px solid var(--border-subtle); background: #f8fafc; color: #0f172a; font-size: 13px; outline: none; }
+        input:focus, select:focus { border-color: #0284c7; background: #fff; }
         .admin-btn { background: #059669; color: white; border: none; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 6px; transition: background 0.2s; }
         .admin-btn:hover { background: #10b981; }
         .excel-box { margin-top: 18px; border-top: 1px dashed var(--border-subtle); padding-top: 18px; }
@@ -406,7 +402,7 @@
     <header class="app-header">
         <button class="admin-trigger-btn" onclick="openAdminModal()">🔐 Admin Login</button>
         <h2>Gali Disawar Kingg</h2>
-        <p style="font-size: 12px; margin-top: 8px; color: #93c5fd; line-height: 1.5; font-weight: 500;">गेम खेलने के लिए हमारा ऑफिशियल एंड्रॉइड ऐप अभी डाउनलोड करें, और अपने दोस्तों को शेयर करें। रेफेरल में अपना मोबाइल नंबर डालें और कंपनी के मुनाफे पर लाइफटाइम 7% कमीशन पाएं!</p>
+        <p style="font-size: 12px; margin-top: 8px; color: #475569; line-height: 1.5; font-weight: 500;">गेम खेलने के लिए हमारा ऑफिशियल एंड्रॉइड ऐप अभी डाउनलोड करें, और अपने दोस्तों को शेयर करें। रेफेरल में अपना मोबाइल नंबर डालें और कंपनी के मुनाफे पर लाइफटाइम 7% कमीशन पाएं!</p>
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
     </header>
 
@@ -616,7 +612,7 @@
                 <button class="admin-btn" onclick="updateMarketData()">Save Result / Time</button>
 
                 <div class="excel-box">
-                    <label style="color: #60a5fa; font-weight: bold; margin-bottom: 6px; display: block;">📂 Poore Saal ka Excel Data Upload Karein</label>
+                    <label style="color: #0284c7; font-weight: bold; margin-bottom: 6px; display: block;">📂 Poore Saal ka Excel Data Upload Karein</label>
                     <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" style="margin-bottom: 8px; font-size: 12px;">
                     <button class="admin-btn" style="background: #2563eb;" onclick="uploadExcelData()">Upload & Save All Data</button>
                 </div>
@@ -656,7 +652,6 @@
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const monthsFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     
-    // सिस्टम की असली तारीख से महीने का इंडेक्स डायनेमिक उठाएं (जैसे नवंबर के लिए 10)
     const nowTime = new Date();
     let currentMonthIndex = nowTime.getMonth(); 
     const todayDateNum = nowTime.getDate(); 
@@ -696,7 +691,6 @@
     document.getElementById('topDateHeader').innerText = `⚡ Fast Results of ${currentMonthNameFull} ${yestDateNum}, ${currentYear} & ${currentMonthNameFull} ${todayDateNum}, ${currentYear}`;
     document.getElementById('liveSectionDays').innerHTML = `<span>${currentMonthNameShort.toUpperCase()}. ${yestDateNum}</span><span>${currentMonthNameShort.toUpperCase()}. ${todayDateNum}</span>`;
 
-    // --- RENDER MARKETS UI ---
     function renderMarketsUI(gamesMasterData, chartDataMonth) {
         const padYest = String(yestDateNum).padStart(2, '0');
         const padToday = String(todayDateNum).padStart(2, '0');
@@ -747,7 +741,6 @@
         });
     }
 
-    // 1. Initial LocalStorage Cache Read for speed
     const currentCacheKey = `${currentMonthNameShort} ${currentYear}`;
     const cachedGM = localStorage.getItem('cache_games_master');
     const cachedCurrentMonth = localStorage.getItem(`cache_chart_${currentCacheKey}`);
@@ -755,7 +748,6 @@
         renderMarketsUI(JSON.parse(cachedGM), JSON.parse(cachedCurrentMonth));
     }
 
-    // 2. Fetch fresh data from Firebase
     onValue(ref(db, 'GamesMaster'), (gmSnap) => {
         const gmData = gmSnap.val() || {};
         localStorage.setItem('cache_games_master', JSON.stringify(gmData));
