@@ -594,7 +594,6 @@
                     </select>
                 </div>
 
-                <!-- 2 Column Grid for Month & Date -->
                 <div class="form-row">
                     <div class="form-group">
                         <label>Month Select Karein</label>
@@ -619,7 +618,6 @@
                     </div>
                 </div>
 
-                <!-- 2 Column Grid for Score & Time -->
                 <div class="form-row">
                     <div class="form-group">
                         <label>New Result Number (Score)</label>
@@ -915,8 +913,8 @@
             alert("Successfully update ho gaya!");
             document.getElementById('resultScore').value = '';
             document.getElementById('gameTimeInput').value = '';
-            closeAdminModal();
-            window.location.reload();
+            // window.location.reload() yahan se hata diya gaya hai taaki admin window apne aap band na ho
+            window.loadChartData(); // Background mein chart update ho jayega
         } catch(e) {
             console.error(e);
             alert("Error aayi update karne me!");
@@ -966,7 +964,7 @@
                 localStorage.clear();
                 alert("Poora saal ka data successfully upload ho gaya!");
                 fileInput.value = '';
-                window.location.reload();
+                window.loadChartData(); // Background mein data refresh ho jayega bina page reload kiye
             } catch (err) {
                 console.error(err);
                 alert("File read karne me error aayi.");
