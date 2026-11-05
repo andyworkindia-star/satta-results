@@ -7,7 +7,6 @@
     <meta name="description" content="Gali Disawar Kingg - Fast results, monthly charts, and gaming portal for Faridabad, Ghaziabad, Gali, and Disawar.">
     <meta name="keywords" content="Gali Disawar King, Satta result, Faridabad result, Ghaziabad result, Gali chart, Disawar chart">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         :root {
             --bg-deep: #f1f5f9;
@@ -79,21 +78,6 @@
             color: #0284c7;
             text-transform: uppercase; 
         }
-        .admin-trigger-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #f1f5f9;
-            border: 1px solid var(--border-subtle);
-            color: #0284c7;
-            padding: 7px 14px;
-            font-size: 11px;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .admin-trigger-btn:hover { background: var(--neon-blue); color: #fff; border-color: var(--neon-blue); }
 
         .download-btn { 
             background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
@@ -382,17 +366,6 @@
             font-size: 13px;
             box-shadow: 0 6px 15px rgba(16, 185, 129, 0.2);
         }
-
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .form-group { margin-bottom: 14px; display: flex; flex-direction: column; }
-        label { font-size: 12px; margin-bottom: 6px; color: #0284c7; font-weight: 700; }
-        input, select { padding: 12px; border-radius: 10px; border: 1px solid var(--border-subtle); background: #f8fafc; color: #0f172a; font-size: 13px; outline: none; width: 100%; }
-        input:focus, select:focus { border-color: #0284c7; background: #fff; }
-        .admin-btn { background: #059669; color: white; border: none; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 6px; transition: background 0.2s; }
-        .admin-btn:hover { background: #10b981; }
-        .delete-btn-custom { background: #dc2626; color: white; border: none; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 6px; transition: background 0.2s; }
-        .delete-btn-custom:hover { background: #b91c1c; }
-        .excel-box { margin-top: 18px; border-top: 1px dashed var(--border-subtle); padding-top: 18px; }
     </style>
 </head>
 <body>
@@ -403,7 +376,6 @@
 
 <div class="container">
     <header class="app-header">
-        <button class="admin-trigger-btn" onclick="openAdminModal()">🔐 Admin Login</button>
         <h2>Gali Disawar Kingg</h2>
         <p style="font-size: 12px; margin-top: 8px; color: #475569; line-height: 1.5; font-weight: 500;">गेम खेलने के लिए हमारा ऑफिशियल एंड्रॉइड ऐप अभी डाउनलोड करें, और अपने दोस्तों को शेयर करें। रेफेरल में अपना मोबाइल नंबर डालें और कंपनी के मुनाफे पर लाइफटाइम 7% कमीशन पाएं!</p>
         <a href="https://drive.google.com/uc?export=download&id=1JfV3dwOf2shroLShkiaM0Trriugr0VWT" class="download-btn">📥 Download Android App</a>
@@ -563,100 +535,9 @@
     </div>
 </div>
 
-<!-- SECURE ADMIN MODAL (BLANK FIELDS) -->
-<div id="adminModal" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span>🔐 Admin Control Panel</span>
-            <button class="close-btn" onclick="closeAdminModal()">✕</button>
-        </div>
-        <div class="modal-body">
-            <div id="loginBox">
-                <div class="form-group">
-                    <label>Admin Email</label>
-                    <input type="email" id="adminEmail">
-                </div>
-                <div class="form-group">
-                    <label>Admin Password</label>
-                    <input type="password" id="adminPass">
-                </div>
-                <button class="admin-btn" onclick="checkLogin()">Login</button>
-            </div>
-
-            <div id="panelBox" style="display: none;">
-                <div class="form-group">
-                    <label>Market Select Karein</label>
-                    <select id="gameName">
-                        <option value="BULANDSHAHR CITY">BULANDSHAHR CITY</option>
-                        <option value="ALIGARH CITY">ALIGARH CITY</option>
-                        <option value="NOIDA NCR">NOIDA NCR</option>
-                        <option value="DELHI BAZAR">DELHI BAZAR</option>
-                        <option value="SHREE GANESH">SHREE GANESH</option>
-                        <option value="FARIDABAD">FARIDABAD</option>
-                        <option value="MATHURA KING">MATHURA KING</option>
-                        <option value="GHAZIABAD">GHAZIABAD</option>
-                        <option value="GALI">GALI</option>
-                        <option value="DISAWAR">DISAWAR</option>
-                    </select>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Month Select Karein</label>
-                        <select id="adminMonthSelect">
-                            <option value="Jan">January</option>
-                            <option value="Feb">February</option>
-                            <option value="Mar">March</option>
-                            <option value="Apr">April</option>
-                            <option value="May">May</option>
-                            <option value="Jun">June</option>
-                            <option value="Jul">July</option>
-                            <option value="Aug">August</option>
-                            <option value="Sep">September</option>
-                            <option value="Oct">October</option>
-                            <option value="Nov">November</option>
-                            <option value="Dec">December</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Date (Tarik Select Karein)</label>
-                        <select id="resultDateInput"></select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>New Result Number (Score)</label>
-                    <input type="text" id="resultScore" placeholder="Jaise: 45">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Close Time</label>
-                        <input type="text" id="closeTimeInput" placeholder="Jaise: 05:30 PM">
-                    </div>
-                    <div class="form-group">
-                        <label>Result Time</label>
-                        <input type="text" id="resultTimeInput" placeholder="Jaise: 05:50 PM">
-                    </div>
-                </div>
-
-                <button class="admin-btn" onclick="updateMarketData()">Save Result / Times</button>
-                <button class="delete-btn-custom" onclick="deleteMarketResult()">🗑️ Delete Selected Date Result</button>
-
-                <div class="excel-box">
-                    <label style="color: #0284c7; font-weight: bold; margin-bottom: 6px; display: block;">📂 Poore Saal ka Excel Data Upload Karein</label>
-                    <input type="file" id="excelFile" accept=".xlsx, .xls, .csv" style="margin-bottom: 8px; font-size: 12px;">
-                    <button class="admin-btn" style="background: #2563eb;" onclick="uploadExcelData()">Upload & Save All Data</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, onValue, set, remove, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => {
@@ -679,7 +560,6 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    const auth = getAuth(app);
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const monthsFull = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -914,161 +794,6 @@
 
     window.openTermsModal = () => document.getElementById('termsModal').style.display = 'flex';
     window.closeTermsModal = () => document.getElementById('termsModal').style.display = 'none';
-
-    window.openAdminModal = () => {
-        document.getElementById('adminModal').style.display = 'flex';
-        
-        const dateSelect = document.getElementById('resultDateInput');
-        if(dateSelect.children.length === 0) {
-            for(let i = 1; i <= 31; i++) {
-                let opt = document.createElement('option');
-                let formattedVal = String(i).padStart(2, '0');
-                opt.value = formattedVal;
-                opt.innerText = formattedVal;
-                dateSelect.appendChild(opt);
-            }
-        }
-
-        const dTime = new Date();
-        dateSelect.value = String(dTime.getDate()).padStart(2, '0');
-        document.getElementById('adminMonthSelect').value = months[currentMonthIndex];
-    };
-    
-    window.closeAdminModal = () => document.getElementById('adminModal').style.display = 'none';
-
-    // --- FIREBASE AUTHENTICATION LOGIN ---
-    window.checkLogin = async function() {
-        const email = document.getElementById('adminEmail').value.trim();
-        const pass = document.getElementById('adminPass').value.trim();
-
-        if (!email || !pass) {
-            alert("Kripya Email aur Password dono daalein!");
-            return;
-        }
-
-        try {
-            await signInWithEmailAndPassword(auth, email, pass);
-            document.getElementById('loginBox').style.display = 'none';
-            document.getElementById('panelBox').style.display = 'block';
-            alert("Login Successful!");
-        } catch (error) {
-            console.error(error);
-            alert("Login Failed: Galat Email ya Password!");
-        }
-    }
-    // -------------------------------------
-
-    window.updateMarketData = async function() {
-        const gameKey = document.getElementById('gameName').value;
-        const selectedMonth = document.getElementById('adminMonthSelect').value;
-        const targetDate = document.getElementById('resultDateInput').value;
-        const newScore = document.getElementById('resultScore').value.trim();
-        const closeTime = document.getElementById('closeTimeInput').value.trim();
-        const resultTime = document.getElementById('resultTimeInput').value.trim();
-
-        try {
-            const cacheKey = `${selectedMonth} ${currentYear}`;
-            let paddedDate = String(targetDate).padStart(2, '0');
-
-            if(newScore) {
-                await set(ref(db, `MonthlyCharts/${cacheKey}/${paddedDate}/${gameKey}`), newScore);
-
-                if(selectedMonth === months[nowTime.getMonth()] && Number(targetDate) === todayDateNum) {
-                    await set(ref(db, `GamesMaster/${gameKey}/resultNumber`), newScore);
-                }
-            }
-            if(closeTime) {
-                await set(ref(db, `GamesMaster/${gameKey}/closeTimeStr`), closeTime);
-            }
-            if(resultTime) {
-                await set(ref(db, `GamesMaster/${gameKey}/resultTimeStr`), resultTime);
-            }
-            
-            localStorage.clear(); 
-            alert("Successfully update ho gaya!");
-            document.getElementById('resultScore').value = '';
-            document.getElementById('closeTimeInput').value = '';
-            document.getElementById('resultTimeInput').value = '';
-            window.loadChartData(); 
-        } catch(e) {
-            console.error(e);
-            alert("Error aayi update karne me!");
-        }
-    }
-
-    window.deleteMarketResult = async function() {
-        const gameKey = document.getElementById('gameName').value;
-        const selectedMonth = document.getElementById('adminMonthSelect').value;
-        const targetDate = document.getElementById('resultDateInput').value;
-
-        if(confirm(`${selectedMonth} ki date ${targetDate} ko ${gameKey} ka result delete karna chahte hain?`)) {
-            try {
-                const cacheKey = `${selectedMonth} ${currentYear}`;
-                let paddedDate = String(targetDate).padStart(2, '0');
-                let unpaddedDate = String(parseInt(targetDate, 10));
-
-                await remove(ref(db, `MonthlyCharts/${cacheKey}/${paddedDate}/${gameKey}`));
-                await remove(ref(db, `MonthlyCharts/${cacheKey}/${unpaddedDate}/${gameKey}`));
-
-                if(selectedMonth === months[nowTime.getMonth()] && Number(targetDate) === todayDateNum) {
-                    await set(ref(db, `GamesMaster/${gameKey}/resultNumber`), '--');
-                }
-
-                localStorage.clear();
-                alert("Result successfully delete ho gaya!");
-                window.loadChartData();
-            } catch(e) {
-                console.error(e);
-                alert("Delete karne me error aayi!");
-            }
-        }
-    }
-
-    window.uploadExcelData = function() {
-        const fileInput = document.getElementById('excelFile');
-        const file = fileInput.files[0];
-        if(!file) { alert("Kripya Excel file select karein!"); return; }
-
-        const reader = new FileReader();
-        reader.onload = async function(e) {
-            try {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, {type: 'array'});
-                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-                const jsonRows = XLSX.utils.sheet_to_json(worksheet);
-
-                let groupedData = {};
-                jsonRows.forEach(row => {
-                    let m = row.month || row.MONTH || row.Month;
-                    let d = row.date || row.DATE || row.Date;
-                    if(m && d) {
-                        let monthKey = String(m).trim();
-                        let dateKey = String(parseInt(d, 10)).padStart(2, '0');
-                        if(!groupedData[monthKey]) groupedData[monthKey] = {};
-                        if(!groupedData[monthKey][dateKey]) groupedData[monthKey][dateKey] = {};
-                        
-                        let markets = ['BULANDSHAHR CITY', 'ALIGARH CITY', 'NOIDA NCR', 'DELHI BAZAR', 'SHREE GANESH', 'FARIDABAD', 'MATHURA KING', 'GHAZIABAD', 'GALI', 'DISAWAR'];
-                        markets.forEach(mkt => {
-                            if(row[mkt]) groupedData[monthKey][dateKey][mkt] = row[mkt];
-                        });
-                    }
-                });
-
-                for(let month in groupedData) {
-                    let fullMonthKey = `${month} ${currentYear}`;
-                    await set(ref(db, `MonthlyCharts/${fullMonthKey}`), groupedData[month]);
-                }
-                localStorage.clear();
-                alert("Poora saal ka data successfully upload ho gaya!");
-                fileInput.value = '';
-                window.loadChartData(); 
-            } catch (err) {
-                console.error(err);
-                alert("File read karne me error aayi.");
-            }
-        };
-        reader.readAsArrayBuffer(file);
-    }
 </script>
 
 </body>
