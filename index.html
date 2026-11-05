@@ -625,7 +625,6 @@
                     <input type="text" id="resultScore" placeholder="Jaise: 45">
                 </div>
 
-                <!-- Close Time aur Result Time ke liye 2 Alag Columns -->
                 <div class="form-row">
                     <div class="form-group">
                         <label>Close Time</label>
@@ -786,7 +785,7 @@
             let mergedMonthData = {};
             
             Object.keys(rawData).forEach(d => {
-                let cleanDate = String(parseInt(d, 10));
+                let cleanDate = String(parseInt(d, 10)).padStart(2, '0');
                 if(!mergedMonthData[cleanDate]) mergedMonthData[cleanDate] = {};
                 Object.assign(mergedMonthData[cleanDate], rawData[d]);
             });
@@ -819,7 +818,7 @@
             if (rawData) {
                 let mergedMonthData = {};
                 Object.keys(rawData).forEach(d => {
-                    let cleanDate = String(parseInt(d, 10));
+                    let cleanDate = String(parseInt(d, 10)).padStart(2, '0');
                     if(!mergedMonthData[cleanDate]) mergedMonthData[cleanDate] = {};
                     Object.assign(mergedMonthData[cleanDate], rawData[d]);
                 });
@@ -843,8 +842,9 @@
         Object.keys(chartData).forEach(dateKey => {
             let numKey = parseInt(dateKey, 10);
             if(!isNaN(numKey)) {
-                if(!cleanMap[numKey]) cleanMap[numKey] = {};
-                Object.assign(cleanMap[numKey], chartData[dateKey]);
+                let paddedKey = String(numKey).padStart(2, '0');
+                if(!cleanMap[paddedKey]) cleanMap[paddedKey] = {};
+                Object.assign(cleanMap[paddedKey], chartData[dateKey]);
             }
         });
 
@@ -860,9 +860,8 @@
             return;
         }
 
-        activeDates.forEach(date => {
-            const r = cleanMap[date];
-            let dateStr = String(date).padStart(2, '0');
+        activeDates.forEach(dateStr => {
+            const r = cleanMap[dateStr];
 
             rows1 += `
                 <tr>
@@ -913,14 +912,15 @@
         if(dateSelect.children.length === 0) {
             for(let i = 1; i <= 31; i++) {
                 let opt = document.createElement('option');
-                opt.value = i;
-                opt.innerText = i;
+                let formattedVal = String(i).padStart(2, '0');
+                opt.value = formattedVal;
+                opt.innerText = formattedVal;
                 dateSelect.appendChild(opt);
             }
         }
 
         const dTime = new Date();
-        dateSelect.value = dTime.getDate();
+        dateSelect.value = String(dTime.getDate()).padStart(2, '0');
         document.getElementById('adminMonthSelect').value = months[currentMonthIndex];
     };
     
@@ -940,16 +940,20 @@
     window.updateMarketData = async function() {
         const gameKey = document.getElementById('gameName').value;
         const selectedMonth = document.getElementById('adminMonthSelect').value;
-        const targetDate = document.getElementById('resultDateInput').value;
+        const targetDate = document.getElementById('resultDateInput').value; // Ab ye '01', '02' format me aayega
         const newScore = document.getElementById('resultScore').value.trim();
         const closeTime = document.getElementById('closeTimeInput').value.trim();
         const resultTime = document.getElementById('resultTimeInput').value.trim();
 
         try {
             const cacheKey = `${selectedMonth} ${currentYear}`;
+            let paddedDate = String(targetDate).padStart(2, '0');
+            let unpaddedDate = String(parseInt(targetDate, 10));
 
             if(newScore) {
-                await set(ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${gameKey}`), newScore);
+                await set(ref(db, `MonthlyCharts/${cacheKey}/${paddedDate}/${gameKey}`), newScore);
+                await set(ref(db, `MonthlyCharts/${cacheKey}/${unpaddedDate}/${gameKey}`), newScore);
+
                 if(selectedMonth === months[nowTime.getMonth()] && Number(targetDate) === todayDateNum) {
                     await set(ref(db, `GamesMaster/${gameKey}/resultNumber`), newScore);
                 }
@@ -981,8 +985,11 @@
         if(confirm(`${selectedMonth} ki date ${targetDate} ko ${gameKey} ka result delete karna chahte hain?`)) {
             try {
                 const cacheKey = `${selectedMonth} ${currentYear}`;
-                const targetRef = ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${gameKey}`);
-                await remove(targetRef);
+                let paddedDate = String(targetDate).padStart(2, '0');
+                let unpaddedDate = String(parseInt(targetDate, 10));
+
+                await remove(ref(db, `MonthlyCharts/${cacheKey}/${paddedDate}/${gameKey}`));
+                await remove(ref(db, `MonthlyCharts/${cacheKey}/${unpaddedDate}/${gameKey}`));
 
                 if(selectedMonth === months[nowTime.getMonth()] && Number(targetDate) === todayDateNum) {
                     await set(ref(db, `GamesMaster/${gameKey}/resultNumber`), '--');
@@ -1017,7 +1024,7 @@
                     let d = row.date || row.DATE || row.Date;
                     if(m && d) {
                         let monthKey = String(m).trim();
-                        let dateKey = String(parseInt(d, 10));
+                        let dateKey = String(parseInt(d, 10)).padStart(2, '0');
                         if(!groupedData[monthKey]) groupedData[monthKey] = {};
                         if(!groupedData[monthKey][dateKey]) groupedData[monthKey][dateKey] = {};
                         
