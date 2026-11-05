@@ -740,8 +740,9 @@
         const padYest = String(yestDateNum).padStart(2, '0');
         const padToday = String(todayDateNum).padStart(2, '0');
         
-        const yestData = chartDataMonth[padYest] || {};
-        const todayChartData = chartDataMonth[padToday] || {};
+        // Hamesha chart data se pichle din aur aaj ka data securely fetch karenge
+        const yestData = chartDataMonth[padYest] || chartDataMonth[String(yestDateNum)] || {};
+        const todayChartData = chartDataMonth[padToday] || chartDataMonth[String(todayDateNum)] || {};
 
         const container = document.getElementById('marketsListContainer');
         let htmlContent = '';
@@ -968,7 +969,7 @@
     window.updateMarketData = async function() {
         const gameKey = document.getElementById('gameName').value;
         const selectedMonth = document.getElementById('adminMonthSelect').value;
-        const targetDate = document.getElementById('resultDateInput').value; // Ab ye hamesha '01', '02' hoga
+        const targetDate = document.getElementById('resultDateInput').value;
         const newScore = document.getElementById('resultScore').value.trim();
         const closeTime = document.getElementById('closeTimeInput').value.trim();
         const resultTime = document.getElementById('resultTimeInput').value.trim();
@@ -978,7 +979,6 @@
             let paddedDate = String(targetDate).padStart(2, '0');
 
             if(newScore) {
-                // Sirf double-digit format ('01', '02') mein save hoga taaki duplicate node na bane
                 await set(ref(db, `MonthlyCharts/${cacheKey}/${paddedDate}/${gameKey}`), newScore);
 
                 if(selectedMonth === months[nowTime.getMonth()] && Number(targetDate) === todayDateNum) {
@@ -1015,7 +1015,6 @@
                 let paddedDate = String(targetDate).padStart(2, '0');
                 let unpaddedDate = String(parseInt(targetDate, 10));
 
-                // Dono single aur double digit nodes ko ek sath remove karenge taaki koi residue na bache
                 await remove(ref(db, `MonthlyCharts/${cacheKey}/${paddedDate}/${gameKey}`));
                 await remove(ref(db, `MonthlyCharts/${cacheKey}/${unpaddedDate}/${gameKey}`));
 
@@ -1052,7 +1051,7 @@
                     let d = row.date || row.DATE || row.Date;
                     if(m && d) {
                         let monthKey = String(m).trim();
-                        let dateKey = String(parseInt(d, 10)).padStart(2, '0'); // Hamesha double digit format
+                        let dateKey = String(parseInt(d, 10)).padStart(2, '0');
                         if(!groupedData[monthKey]) groupedData[monthKey] = {};
                         if(!groupedData[monthKey][dateKey]) groupedData[monthKey][dateKey] = {};
                         
