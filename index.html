@@ -390,6 +390,8 @@
         input:focus, select:focus { border-color: #0284c7; background: #fff; }
         .admin-btn { background: #059669; color: white; border: none; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 6px; transition: background 0.2s; }
         .admin-btn:hover { background: #10b981; }
+        .delete-btn-custom { background: #dc2626; color: white; border: none; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 6px; transition: background 0.2s; }
+        .delete-btn-custom:hover { background: #b91c1c; }
         .excel-box { margin-top: 18px; border-top: 1px dashed var(--border-subtle); padding-top: 18px; }
     </style>
 </head>
@@ -618,18 +620,25 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label>New Result Number (Score)</label>
+                    <input type="text" id="resultScore" placeholder="Jaise: 45">
+                </div>
+
+                <!-- Close Time aur Result Time ke liye 2 Alag Columns -->
                 <div class="form-row">
                     <div class="form-group">
-                        <label>New Result Number (Score)</label>
-                        <input type="text" id="resultScore" placeholder="Jaise: 45 ya -- hatane ke liye">
+                        <label>Close Time</label>
+                        <input type="text" id="closeTimeInput" placeholder="Jaise: 05:30 PM">
                     </div>
                     <div class="form-group">
-                        <label>Market Time (Schedule)</label>
-                        <input type="text" id="gameTimeInput" placeholder="Jaise: at 06:00 PM">
+                        <label>Result Time</label>
+                        <input type="text" id="resultTimeInput" placeholder="Jaise: 05:50 PM">
                     </div>
                 </div>
 
-                <button class="admin-btn" onclick="updateMarketData()">Save Result / Time</button>
+                <button class="admin-btn" onclick="updateMarketData()">Save Result / Times</button>
+                <button class="delete-btn-custom" onclick="deleteMarketResult()">🗑️ Delete Selected Date Result</button>
 
                 <div class="excel-box">
                     <label style="color: #0284c7; font-weight: bold; margin-bottom: 6px; display: block;">📂 Poore Saal ka Excel Data Upload Karein</label>
@@ -933,34 +942,59 @@
         const selectedMonth = document.getElementById('adminMonthSelect').value;
         const targetDate = document.getElementById('resultDateInput').value;
         const newScore = document.getElementById('resultScore').value.trim();
-        const newTime = document.getElementById('gameTimeInput').value.trim();
+        const closeTime = document.getElementById('closeTimeInput').value.trim();
+        const resultTime = document.getElementById('resultTimeInput').value.trim();
 
         try {
             const cacheKey = `${selectedMonth} ${currentYear}`;
-            const targetRef = ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${gameKey}`);
 
-            if(newScore === '' || newScore === '--') {
-                // Agar score khali ya '--' daala hai toh database se us result ko delete/remove kar do
-                await remove(targetRef);
-            } else if(newScore) {
-                await set(targetRef, newScore);
+            if(newScore) {
+                await set(ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${gameKey}`), newScore);
                 if(selectedMonth === months[nowTime.getMonth()] && Number(targetDate) === todayDateNum) {
                     await set(ref(db, `GamesMaster/${gameKey}/resultNumber`), newScore);
                 }
             }
-
-            if(newTime) {
-                await set(ref(db, `GamesMaster/${gameKey}/resultTimeStr`), newTime);
+            if(closeTime) {
+                await set(ref(db, `GamesMaster/${gameKey}/closeTimeStr`), closeTime);
             }
-
+            if(resultTime) {
+                await set(ref(db, `GamesMaster/${gameKey}/resultTimeStr`), resultTime);
+            }
+            
             localStorage.clear(); 
             alert("Successfully update ho gaya!");
             document.getElementById('resultScore').value = '';
-            document.getElementById('gameTimeInput').value = '';
+            document.getElementById('closeTimeInput').value = '';
+            document.getElementById('resultTimeInput').value = '';
             window.loadChartData(); 
         } catch(e) {
             console.error(e);
             alert("Error aayi update karne me!");
+        }
+    }
+
+    window.deleteMarketResult = async function() {
+        const gameKey = document.getElementById('gameName').value;
+        const selectedMonth = document.getElementById('adminMonthSelect').value;
+        const targetDate = document.getElementById('resultDateInput').value;
+
+        if(confirm(`${selectedMonth} ki date ${targetDate} ko ${gameKey} ka result delete karna chahte hain?`)) {
+            try {
+                const cacheKey = `${selectedMonth} ${currentYear}`;
+                const targetRef = ref(db, `MonthlyCharts/${cacheKey}/${targetDate}/${gameKey}`);
+                await remove(targetRef);
+
+                if(selectedMonth === months[nowTime.getMonth()] && Number(targetDate) === todayDateNum) {
+                    await set(ref(db, `GamesMaster/${gameKey}/resultNumber`), '--');
+                }
+
+                localStorage.clear();
+                alert("Result successfully delete ho gaya!");
+                window.loadChartData();
+            } catch(e) {
+                console.error(e);
+                alert("Delete karne me error aayi!");
+            }
         }
     }
 
