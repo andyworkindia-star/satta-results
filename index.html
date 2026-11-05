@@ -773,9 +773,18 @@
         localStorage.setItem('cache_games_master', JSON.stringify(gmData));
 
         onValue(ref(db, `MonthlyCharts/${currentCacheKey}`), (chartSnap) => {
-            const chartDataMonth = chartSnap.val() || {};
-            localStorage.setItem(`cache_chart_${currentCacheKey}`, JSON.stringify(chartDataMonth));
-            renderMarketsUI(gmData, chartDataMonth);
+            let rawData = chartSnap.val() || {};
+            let mergedMonthData = {};
+            
+            // Fix duplicate dates by merging objects if they are split or stored with mixed types
+            Object.keys(rawData).forEach(d => {
+                let cleanDate = String(parseInt(d, 10)); // '01' and '1' becomes '1'
+                if(!mergedMonthData[cleanDate]) mergedMonthData[cleanDate] = {};
+                Object.assign(mergedMonthData[cleanDate], rawData[d]);
+            });
+
+            localStorage.setItem(`cache_chart_${currentCacheKey}`, JSON.stringify(mergedMonthData));
+            renderMarketsUI(gmData, mergedMonthData);
         }, { onlyOnce: true });
     }, { onlyOnce: true });
 
@@ -798,10 +807,17 @@
         }
 
         get(ref(db, `MonthlyCharts/${cacheKey}`)).then((snapshot) => {
-            const chartData = snapshot.val();
-            if (chartData) {
-                localStorage.setItem(`cache_chart_${cacheKey}`, JSON.stringify(chartData));
-                buildChartTables(chartData);
+            let rawData = snapshot.val();
+            if (rawData) {
+                let mergedMonthData = {};
+                Object.keys(rawData).forEach(d => {
+                    let cleanDate = String(parseInt(d, 10));
+                    if(!mergedMonthData[cleanDate]) mergedMonthData[cleanDate] = {};
+                    Object.assign(mergedMonthData[cleanDate], rawData[d]);
+                });
+
+                localStorage.setItem(`cache_chart_${cacheKey}`, JSON.stringify(mergedMonthData));
+                buildChartTables(mergedMonthData);
             } else if (!cachedChart) {
                 buildChartTables({});
             }
@@ -815,8 +831,18 @@
         let rows1 = '';
         let rows2 = '';
         
-        const activeDates = Object.keys(chartData).filter(date => {
-            const r = chartData[date];
+        // Clean and group dates properly to avoid duplication
+        let cleanMap = {};
+        Object.keys(chartData).forEach(dateKey => {
+            let numKey = parseInt(dateKey, 10);
+            if(!isNaN(numKey)) {
+                if(!cleanMap[numKey]) cleanMap[numKey] = {};
+                Object.assign(cleanMap[numKey], chartData[dateKey]);
+            }
+        });
+
+        const activeDates = Object.keys(cleanMap).filter(date => {
+            const r = cleanMap[date];
             if (!r) return false;
             return Object.values(r).some(val => val && val !== '--' && val !== 'XX');
         }).sort((a, b) => parseInt(a) - parseInt(b));
@@ -828,7 +854,7 @@
         }
 
         activeDates.forEach(date => {
-            const r = chartData[date];
+            const r = cleanMap[date];
             let dateStr = String(date).padStart(2, '0');
 
             rows1 += `
@@ -953,20 +979,14 @@
                     let d = row.date || row.DATE || row.Date;
                     if(m && d) {
                         let monthKey = String(m).trim();
-                        let dateKey = String(d).padStart(2, '0');
+                        let dateKey = String(parseInt(d, 10)); // Clean date to avoid splits
                         if(!groupedData[monthKey]) groupedData[monthKey] = {};
-                        groupedData[monthKey][dateKey] = {
-                            'BULANDSHAHR CITY': row['BULANDSHAHR CITY'] || '--',
-                            'ALIGARH CITY': row['ALIGARH CITY'] || '--',
-                            'NOIDA NCR': row['NOIDA NCR'] || '--',
-                            'DELHI BAZAR': row['DELHI BAZAR'] || '--',
-                            'SHREE GANESH': row['SHREE GANESH'] || '--',
-                            'FARIDABAD': row['FARIDABAD'] || '--',
-                            'MATHURA KING': row['MATHURA KING'] || '--',
-                            'GHAZIABAD': row['GHAZIABAD'] || '--',
-                            'GALI': row['GALI'] || '--',
-                            'DISAWAR': row['DISAWAR'] || '--'
-                        };
+                        if(!groupedData[monthKey][dateKey]) groupedData[monthKey][dateKey] = {};
+                        
+                        let markets = ['BULANDSHAHR CITY', 'ALIGARH CITY', 'NOIDA NCR', 'DELHI BAZAR', 'SHREE GANESH', 'FARIDABAD', 'MATHURA KING', 'GHAZIABAD', 'GALI', 'DISAWAR'];
+                        markets.forEach(mkt => {
+                            if(row[mkt]) groupedData[monthKey][dateKey][mkt] = row[mkt];
+                        });
                     }
                 });
 
