@@ -668,7 +668,7 @@
     });
 
     const firebaseConfig = {
-        apiKey: "AIzaSyADYsúp73b8lC3kgH6aya_XnisMP1HztcU",
+        apiKey: "AIzaSyAOysup23b8lC3kgH6aya_XnisMP1HztcU",
         authDomain: "galidisawarkingg.firebaseapp.com",
         databaseURL: "https://galidisawarkingg-default-rtdb.firebaseio.com",
         projectId: "galidisawarkingg",
@@ -936,7 +936,7 @@
     
     window.closeAdminModal = () => document.getElementById('adminModal').style.display = 'none';
 
-    // --- FIREBASE AUTHENTICATION LOGIN WITH ERROR POPUP ---
+    // --- FIREBASE AUTHENTICATION LOGIN ---
     window.checkLogin = async function() {
         const email = document.getElementById('adminEmail').value.trim();
         const pass = document.getElementById('adminPass').value.trim();
@@ -953,10 +953,10 @@
             alert("Login Successful!");
         } catch (error) {
             console.error(error);
-            alert("Firebase Error Code: " + error.code + "\nMessage: " + error.message);
+            alert("Login Failed: Galat Email ya Password!");
         }
     }
-    // ------------------------------------------------------
+    // -------------------------------------
 
     window.updateMarketData = async function() {
         const gameKey = document.getElementById('gameName').value;
