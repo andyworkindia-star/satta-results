@@ -719,21 +719,38 @@
     document.getElementById('topDateHeader').innerText = `⚡ Fast Results of ${currentMonthNameFull} ${yestDateNum}, ${currentYear} & ${currentMonthNameFull} ${todayDateNum}, ${currentYear}`;
     document.getElementById('liveSectionDays').innerHTML = `<span>${currentMonthNameShort.toUpperCase()}. ${padYestStr}</span><span>${currentMonthNameShort.toUpperCase()}. ${padTodayStr}</span>`;
 
+    function parseTimeString(timeStr) {
+        if (!timeStr) return null;
+        let parts = timeStr.trim().split(' ');
+        if (parts.length < 2) return null;
+        let timeParts = parts[0].split(':');
+        let hours = parseInt(timeParts[0], 10);
+        let minutes = parseInt(timeParts[1], 10);
+        let modifier = parts[1].toUpperCase();
+
+        if (modifier === 'PM' && hours < 12) hours += 12;
+        if (modifier === 'AM' && hours === 12) hours = 0;
+
+        let d = new Date();
+        d.setHours(hours, minutes, 0, 0);
+        return d;
+    }
+
     function renderMarketsUI(gamesMasterData, chartDataMonth) {
         const padYest = String(yestDateNum).padStart(2, '0');
         const padToday = String(todayDateNum).padStart(2, '0');
         
-        const yestData = chartDataMonth[yestDateNum] || chartDataMonth[padYest] || chartDataMonth[String(yestDateNum)] || {};
-        const todayChartData = chartDataMonth[todayDateNum] || chartDataMonth[padToday] || chartDataMonth[String(todayDateNum)] || {};
+        const yestData = chartDataMonth[padYest] || {};
+        const todayChartData = chartDataMonth[padToday] || {};
 
         const container = document.getElementById('marketsListContainer');
         let htmlContent = '';
+        const currentTime = new Date();
 
         defaultMarkets.forEach(market => {
             const gmInfo = gamesMasterData[market.name] || {};
             const mTime = gmInfo.resultTimeStr || gmInfo.closeTimeStr || market.time;
             
-            // Priority chart data se lenge taaki live aur chart dono match karein
             let valToday = todayChartData[market.name];
             if (!valToday || valToday === '--') {
                 if (gmInfo.resultNumber && gmInfo.resultNumber !== 'Wait...' && gmInfo.resultNumber !== '--') {
@@ -743,10 +760,16 @@
                 }
             }
 
+            let resultDateTime = parseTimeString(mTime);
+            let isTimePassed = true;
+            if (resultDateTime && currentTime < resultDateTime) {
+                isTimePassed = false;
+            }
+
             const valYest = yestData[market.name] || '--';
 
             let scoreTodayHTML = '';
-            if (!valToday || valToday === '--' || valToday === 'Wait...') {
+            if (!isTimePassed || !valToday || valToday === '--' || valToday === 'Wait...') {
                 scoreTodayHTML = `<div class="wait-box"><div class="spinner"></div> Wait...</div>`;
             } else {
                 let strToday = String(valToday).trim();
@@ -945,7 +968,7 @@
     window.updateMarketData = async function() {
         const gameKey = document.getElementById('gameName').value;
         const selectedMonth = document.getElementById('adminMonthSelect').value;
-        const targetDate = document.getElementById('resultDateInput').value;
+        const targetDate = document.getElementById('resultDateInput').value; // Ab ye hamesha '01', '02' hoga
         const newScore = document.getElementById('resultScore').value.trim();
         const closeTime = document.getElementById('closeTimeInput').value.trim();
         const resultTime = document.getElementById('resultTimeInput').value.trim();
@@ -953,14 +976,11 @@
         try {
             const cacheKey = `${selectedMonth} ${currentYear}`;
             let paddedDate = String(targetDate).padStart(2, '0');
-            let unpaddedDate = String(parseInt(targetDate, 10));
 
             if(newScore) {
-                // Monthly Chart mein save karein
+                // Sirf double-digit format ('01', '02') mein save hoga taaki duplicate node na bane
                 await set(ref(db, `MonthlyCharts/${cacheKey}/${paddedDate}/${gameKey}`), newScore);
-                await set(ref(db, `MonthlyCharts/${cacheKey}/${unpaddedDate}/${gameKey}`), newScore);
 
-                // Agar current month aur aaj ki date hai, toh GamesMaster (Live Results) mein bhi turant update karein
                 if(selectedMonth === months[nowTime.getMonth()] && Number(targetDate) === todayDateNum) {
                     await set(ref(db, `GamesMaster/${gameKey}/resultNumber`), newScore);
                 }
@@ -995,6 +1015,7 @@
                 let paddedDate = String(targetDate).padStart(2, '0');
                 let unpaddedDate = String(parseInt(targetDate, 10));
 
+                // Dono single aur double digit nodes ko ek sath remove karenge taaki koi residue na bache
                 await remove(ref(db, `MonthlyCharts/${cacheKey}/${paddedDate}/${gameKey}`));
                 await remove(ref(db, `MonthlyCharts/${cacheKey}/${unpaddedDate}/${gameKey}`));
 
@@ -1031,7 +1052,7 @@
                     let d = row.date || row.DATE || row.Date;
                     if(m && d) {
                         let monthKey = String(m).trim();
-                        let dateKey = String(parseInt(d, 10)).padStart(2, '0');
+                        let dateKey = String(parseInt(d, 10)).padStart(2, '0'); // Hamesha double digit format
                         if(!groupedData[monthKey]) groupedData[monthKey] = {};
                         if(!groupedData[monthKey][dateKey]) groupedData[monthKey][dateKey] = {};
                         
