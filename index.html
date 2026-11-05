@@ -714,8 +714,10 @@
     const currentMonthNameShort = months[currentMonthIndex];
     const currentMonthNameFull = monthsFull[currentMonthIndex];
 
+    const padYestStr = String(yestDateNum).padStart(2, '0');
+    const padTodayStr = String(todayDateNum).padStart(2, '0');
     document.getElementById('topDateHeader').innerText = `⚡ Fast Results of ${currentMonthNameFull} ${yestDateNum}, ${currentYear} & ${currentMonthNameFull} ${todayDateNum}, ${currentYear}`;
-    document.getElementById('liveSectionDays').innerHTML = `<span>${currentMonthNameShort.toUpperCase()}. ${yestDateNum}</span><span>${currentMonthNameShort.toUpperCase()}. ${todayDateNum}</span>`;
+    document.getElementById('liveSectionDays').innerHTML = `<span>${currentMonthNameShort.toUpperCase()}. ${padYestStr}</span><span>${currentMonthNameShort.toUpperCase()}. ${padTodayStr}</span>`;
 
     function renderMarketsUI(gamesMasterData, chartDataMonth) {
         const padYest = String(yestDateNum).padStart(2, '0');
@@ -731,11 +733,14 @@
             const gmInfo = gamesMasterData[market.name] || {};
             const mTime = gmInfo.resultTimeStr || gmInfo.closeTimeStr || market.time;
             
-            let valToday = '--';
-            if (gmInfo.resultNumber && gmInfo.resultNumber !== 'Wait...' && gmInfo.resultNumber !== '--') {
-                valToday = gmInfo.resultNumber;
-            } else {
-                valToday = todayChartData[market.name] || '--';
+            // Priority chart data se lenge taaki live aur chart dono match karein
+            let valToday = todayChartData[market.name];
+            if (!valToday || valToday === '--') {
+                if (gmInfo.resultNumber && gmInfo.resultNumber !== 'Wait...' && gmInfo.resultNumber !== '--') {
+                    valToday = gmInfo.resultNumber;
+                } else {
+                    valToday = '--';
+                }
             }
 
             const valYest = yestData[market.name] || '--';
@@ -940,7 +945,7 @@
     window.updateMarketData = async function() {
         const gameKey = document.getElementById('gameName').value;
         const selectedMonth = document.getElementById('adminMonthSelect').value;
-        const targetDate = document.getElementById('resultDateInput').value; // Ab ye '01', '02' format me aayega
+        const targetDate = document.getElementById('resultDateInput').value;
         const newScore = document.getElementById('resultScore').value.trim();
         const closeTime = document.getElementById('closeTimeInput').value.trim();
         const resultTime = document.getElementById('resultTimeInput').value.trim();
@@ -951,9 +956,11 @@
             let unpaddedDate = String(parseInt(targetDate, 10));
 
             if(newScore) {
+                // Monthly Chart mein save karein
                 await set(ref(db, `MonthlyCharts/${cacheKey}/${paddedDate}/${gameKey}`), newScore);
                 await set(ref(db, `MonthlyCharts/${cacheKey}/${unpaddedDate}/${gameKey}`), newScore);
 
+                // Agar current month aur aaj ki date hai, toh GamesMaster (Live Results) mein bhi turant update karein
                 if(selectedMonth === months[nowTime.getMonth()] && Number(targetDate) === todayDateNum) {
                     await set(ref(db, `GamesMaster/${gameKey}/resultNumber`), newScore);
                 }
