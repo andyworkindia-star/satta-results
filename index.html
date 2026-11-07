@@ -619,13 +619,10 @@
             const gmInfo = gamesMasterData[market.name] || {};
             const mTime = gmInfo.resultTimeStr || gmInfo.closeTimeStr || market.time;
             
+            // Strictly check today's chart data first. If not present, show '--' (Wait...) instead of falling back to old master data.
             let valToday = todayChartData[market.name];
-            if (!valToday || valToday === '--') {
-                if (gmInfo.resultNumber && gmInfo.resultNumber !== 'Wait...' && gmInfo.resultNumber !== '--') {
-                    valToday = gmInfo.resultNumber;
-                } else {
-                    valToday = '--';
-                }
+            if (!valToday || valToday === '--' || valToday === 'XX') {
+                valToday = '--';
             }
 
             const valYest = yestData[market.name] || '--';
